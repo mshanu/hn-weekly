@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HN Weekly Archive</title>
+<style>
+:root {
+  --bg: #f7f6f2; --surface: #ffffff; --text: #1d1c1a; --muted: #6b6860; --line: #e4e1d8;
+  --accent: #d2561c;
+  --v-enthusiastic: #2f7d4f; --v-skeptical: #b4432f; --v-divided: #8a5fbf; --v-informative: #3769a8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161513; --surface: #1f1e1b; --text: #ecebe6; --muted: #9c998f; --line: #34322d;
+    --accent: #f07a3e;
+    --v-enthusiastic: #6cc48f; --v-skeptical: #ee8a76; --v-divided: #bb9be6; --v-informative: #86afe6;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 32px 16px 64px; }
+a { color: inherit; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: 12px; }
+h1 { font-size: 28px; line-height: 1.15; margin: 6px 0 6px; letter-spacing: -.01em; }
+.headline { margin: 0 0 8px; color: var(--muted); font-size: 16px; max-width: 70ch; }
+.sec { margin-top: 32px; }
+.sec h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted);
+  margin: 0 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.sec h2 { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sheat { display: flex; align-items: center; gap: 8px; flex: 0 1 220px; }
+.sheat .bar { flex: 1; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; min-width: 60px; }
+.sheat .bar span { display: block; height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, #f2b33d, var(--accent)); }
+.hottest { color: var(--accent); font-weight: 700; }
+.box .top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.flames { font-size: 13px; white-space: nowrap; letter-spacing: -2px; line-height: 1.4; }
+.flames.f1 { opacity: .55; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.box:hover { border-color: var(--accent); }
+.box h3 { font-size: 16px; line-height: 1.25; margin: 0; overflow-wrap: anywhere; }
+.box h3 a { text-decoration: none; }
+.box h3 a:hover { text-decoration: underline; }
+.gist { margin: 0; }
+.mood { align-self: flex-start; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+  border: 1px solid currentColor; }
+.v-enthusiastic { color: var(--v-enthusiastic); } .v-skeptical { color: var(--v-skeptical); }
+.v-divided { color: var(--v-divided); } .v-informative { color: var(--v-informative); }
+.take { margin: 0; color: var(--muted); font-style: italic; }
+.foot { margin-top: auto; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-size: 13px; }
+.discuss { margin-left: auto; color: var(--accent); text-decoration: none; }
+.discuss:hover { text-decoration: underline; }
+.threads summary { cursor: pointer; color: var(--muted); list-style: none; }
+.threads summary::-webkit-details-marker { display: none; }
+.threads summary::before { content: "▸ "; }
+.threads[open] summary::before { content: "▾ "; }
+.threads[open] { flex-basis: 100%; order: 2; }
+.threads ul { margin: 6px 0 0; padding-left: 16px; }
+.threads li { margin: 3px 0; }
+.threads li a { color: var(--accent); text-decoration: none; }
+.threads li a:hover { text-decoration: underline; }
+.more { margin-top: 36px; }
+.more summary { cursor: pointer; color: var(--muted); }
+.more ul { columns: 2 280px; padding-left: 18px; margin: 10px 0; }
+.more li { margin: 3px 0; break-inside: avoid; }
+.more .hn { color: var(--accent); font-size: 12px; margin-left: 4px; }
+.week-row { display: block; text-decoration: none; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 10px; padding: 14px 16px; margin: 12px 0; }
+.week-row:hover { border-color: var(--accent); }
+.week-row p { margin: 6px 0 0; color: var(--muted); }
+.meta { color: var(--muted); font-size: 13px; }
+footer { margin-top: 48px; color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">Hacker News Weekly</div>
+  <h1>Archive</h1>
+</header>
+
+<a class="week-row" href="2026-W44.html"><strong>Oct 26 – Nov 1, 2026</strong> <span class="meta">2026-W44</span><p>Binance lost $5.6B in a 20-minute hack, OpenAI showcased AI-assisted proofs, Anthropic filed risky IPO, and Serbian students ended 14 years of authoritarian rule.</p></a>
+
+</div>
+</body>
+</html>

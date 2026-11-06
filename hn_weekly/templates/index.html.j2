@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HN Weekly Archive</title>
+{% include "_style.html.j2" %}
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">Hacker News Weekly</div>
+  <h1>Archive</h1>
+</header>
+{% for w in weeks %}
+<a class="week-row" href="{{ w.week }}.html"><strong>{{ w.range }}</strong> <span class="meta">{{ w.week }}</span><p>{{ w.headline }}</p></a>
+{% else %}
+<p class="meta">No digests yet.</p>
+{% endfor %}
+</div>
+</body>
+</html>

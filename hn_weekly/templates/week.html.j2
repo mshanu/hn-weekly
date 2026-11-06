@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HN Weekly {{ d.week }}</title>
+<meta name="hn-week" content="{{ d.week }}">
+<meta name="hn-range" content="{{ d.range }}">
+<meta name="hn-headline" content="{{ d.headline }}">
+{% include "_style.html.j2" %}
+</head>
+<body>
+{% set moods = {"enthusiastic": ("🎉", "excited"), "skeptical": ("🤨", "skeptical"),
+                "divided": ("😐", "divided"), "informative": ("💡", "informative")} %}
+<div class="wrap">
+<header>
+  <div class="kicker">Hacker News Weekly · <a href="index.html">archive</a></div>
+  <h1>{{ d.range }}</h1>
+  <p class="headline">{{ d.headline }}</p>
+</header>
+
+{% for s in d.sections %}
+<section class="sec">
+  <h2><span>{{ s.name }}</span>
+    <span class="sheat" title="Section activity: {{ '{:,}'.format(s.heat) }} points + comments">
+      <span class="bar"><span style="width: {{ s.heat_pct }}%"></span></span>{% if loop.first %}<span class="hottest">hottest</span>{% endif %}
+    </span>
+  </h2>
+  <div class="grid">
+  {% for b in s.boxes %}
+    {% set m = moods.get(b.mood, ("💬", b.mood)) %}
+    <article class="box">
+      <div class="top">
+        <h3><a href="{{ b.url }}">{{ b.title }}</a></h3>
+        <span class="flames f{{ b.flames }}" title="Activity: {{ '{:,}'.format(b.heat) }} points + comments">{{ "🔥" * b.flames }}</span>
+      </div>
+      <p class="gist">{{ b.gist }}</p>
+      <span class="mood v-{{ b.mood }}">{{ m[0] }} {{ m[1] }}</span>
+      <p class="take">“{{ b.take }}”</p>
+      <div class="foot">
+        {% if b.threads and b.threads|length > 1 %}
+        <details class="threads">
+          <summary>+{{ b.threads|length - 1 }} thread{{ "s" if b.threads|length > 2 }}</summary>
+          <ul>
+          {% for th in b.threads[1:] %}<li><a href="{{ th.hn_url }}">{{ th.title }}</a></li>{% endfor %}
+          </ul>
+        </details>
+        {% endif %}
+        <a class="discuss" href="{{ b.hn_url }}">discuss →</a>
+      </div>
+    </article>
+  {% endfor %}
+  </div>
+</section>
+{% endfor %}
+
+{% if d.more %}
+<details class="more">
+  <summary>{{ d.more|length }} more stories this week</summary>
+  <ul>
+  {% for t in d.more %}<li><a href="{{ t.url }}">{{ t.title }}</a> <a class="hn" href="{{ t.hn_url }}">hn</a></li>{% endfor %}
+  </ul>
+</details>
+{% endif %}
+
+<footer>Generated {{ d.generated }} with {{ d.model }} · top {{ d.per_day }} stories/day from the HN Algolia API.</footer>
+</div>
+</body>
+</html>

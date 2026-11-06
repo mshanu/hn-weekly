@@ -1,0 +1,5 @@
+.env
+.venv/
+__pycache__/
+# Stage JSON is a local/CI-temp cache only — never committed
+site/data/
