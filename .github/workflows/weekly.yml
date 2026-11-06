@@ -28,7 +28,7 @@ jobs:
     env:
       TZ: Asia/Kolkata
       OUTPUT_DIR: site
-      DATA_DIR: ${{ runner.temp }}/data   # stage JSON lives here only during the run
+      DATA_DIR: /tmp/hn-weekly-data   # stage JSON lives here only during the run (runner is discarded)
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-4.1-mini' }}
     steps:
