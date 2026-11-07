@@ -9,15 +9,49 @@
 <meta name="hn-headline" content="{{ d.headline }}">
 {% include "_style.html.j2" %}
 </head>
-<body>
+<body class="{{ 'has-ticker' if d.more }}">
 {% set moods = {"enthusiastic": ("🎉", "excited"), "skeptical": ("🤨", "skeptical"),
                 "divided": ("😐", "divided"), "informative": ("💡", "informative")} %}
-<div class="wrap">
-<header>
-  <div class="kicker">Hacker News Weekly · <a href="index.html">archive</a></div>
-  <h1>{{ d.range }}</h1>
-  <p class="headline">{{ d.headline }}</p>
+{% set kinds = {"open": "Headlines", "story": "Top story", "rapid": "In other news", "launches": "Launches",
+                "quote": "Comment of the week", "signoff": "Sign-off"} %}
+{% set bc = d.broadcast %}
+{% set box_start = {} %}
+{% if bc %}{% for s in bc.segments %}{% if s.box_id >= 0 and s.box_id not in box_start %}{% set _ = box_start.update({s.box_id: s.start}) %}{% endif %}{% endfor %}{% endif %}
+
+<header class="masthead">
+  <div class="mast-inner">
+    <a class="brand" href="index.html"><span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4M16.2 7.8a6 6 0 0 1 0 8.4M4.9 4.9a10 10 0 0 0 0 14.2M19.1 4.9a10 10 0 0 1 0 14.2"/></svg></span>HN WEEKLY</a>
+    {% if bc %}<span class="onair" id="onair"><span class="dot"></span><span id="onair-label">ON AIR</span></span>{% endif %}
+    <span class="mast-date">{{ d.range }}</span>
+    <a class="mast-archive" href="index.html">Archive</a>
+  </div>
 </header>
+
+<div class="wrap">
+<section class="lead">
+  <div class="kicker">This week on Hacker News{% if bc %} · {{ (bc.duration / 60)|round(0, 'ceil')|int }}-minute bulletin{% endif %}</div>
+  <h1>{{ d.headline }}</h1>
+</section>
+
+{% if bc %}
+<div class="player" id="player">
+  <audio id="audio" preload="metadata" src="{{ bc.audio }}"></audio>
+  <button class="play" id="play" aria-label="Play bulletin">
+    <svg id="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    <svg id="ico-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+  </button>
+  <div class="pmain">
+    <div class="now"><span class="now-kind" id="now-kind">Press play</span><span class="now-title" id="now-title">{{ d.range }} in under {{ (bc.duration / 60)|round(0, 'ceil')|int }} minutes</span></div>
+    <div class="track" id="track" role="slider" aria-label="Seek" tabindex="0">
+      <div class="fill" id="fill"></div>
+      {% for s in bc.segments %}{% if s.kind in ("story", "quote", "launches") and loop.index0 > 0 %}<span class="tick" style="left: {{ (100 * s.start / bc.duration)|round(2) }}%"></span>{% endif %}{% endfor %}
+    </div>
+    <div class="ptime"><span id="t-cur">0:00</span><span id="t-dur">{{ bc.duration|mmss }}</span></div>
+  </div>
+  <button class="speed" id="speed" aria-label="Playback speed">1×</button>
+</div>
+<script type="application/json" id="bc-seg">{{ bc.segments|tojson }}</script>
+{% endif %}
 
 {% for s in d.sections %}
 <section class="sec">
@@ -29,7 +63,7 @@
   <div class="grid">
   {% for b in s.boxes %}
     {% set m = moods.get(b.mood, ("💬", b.mood)) %}
-    <article class="box">
+    <article class="box{{ ' seekable' if b.id in box_start }}" data-box-id="{{ b.id }}">
       <div class="top">
         <h3><a href="{{ b.url }}">{{ b.title }}</a></h3>
         <span class="flames f{{ b.flames }}" title="Activity: {{ '{:,}'.format(b.heat) }} points + comments">{{ "🔥" * b.flames }}</span>
@@ -38,6 +72,7 @@
       <span class="mood v-{{ b.mood }}">{{ m[0] }} {{ m[1] }}</span>
       <p class="take">“{{ b.take }}”</p>
       <div class="foot">
+        {% if b.id in box_start %}<span class="at" title="Play this story">▶ {{ box_start[b.id]|mmss }}</span>{% endif %}
         {% if b.threads and b.threads|length > 1 %}
         <details class="threads">
           <summary>+{{ b.threads|length - 1 }} thread{{ "s" if b.threads|length > 2 }}</summary>
@@ -48,11 +83,24 @@
         {% endif %}
         <a class="discuss" href="{{ b.hn_url }}">discuss →</a>
       </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
     </article>
   {% endfor %}
   </div>
 </section>
 {% endfor %}
+
+{% if bc %}
+<details class="transcript">
+  <summary>Read the transcript</summary>
+  <ol>
+  {% for s in bc.segments %}
+    <li data-seg="{{ loop.index0 }}"><button class="ts" data-t="{{ s.start }}">{{ s.start|mmss }}</button>
+      <span class="tk">{{ kinds.get(s.kind, s.kind) }}</span> {{ s.text }}</li>
+  {% endfor %}
+  </ol>
+</details>
+{% endif %}
 
 {% if d.more %}
 <details class="more">
@@ -61,9 +109,105 @@
   {% for t in d.more %}<li><a href="{{ t.url }}">{{ t.title }}</a> <a class="hn" href="{{ t.hn_url }}">hn</a></li>{% endfor %}
   </ul>
 </details>
+
+<div class="ticker" aria-label="More headlines">
+  <span class="ticker-label">ALSO THIS WEEK</span>
+  <div class="ticker-viewport">
+    <div class="ticker-track" style="--dur: {{ d.more|length * 5 }}s">
+      {% for _ in range(2) %}<span class="ticker-run"{% if loop.index0 %} aria-hidden="true"{% endif %}>{% for t in d.more %}<a href="{{ t.hn_url }}"{% if loop.index0 %} tabindex="-1"{% endif %}>{{ t.title }}</a><span class="sep">◆</span>{% endfor %}</span>{% endfor %}
+    </div>
+  </div>
+</div>
 {% endif %}
 
-<footer>Generated {{ d.generated }} with {{ d.model }} · top {{ d.per_day }} stories/day from the HN Algolia API.</footer>
+<footer>Generated {{ d.generated }} with {{ d.model }}{% if bc %} · voice: {{ bc.voice }}{% endif %} · top {{ d.per_day }} stories/day from the HN Algolia API.</footer>
 </div>
+
+{% if bc %}
+<script>
+(() => {
+  const segs = JSON.parse(document.getElementById('bc-seg').textContent);
+  const kinds = {{ kinds|tojson }};
+  const $ = id => document.getElementById(id);
+  const audio = $('audio'), player = $('player'), fill = $('fill'), track = $('track');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+  const dur = () => audio.duration || segs[segs.length - 1].end;
+  let cur = -1;
+
+  audio.addEventListener('error', () => { player.hidden = true; $('onair') && ($('onair').hidden = true); });
+
+  function segAt(t) {
+    for (let i = segs.length - 1; i >= 0; i--) if (t >= segs[i].start) return i;
+    return 0;
+  }
+  function inView(el) {
+    const r = el.getBoundingClientRect(), top = player.getBoundingClientRect().bottom;
+    return r.top >= top && r.bottom <= innerHeight - 48;
+  }
+  function setSeg(i) {
+    if (i === cur) return;
+    cur = i;
+    const s = segs[i];
+    $('now-kind').textContent = kinds[s.kind] || s.kind;
+    $('now-title').textContent = s.title;
+    document.querySelectorAll('.box.on-air').forEach(b => b.classList.remove('on-air'));
+    document.querySelectorAll('.transcript li.cur').forEach(li => li.classList.remove('cur'));
+    document.querySelector(`.transcript li[data-seg="${i}"]`)?.classList.add('cur');
+    const box = s.box_id >= 0 && document.querySelector(`.box[data-box-id="${s.box_id}"]`);
+    if (box) {
+      box.classList.add('on-air');
+      if (!audio.paused && !inView(box)) box.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    }
+  }
+  function seek(t, play = true) {
+    audio.currentTime = t; setSeg(segAt(t + 0.01));
+    if (play) audio.play();
+  }
+
+  audio.addEventListener('timeupdate', () => {
+    fill.style.width = (100 * audio.currentTime / dur()) + '%';
+    $('t-cur').textContent = fmt(audio.currentTime);
+    setSeg(segAt(audio.currentTime));
+  });
+  audio.addEventListener('loadedmetadata', () => { $('t-dur').textContent = fmt(audio.duration); });
+  const sync = () => {
+    const playing = !audio.paused;
+    $('ico-play').hidden = playing; $('ico-pause').hidden = !playing;
+    $('play').setAttribute('aria-label', playing ? 'Pause bulletin' : 'Play bulletin');
+    document.body.classList.toggle('playing', playing);
+    $('onair-label').textContent = playing ? 'ON AIR' : (audio.currentTime > 0 ? 'PAUSED' : 'ON AIR');
+  };
+  audio.addEventListener('play', sync); audio.addEventListener('pause', sync);
+  audio.addEventListener('ended', () => { document.querySelectorAll('.box.on-air').forEach(b => b.classList.remove('on-air')); });
+
+  $('play').addEventListener('click', () => audio.paused ? audio.play() : audio.pause());
+  const speeds = [1, 1.25, 1.5];
+  $('speed').addEventListener('click', e => {
+    audio.playbackRate = speeds[(speeds.indexOf(audio.playbackRate) + 1) % speeds.length];
+    e.currentTarget.textContent = audio.playbackRate + '×';
+  });
+  track.addEventListener('click', e => {
+    const r = track.getBoundingClientRect();
+    seek(Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * dur(), !audio.paused);
+  });
+  track.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') seek(Math.min(dur(), audio.currentTime + 10), !audio.paused);
+    if (e.key === 'ArrowLeft') seek(Math.max(0, audio.currentTime - 10), !audio.paused);
+  });
+  document.querySelectorAll('.box.seekable').forEach(box => box.addEventListener('click', e => {
+    if (e.target.closest('a, summary, details ul')) return;
+    const i = segs.findIndex(s => s.box_id === +box.dataset.boxId);
+    if (i >= 0) seek(segs[i].start);
+  }));
+  document.querySelectorAll('.transcript .ts').forEach(b => b.addEventListener('click', () => seek(+b.dataset.t)));
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space' && !e.target.closest('input, textarea, button, [contenteditable]')) {
+      e.preventDefault(); audio.paused ? audio.play() : audio.pause();
+    }
+  });
+})();
+</script>
+{% endif %}
 </body>
 </html>

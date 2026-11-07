@@ -54,6 +54,28 @@ jobs:
             git push
           fi
 
+      # Audio lives in GitHub Releases (free, outside git history), not in the repo.
+      - name: Publish new audio as a release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for f in site/audio/*.mp3; do
+            [ -e "$f" ] || continue
+            w=$(basename "$f" .mp3)
+            gh release view "digest-$w" >/dev/null 2>&1 || \
+              gh release create "digest-$w" "$f" --title "HN Weekly $w" --notes "5-minute audio bulletin for $w."
+          done
+
+      - name: Fetch the last 12 weeks of audio for the site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p site/audio
+          for tag in $(gh release list --limit 12 --json tagName -q '.[].tagName'); do
+            gh release download "$tag" -p '*.mp3' -D site/audio --skip-existing
+          done
+          ls -la site/audio
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3

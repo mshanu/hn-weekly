@@ -1,0 +1,236 @@
+"""The 5-minute audio bulletin: an anchor script (LLM) read aloud by OpenAI TTS.
+
+Stage 6 writes `6_script.json`: segments, each tied to a box (or to none).
+Stage 7 synthesizes each segment as raw PCM, so every segment's duration is exact.
+It joins them with short pauses, encodes one CBR MP3, and writes `7_broadcast.json`
+with start/end times. The page uses those times to highlight the box being read.
+"""
+
+import asyncio
+import json
+import re
+from pathlib import Path
+
+import lameenc
+from openai import AsyncOpenAI
+
+from .summarize import Summarizer, _schema, STR
+
+SAMPLE_RATE = 24_000          # OpenAI TTS PCM: 24kHz, 16-bit, mono
+BYTES_PER_SEC = SAMPLE_RATE * 2
+PAUSE = {"open": 0.6, "story": 0.7, "rapid": 0.35, "launches": 0.35, "quote": 0.6, "signoff": 0.0}
+KINDS = ["open", "story", "rapid", "launches", "quote", "signoff"]
+WORD_TARGET, WORD_MAX = 570, 630   # measured ~120 wpm → ≈ 4:45 of audio
+QUOTE_MAX = 40
+
+SCRIPT_FORMAT = _schema("bulletin", {
+    "segments": {"type": "array", "items": {
+        "type": "object",
+        "properties": {
+            "kind": {"type": "string", "enum": KINDS},
+            "box_id": {"type": "integer"},
+            "title": STR,
+            "text": STR,
+            "quote": STR,
+        },
+        "required": ["kind", "box_id", "title", "text", "quote"],
+        "additionalProperties": False,
+    }},
+})
+
+SCRIPT_PROMPT = f"""You are the anchor of "HN Weekly", a 5-minute spoken news bulletin about last week on Hacker News.
+Write the script as segments, in this order:
+1. open (box_id -1): greet and give the week's dates, then tease the 3 TOP stories in one sentence. ~35 words.
+2. story: exactly one per TOP box, in the given order: what happened, then pivot with a phrase like
+   "On Hacker News…" and give the community's reaction, including the main disagreement. ~95 words each.
+3. rapid: exactly one per RAPID box, in order: "In other news" style, one or two sentences combining the fact and
+   the HN reaction. ~22 words each.
+4. launches: exactly one per LAUNCH box: what was built and how HN received it. ~22 words each.
+Never move a box to a different kind of segment, and never cover boxes that are not listed.
+5. quote (box_id = the box the comment is from): introduce and read ONE striking comment from CANDIDATE COMMENTS.
+   Put the exact quoted words in "quote". They must be copied VERBATIM, max 35 words, from one candidate, and
+   also spoken in "text" with attribution like "user jstummbillig wrote: …". ~40 words.
+6. signoff (box_id -1): one short sentence. ~12 words.
+Rules:
+- Total about {WORD_TARGET} words. NEVER exceed {WORD_MAX}.
+- This is read aloud by a text-to-speech voice. Write for the ear: short sentences, no markdown, no emoji, no URLs,
+  no parentheses. Write numbers, money and abbreviations the way they are spoken
+  ("five point six billion dollars", "C-V-E", "M6 chip").
+- Neutral, crisp radio tone. No hype, and do not invent facts beyond what is given.
+- "title" is a 2-5 word on-screen label for the segment (e.g. "Binance loses $5.6B").
+- box_id must be one of the ids given, or -1 for open/signoff. Set "quote" to "" for every segment except quote."""
+
+
+def _norm(s: str) -> str:
+    return re.sub(r"\s+", " ", s.replace("“", '"').replace("”", '"').replace("’", "'")).strip().lower()
+
+
+def _words(segments) -> int:
+    return sum(len(s["text"].split()) for s in segments)
+
+
+def _story_id(hn_url: str) -> int:
+    return int(hn_url.rsplit("=", 1)[1])
+
+
+def build_inputs(digest: dict, wdir: Path) -> tuple[str, dict[int, list[tuple[str, str]]], dict[str, list[int]]]:
+    """Prompt input (top / rapid / launch boxes plus candidate comments) and candidate quotes per box."""
+    topics = json.loads((wdir / "4_topics.json").read_text())
+    topic_of = {i: t for t in topics for i in t["story_ids"]}
+    boxes = sorted((b for s in digest["sections"] for b in s["boxes"]), key=lambda b: b["id"])
+
+    def describe(b):
+        t = topic_of[_story_id(b["hn_url"])]
+        return (f"[box {b['id']}] {b['title']} (section: {b['section']}, mood: {b['mood']})\n"
+                f"  what: {t['gist']}\n  hn: {t['pulse']}")
+
+    top = boxes[:3]
+    launches = [b for b in boxes[3:] if b["section"] == "Launches & Repos"]
+    rapid = [b for b in boxes[3:] if b not in launches][:6]
+
+    candidates: dict[int, list[tuple[str, str]]] = {}
+    lines = []
+    for b in boxes[:10]:
+        raw_p = wdir / "2_raw" / f"{_story_id(b['hn_url'])}.json"
+        if not raw_p.exists():
+            continue
+        for c in json.loads(raw_p.read_text())["comments"][:2]:
+            text = c["text"][:400]
+            candidates.setdefault(b["id"], []).append((c["author"], text))
+            lines.append(f"[box {b['id']}] user {c['author']}: {text}")
+
+    prompt = (f"WEEK: {digest['range']}\nHEADLINE: {digest['headline']}\n\n"
+              "TOP:\n" + "\n".join(map(describe, top)) +
+              "\n\nRAPID:\n" + "\n".join(map(describe, rapid)) +
+              "\n\nLAUNCH:\n" + ("\n".join(map(describe, launches)) or "(none)") +
+              "\n\nCANDIDATE COMMENTS:\n" + "\n".join(lines))
+    rundown = {"story": [b["id"] for b in top], "rapid": [b["id"] for b in rapid],
+               "launches": [b["id"] for b in launches]}
+    return prompt, candidates, rundown
+
+
+def problems(segments: list[dict], rundown: dict[str, list[int]], candidates: dict[int, list[tuple[str, str]]]) -> list[str]:
+    """Human-readable issues to feed back to the model for one retry."""
+    out = []
+    if (w := _words(segments)) > WORD_MAX:
+        out.append(f"It is {w} words; the hard limit is {WORD_MAX}. Aim for {WORD_TARGET}.")
+    for kind, ids in rundown.items():
+        got = [s["box_id"] for s in segments if s["kind"] == kind]
+        if got != ids:
+            out.append(f"'{kind}' segments must cover exactly boxes {ids} in that order; you gave {got}.")
+    pool = [_norm(t) for cs in candidates.values() for _, t in cs]
+    for s in segments:
+        if s["kind"] == "quote":
+            if len(s["quote"].split()) > QUOTE_MAX:
+                out.append(f"The quote is {len(s['quote'].split())} words; max {QUOTE_MAX}. Pick a shorter "
+                           "verbatim excerpt (a complete sentence or two).")
+            elif not any(_norm(s["quote"]) in c for c in pool):
+                out.append("The quote is not a verbatim excerpt of a candidate comment.")
+    return out
+
+
+def validate_script(segments: list[dict], digest: dict, candidates: dict[int, list[tuple[str, str]]]) -> list[dict]:
+    valid_ids = {b["id"] for s in digest["sections"] for b in s["boxes"]}
+    out = []
+    for s in segments:
+        if not s["text"].strip():
+            continue
+        if s["box_id"] not in valid_ids:
+            s["box_id"] = -1
+        if s["kind"] == "quote":
+            q = _norm(s["quote"])
+            pool = [_norm(t) for cs in candidates.values() for _, t in cs]
+            if len(q) < 12 or len(s["quote"].split()) > QUOTE_MAX + 5 or not any(q in c for c in pool):
+                continue  # never broadcast a quote we can't verify verbatim
+        out.append(s)
+    if not any(s["kind"] == "quote" for s in out) and (fb := fallback_quote(digest, candidates)):
+        at = next((i for i, s in enumerate(out) if s["kind"] == "signoff"), len(out))
+        out.insert(at, fb)
+    return out
+
+
+def fallback_quote(digest: dict, candidates) -> dict | None:
+    """Deterministic verbatim quote: the leading sentences (<= 35 words) of a top comment on the hottest topics."""
+    titles = {b["id"]: b["title"] for s in digest["sections"] for b in s["boxes"]}
+    for box_id in sorted(candidates):
+        for author, text in candidates[box_id]:
+            excerpt = ""
+            for sent in re.split(r"(?<=[.!?])\s+", " ".join(text.split())):
+                if len((excerpt + " " + sent).split()) > 35:
+                    break
+                excerpt = (excerpt + " " + sent).strip()
+            if len(excerpt.split()) >= 8:
+                return {"kind": "quote", "box_id": box_id, "title": "Comment of the week", "quote": excerpt,
+                        "text": f"Our comment of the week comes from the {titles[box_id]} thread. "
+                                f"User {author} wrote: {excerpt}"}
+    return None
+
+
+async def write_script(llm: Summarizer, digest: dict, wdir: Path) -> list[dict]:
+    prompt, candidates, rundown = build_inputs(digest, wdir)
+    segs = (await llm._call(SCRIPT_PROMPT, prompt, SCRIPT_FORMAT))["segments"]
+    if issues := problems(segs, rundown, candidates):
+        print("  script retry:", "; ".join(issues), flush=True)
+        segs = (await llm._call(
+            SCRIPT_PROMPT, prompt + "\n\nYOUR PREVIOUS DRAFT:\n" + json.dumps(segs, ensure_ascii=False) +
+            "\n\nFix these problems and return the full corrected script:\n- " + "\n- ".join(issues),
+            SCRIPT_FORMAT))["segments"]
+    return validate_script(segs, digest, candidates)
+
+
+async def synthesize(cfg, segments: list[dict]) -> list[bytes]:
+    client = AsyncOpenAI(api_key=cfg.api_key, max_retries=5)
+    sem = asyncio.Semaphore(4)
+
+    async def one(seg):
+        async with sem:
+            r = await client.audio.speech.create(
+                model=cfg.tts_model, voice=cfg.tts_voice, input=seg["text"],
+                instructions=cfg.tts_style, response_format="pcm")
+            pcm = r.content
+            return pcm[: len(pcm) // 2 * 2]  # whole 16-bit samples only
+    return await asyncio.gather(*(one(s) for s in segments))
+
+
+def encode_mp3(pcm: bytes) -> bytes:
+    enc = lameenc.Encoder()
+    enc.set_bit_rate(64)
+    enc.set_in_sample_rate(SAMPLE_RATE)
+    enc.set_channels(1)
+    enc.set_quality(2)
+    return bytes(enc.encode(pcm) + enc.flush())
+
+
+async def stage_broadcast(cfg, llm: Summarizer, digest: dict, week: str, wdir: Path, log) -> dict | None:
+    audio_rel = f"audio/{week}.mp3"
+    audio_path = cfg.output_dir / audio_rel
+    bpath = wdir / "7_broadcast.json"
+    if bpath.exists() and audio_path.exists():
+        return json.loads(bpath.read_text())
+
+    spath = wdir / "6_script.json"
+    if spath.exists():
+        segments = json.loads(spath.read_text())
+    else:
+        log("Writing the anchor script…")
+        segments = await write_script(llm, digest, wdir)
+        spath.write_text(json.dumps(segments, ensure_ascii=False, indent=2))
+    log(f"  script: {len(segments)} segments, {_words(segments)} words")
+
+    log(f"Recording audio ({cfg.tts_voice})…")
+    clips = await synthesize(cfg, segments)
+    pcm, t, timeline = bytearray(), 0.0, []
+    for seg, clip in zip(segments, clips):
+        dur = len(clip) / BYTES_PER_SEC
+        timeline.append({"kind": seg["kind"], "box_id": seg["box_id"], "title": seg["title"],
+                         "text": seg["text"], "start": round(t, 2), "end": round(t + dur, 2)})
+        pause = PAUSE.get(seg["kind"], 0.4)
+        pcm += clip + bytes(int(pause * SAMPLE_RATE) * 2)
+        t += dur + pause
+
+    audio_path.parent.mkdir(parents=True, exist_ok=True)
+    audio_path.write_bytes(encode_mp3(bytes(pcm)))
+    broadcast = {"audio": audio_rel, "duration": round(t, 1), "voice": cfg.tts_voice, "segments": timeline}
+    bpath.write_text(json.dumps(broadcast, ensure_ascii=False, indent=2))
+    log(f"  audio: {int(t // 60)}:{int(t % 60):02d}, {audio_path.stat().st_size / 1e6:.1f} MB → {audio_path}")
+    return broadcast

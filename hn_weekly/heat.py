@@ -34,6 +34,7 @@ def apply_heat(digest: dict, wdir: Path) -> dict:
     order = sorted(boxes, key=lambda b: -b["heat"])
     n = len(order)
     for rank, b in enumerate(order):
+        b["id"] = rank  # stable id = heat rank; the audio bulletin refers to boxes by it
         b["flames"] = 3 if rank < max(1, round(n * 0.25)) else 2 if rank < round(n * 0.6) else 1
 
     hottest = max(section_heat.values(), default=1)

@@ -21,6 +21,7 @@ def _slug(text: str) -> str:
 
 env.filters["day"] = _day_label
 env.filters["slug"] = _slug
+env.filters["mmss"] = lambda t: f"{int(t // 60)}:{int(t % 60):02d}"
 
 
 def render_week(digest: dict, output_dir: Path) -> Path:

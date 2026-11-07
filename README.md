@@ -14,15 +14,21 @@ GitHub Actions (Mon 02:30 UTC = 08:00 IST)
        3. summarize one OpenAI call per story
        4. group     stories about the same event → topics
        5. compact   20 hottest topics → boxes + one-line headline
-       render       site/<week>.html + site/index.html (archive)
-  └─ commit site/*.html  →  deploy site/ to GitHub Pages
+       6. script    ~580-word anchor script (top 3, rapid fire, launches, verbatim comment of the week)
+       7. audio     OpenAI TTS per segment (voice: coral) → one ~5-minute MP3 + exact segment timings
+       render       site/<week>.html (player highlights the box being read) + site/index.html
+  └─ commit site/*.html · publish MP3 as release digest-<week> · deploy site/ (+ last 12 weeks' audio) to Pages
 ```
 
 The stage JSON is written to `DATA_DIR`. In CI that is a temporary folder that is thrown away
 after each run. Only the finished HTML pages are committed. The archive page is rebuilt from the
 `<meta name="hn-…">` tags in those pages.
 
-Cost: GitHub is free (public repo). OpenAI is about $0.30 a week with `gpt-4.1-mini`.
+Audio is stored as GitHub Release assets, which keeps it out of git history. Each deploy pulls the
+last 12 weeks' MP3s into the site.
+
+Cost: GitHub is free (public repo). OpenAI is about $0.40 a week: about $0.30 for summaries and
+$0.10 for the script and voice.
 
 ## Setup (one-time)
 
@@ -40,4 +46,4 @@ Cost: GitHub is free (public repo). OpenAI is about $0.30 a week with `gpt-4.1-m
 | Preview the picked stories (no OpenAI calls) | `uv run python -m hn_weekly --dry-run` |
 
 Settings (environment variables or `.env`): `OPENAI_API_KEY`, `OPENAI_MODEL`, `OUTPUT_DIR`,
-`DATA_DIR`, `PER_DAY`.
+`DATA_DIR`, `PER_DAY`, `OPENAI_TTS_MODEL`, `TTS_VOICE`, `TTS_STYLE`.

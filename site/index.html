@@ -73,6 +73,93 @@ h1 { font-size: 28px; line-height: 1.15; margin: 6px 0 6px; letter-spacing: -.01
 .week-row p { margin: 6px 0 0; color: var(--muted); }
 .meta { color: var(--muted); font-size: 13px; }
 footer { margin-top: 48px; color: var(--muted); font-size: 12px; }
+
+/* ---------- Newscast ---------- */
+:root { --ink: #121212; --ink-text: #f4f2ec; --live: #e5322d; --glow: rgba(210, 86, 28, .18); }
+@media (prefers-color-scheme: dark) { :root { --ink: #0b0b0a; --glow: rgba(240, 122, 62, .22); } }
+.masthead { background: var(--ink); color: var(--ink-text); border-bottom: 3px solid var(--accent); }
+.mast-inner { max-width: 1080px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 8px; font-weight: 800; letter-spacing: .12em; font-size: 15px; text-decoration: none; }
+.logo { display: inline-grid; place-items: center; width: 22px; height: 22px; background: var(--accent); color: #fff;
+  letter-spacing: 0; border-radius: 3px; }
+.logo svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+.onair { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800; letter-spacing: .1em;
+  padding: 3px 8px; border-radius: 3px; background: #3a3a38; color: #cfccc4; }
+.onair .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.playing .onair { background: var(--live); color: #fff; }
+.playing .onair .dot { animation: blink 1.2s infinite; }
+@keyframes blink { 50% { opacity: .25; } }
+.mast-date { margin-left: auto; font-size: 13px; color: #b9b6ad; }
+.mast-archive { font-size: 13px; color: #b9b6ad; }
+.wrap { padding-top: 24px; }
+.lead h1 { font-size: clamp(22px, 3.4vw, 32px); line-height: 1.2; max-width: 32ch; margin: 8px 0 18px; }
+
+.player { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 14px; margin: 0 0 8px;
+  padding: 12px 14px; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .06); }
+.play { flex: none; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--accent); color: #fff;
+  display: grid; place-items: center; cursor: pointer; }
+.play svg { width: 22px; height: 22px; fill: currentColor; }
+.play svg[hidden] { display: none; }
+.play:hover { filter: brightness(1.08); }
+.pmain { flex: 1; min-width: 0; }
+.now { display: flex; align-items: baseline; gap: 8px; min-width: 0; margin-bottom: 6px; }
+.now-kind { flex: none; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.now-title { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.track { position: relative; height: 8px; border-radius: 4px; background: var(--line); cursor: pointer; }
+.fill { position: absolute; inset: 0 auto 0 0; width: 0; border-radius: 4px; background: var(--accent); }
+.tick { position: absolute; top: -2px; width: 2px; height: 12px; background: var(--muted); opacity: .5; border-radius: 1px; }
+.ptime { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-top: 4px;
+  font-variant-numeric: tabular-nums; }
+.speed { flex: none; font: 600 13px/1 inherit; font-family: inherit; padding: 8px 10px; border-radius: 8px;
+  border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; min-width: 52px; }
+
+.box { position: relative; transition: border-color .2s, box-shadow .2s, transform .2s; }
+.box.seekable { cursor: pointer; }
+.at { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.box.seekable:hover .at { color: var(--accent); }
+.live-badge { position: absolute; top: -10px; left: 12px; display: none; font-size: 11px; font-weight: 800;
+  letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; background: var(--live); color: #fff; }
+.box.on-air { border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
+.box.on-air .live-badge { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .playing .box.on-air { animation: onair 2.4s ease-in-out infinite; }
+  @keyframes onair { 50% { box-shadow: 0 0 0 6px var(--glow); } }
+}
+
+.transcript { margin-top: 36px; }
+.transcript summary { cursor: pointer; color: var(--muted); }
+.transcript ol { list-style: none; padding: 0; margin: 12px 0 0; max-width: 72ch; }
+.transcript li { padding: 8px 10px; border-radius: 8px; margin: 2px 0; }
+.transcript li.cur { background: var(--surface); outline: 1px solid var(--line); }
+.ts { font: 12px/1 inherit; font-family: inherit; font-variant-numeric: tabular-nums; color: var(--accent);
+  background: none; border: 0; padding: 0 6px 0 0; cursor: pointer; }
+.tk { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-right: 4px; }
+
+body.has-ticker { padding-bottom: 40px; }
+.ticker { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex; align-items: stretch; height: 34px;
+  background: var(--ink); color: var(--ink-text); font-size: 13px; border-top: 2px solid var(--accent); }
+.ticker-label { flex: none; display: flex; align-items: center; padding: 0 12px; background: var(--accent); color: #fff;
+  font-weight: 800; font-size: 11px; letter-spacing: .1em; }
+.ticker-viewport { flex: 1; overflow: hidden; display: flex; align-items: center; }
+.ticker-track { display: flex; width: max-content; animation: ticker var(--dur) linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker-run { display: flex; align-items: center; white-space: nowrap; }
+.ticker a { text-decoration: none; padding: 0 4px; }
+.ticker a:hover { color: var(--accent); }
+.ticker .sep { color: var(--accent); padding: 0 10px; font-size: 9px; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+  .ticker-viewport { overflow-x: auto; }
+}
+@media (max-width: 560px) {
+  .mast-date { margin-left: 0; width: 100%; order: 3; }
+  .player { gap: 10px; padding: 10px; }
+  .play { width: 42px; height: 42px; }
+  .ticker-label { padding: 0 8px; font-size: 10px; }
+}
 </style>
 </head>
 <body>

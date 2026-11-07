@@ -3,3 +3,5 @@
 __pycache__/
 # Stage JSON is a local/CI-temp cache only — never committed
 site/data/
+# Audio is published to GitHub Releases, not git
+site/audio/

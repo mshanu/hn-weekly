@@ -19,6 +19,12 @@ SECTIONS = [
 ]
 
 
+DEFAULT_TTS_STYLE = (
+    "Crisp radio news anchor. Brisk, upbeat pace, confident and neutral, with clear diction. "
+    "Slight emphasis on numbers and names. Short natural pause between sentences."
+)
+
+
 @dataclass(frozen=True)
 class Config:
     output_dir: Path
@@ -26,6 +32,9 @@ class Config:
     per_day: int
     model: str
     api_key: str | None
+    tts_model: str
+    tts_voice: str
+    tts_style: str
 
     def week_dir(self, week: str) -> Path:
         return self.data_dir / week
@@ -40,4 +49,7 @@ def load_config() -> Config:
         per_day=int(os.getenv("PER_DAY", "20")),
         model=os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
         api_key=os.getenv("OPENAI_API_KEY") or None,
+        tts_model=os.getenv("OPENAI_TTS_MODEL", "gpt-4o-mini-tts"),
+        tts_voice=os.getenv("TTS_VOICE", "coral"),
+        tts_style=os.getenv("TTS_STYLE", DEFAULT_TTS_STYLE),
     )

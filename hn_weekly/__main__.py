@@ -20,6 +20,7 @@ import httpx
 
 from .config import SECTIONS, load_config
 from .extract import build_raw
+from .broadcast import stage_broadcast
 from .heat import apply_heat
 from .fetch import UA, collect_week, previous_week, week_days
 from .render import render_week
@@ -195,6 +196,9 @@ async def main() -> int:
 
     if args.rerender:
         digest = apply_heat(read_json(wdir / "5_digest.json"), wdir)
+        bpath = wdir / "7_broadcast.json"
+        if bpath.exists() and (cfg.output_dir / f"audio/{week}.mp3").exists():
+            digest["broadcast"] = read_json(bpath)
         log(f"Re-rendered {render_week(digest, cfg.output_dir)}")
         return 0
 
@@ -217,6 +221,10 @@ async def main() -> int:
     summaries = await stage_story_summaries(llm, stories, raws, wdir)
     topics = await stage_topics(llm, stories, summaries, wdir)
     digest = apply_heat(await stage_digest(cfg, llm, week, stories, topics, wdir), wdir)
+    try:
+        digest["broadcast"] = await stage_broadcast(cfg, llm, digest, week, wdir, log)
+    except Exception as e:  # audio is a bonus: never block the page on it
+        log(f"  ! audio bulletin failed, publishing without it: {e!r}")
     out = render_week(digest, cfg.output_dir)
     log(f"Done: {out}")
     if not args.no_open:
