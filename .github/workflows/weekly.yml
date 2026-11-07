@@ -63,7 +63,7 @@ jobs:
             [ -e "$f" ] || continue
             w=$(basename "$f" .mp3)
             gh release view "digest-$w" >/dev/null 2>&1 || \
-              gh release create "digest-$w" "$f" --title "HN Weekly $w" --notes "5-minute audio bulletin for $w."
+              gh release create "digest-$w" "$f" --title "HN Weekly $w" --notes "2-minute audio bulletin for $w."
           done
 
       - name: Fetch the last 12 weeks of audio for the site

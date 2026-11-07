@@ -14,8 +14,8 @@ GitHub Actions (Mon 02:30 UTC = 08:00 IST)
        3. summarize one OpenAI call per story
        4. group     stories about the same event → topics
        5. compact   20 hottest topics → boxes + one-line headline
-       6. script    ~580-word anchor script (top 3, rapid fire, launches, verbatim comment of the week)
-       7. audio     OpenAI TTS per segment (voice: coral) → one ~5-minute MP3 + exact segment timings
+       6. script    ~235-word anchor script (top 3, 5 quick hits, verbatim comment of the week)
+       7. audio     OpenAI TTS per segment (voice: coral) → one ~2-minute MP3 + exact segment timings
        render       site/<week>.html (player highlights the box being read) + site/index.html
   └─ commit site/*.html · publish MP3 as release digest-<week> · deploy site/ (+ last 12 weeks' audio) to Pages
 ```

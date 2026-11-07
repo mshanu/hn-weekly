@@ -222,7 +222,7 @@ body.staged { overflow: hidden; }
 .s-link:hover { text-decoration: underline; }
 .k-rapid .s-title, .k-launches .s-title { font-size: clamp(28px, 4.6vw, 54px); }
 .s-date { font-size: clamp(16px, 2vw, 20px); color: var(--muted); margin-top: 10px; }
-.s-head { font-size: clamp(28px, 4.4vw, 52px); line-height: 1.12; letter-spacing: -.015em; margin: 12px 0 30px; max-width: 24ch; }
+.s-head { font-size: clamp(26px, 3.6vw, 44px); line-height: 1.12; letter-spacing: -.015em; margin: 12px 0 0; max-width: 26ch; }
 .s-coming span { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .s-coming ol { list-style: none; counter-reset: c; padding: 0; margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
 .s-coming li { counter-increment: c; padding: 10px 16px; border-radius: 10px; background: rgba(255, 255, 255, .07);
@@ -237,6 +237,8 @@ body.staged { overflow: hidden; }
 .s-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .s-replay, .s-plain { font: 600 16px/1 inherit; font-family: inherit; padding: 12px 18px; border-radius: 999px; cursor: pointer; }
 .s-replay { border: 0; background: var(--accent); color: #fff; }
+.s-startrow { margin: 26px 0 30px; }
+.playing .s-startrow { visibility: hidden; }
 .s-plain { border: 1px solid rgba(255, 255, 255, .25); background: transparent; color: #f4f2ec; }
 
 .st-low { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 20px 10px; }
@@ -267,7 +269,7 @@ body.staged { overflow: hidden; }
 @media (max-height: 560px) { .lower3 { display: none; } }
 </style>
 </head>
-<body class="has-ticker">
+<body class="has-ticker staged">
 
 
 
@@ -285,9 +287,9 @@ body.staged { overflow: hidden; }
 
 <div class="wrap">
 <section class="lead">
-  <div class="kicker">This week on Hacker News · 5-minute bulletin</div>
+  <div class="kicker">This week on Hacker News · 3-minute bulletin</div>
   <h1>Binance lost $5.6B in a 20-minute hack, OpenAI showcased AI-assisted proofs, Anthropic filed risky IPO, and Serbian students ended 14 years of authoritarian rule.</h1>
-  <button class="watch" id="watch-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch the bulletin<span>4:57</span></button>
+  <button class="watch" id="watch-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch the bulletin<span>2:02</span></button>
 </section>
 
 
@@ -298,16 +300,16 @@ body.staged { overflow: hidden; }
     <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
   </button>
   <div class="pmain">
-    <div class="now"><span class="now-kind" id="now-kind">Press play</span><span class="now-title" id="now-title">Oct 26 – Nov 1, 2026 in under 5 minutes</span></div>
+    <div class="now"><span class="now-kind" id="now-kind">Press play</span><span class="now-title" id="now-title">Oct 26 – Nov 1, 2026 in under 3 minutes</span></div>
     <div class="track" id="track" role="slider" aria-label="Seek" tabindex="0">
       <div class="fill" id="fill"></div>
-      <span class="tick" style="left: 6.13%"></span><span class="tick" style="left: 16.98%"></span><span class="tick" style="left: 30.81%"></span><span class="tick" style="left: 76.66%"></span><span class="tick" style="left: 81.47%"></span><span class="tick" style="left: 86.37%"></span><span class="tick" style="left: 91.42%"></span>
+      <span class="tick" style="left: 4.29%"></span><span class="tick" style="left: 14.88%"></span><span class="tick" style="left: 28.45%"></span><span class="tick" style="left: 88.35%"></span>
     </div>
-    <div class="ptime"><span id="t-cur">0:00</span><span id="t-dur">4:57</span></div>
+    <div class="ptime"><span id="t-cur">0:00</span><span id="t-dur">2:02</span></div>
   </div>
   <button class="speed" id="speed" aria-label="Playback speed">1×</button>
 </div>
-<script type="application/json" id="bc-seg">[{"box_id": -1, "end": 17.6, "kind": "open", "start": 0.0, "text": "Welcome to HN Weekly covering the week from October twenty sixth to November first, twenty twenty six. This week, we reflect on Patrick Stewart\u0027s legacy, Binance\u0027s $5.6 billion hack, and risks in Anthropic\u0027s IPO filing.", "title": "HN Weekly Intro"}, {"box_id": 0, "end": 49.75, "kind": "story", "start": 18.2, "text": "Patrick Stewart, acclaimed for his role as Captain Jean-Luc Picard in Star Trek The Next Generation, has passed away. His character was a beacon of moral leadership and integrity, inspiring many. On Hacker News, the community celebrated Stewart\u0027s influence on leadership and personal values. Discussions noted his versatility beyond Star Trek and debated comparisons to other captains. Overall, users appreciated the hopeful vision his work provided in challenging political times.", "title": "Patrick Stewart\u0027s Legacy"}, {"box_id": 1, "end": 90.85, "kind": "story", "start": 50.45, "text": "Binance experienced a massive security breach, losing between five point six and six point three billion dollars of cryptocurrency in just twenty minutes from hot wallets. The attack reportedly exploited a compromised DevOps engineer\u0027s laptop and has been linked to the North Korean hacking group TraderTraitor. On Hacker News, users expressed serious concerns over Binance\u0027s security, questioning how a laptop breach resulted in such a large, rapid theft. Debates also focused on the North Korean attribution, hot wallet risks, and the effectiveness of freezing stolen crypto on blockchains.", "title": "Binance Loses $5.6B"}, {"box_id": 2, "end": 128.8, "kind": "story", "start": 91.55, "text": "Anthropic filed its S-1 IPO prospectus, highlighting rapid AI-driven revenue growth but also revealing risks like customer concentration, geopolitical tensions, and open-source competition. Blackstone doubts Anthropic will secure an investment-grade credit rating post-IPO. On Hacker News, the community recognized Anthropic\u0027s growth and AI coding advances but remained skeptical about sustained demand amid fierce competition and market volatility. The mood was cautious optimism mixed with concerns over financial stability and speculative risk.", "title": "Anthropic IPO Risks"}, {"box_id": 4, "end": 147.25, "kind": "rapid", "start": 129.5, "text": "OpenAI announced AI-assisted breakthroughs in mathematics, computer science, and physics, including a refutation of the Exponential Time Hypothesis. Hacker News users were impressed but debated OpenAI\u0027s role in science and urged caution on practical impacts.", "title": "OpenAI AI Discoveries"}, {"box_id": 5, "end": 165.95, "kind": "rapid", "start": 147.6, "text": "The Claude Code VS Code extension was compromised with an SSH reverse backdoor affecting thousands, exposing supply-chain weaknesses. Hacker News highlighted the severity and ongoing trust concerns in third-party marketplaces despite swift remediation.", "title": "Claude Extension Backdoor"}, {"box_id": 6, "end": 181.5, "kind": "rapid", "start": 166.3, "text": "Google released Gemini 4 Carbon, a powerful AI model excelling in cybersecurity, but it remains unavailable publicly. The community praised its capabilities yet criticized limited access and unclear benchmarking.", "title": "Google Gemini 4 Carbon"}, {"box_id": 7, "end": 197.15, "kind": "rapid", "start": 181.85, "text": "Microsoft offered voluntary buyouts to about twenty five percent of its workforce, aiming to reduce costs without layoffs. Hacker News users noted the hard choice for employees and expressed skepticism about AI\u0027s influence on staffing changes.", "title": "Microsoft 25 Percent Buyouts"}, {"box_id": 8, "end": 212.75, "kind": "rapid", "start": 197.5, "text": "ICE conducted intrusive surveillance on left-wing activists using aggressive techniques. The Hacker News community condemned this as government overreach threatening civil liberties, drawing parallels to historical abuses.", "title": "ICE Surveillance Operation"}, {"box_id": 9, "end": 227.4, "kind": "rapid", "start": 213.1, "text": "Mistral AI released open weights for its Large 4 multimodal model optimized for coding and cybersecurity. Users appreciated improved pricing but questioned competitiveness and licensing restrictions.", "title": "Mistral Large 4 Weights Released"}, {"box_id": 3, "end": 241.7, "kind": "launches", "start": 227.75, "text": "HackerTube launched a YouTube-like platform curating nerd-focused videos favored by Hacker News, avoiding clickbait. The community valued its quality content and technical achievement using AI tools.", "title": "HackerTube Curates Videos"}, {"box_id": 10, "end": 256.25, "kind": "launches", "start": 242.05, "text": "HackerBooks aggregates and ranks books mentioned on Hacker News, reshuffling daily. The community welcomed the curated collection but noted categorization and data limitations.", "title": "HackerBooks Aggregates Books"}, {"box_id": 13, "end": 271.25, "kind": "launches", "start": 256.6, "text": "Ghostty version one point four features performance improvements, full Kitty protocol support, and better SSH integration. Hacker News praised its modern design though some remain cautious about missing features.", "title": "Ghostty Terminal Update"}, {"author": "halflife", "box_id": 0, "end": 290.9, "kind": "quote", "quote": "Watching him in Star Trek TNG made me reevaluate how management of people should be done, his character was assertive but compassionate. High morals coupled with grounded reason.", "start": 271.6, "text": "Our comment of the week comes from the Patrick Stewart Dies thread. User halflife wrote: Watching him in Star Trek TNG made me reevaluate how management of people should be done, his character was assertive but compassionate. High morals coupled with grounded reason.", "title": "Comment of the week"}, {"box_id": -1, "end": 297.1, "kind": "signoff", "start": 291.5, "text": "That\u0027s all for this week on Hacker News. Stay curious and see you next time.", "title": "HN Weekly Signoff"}]</script>
+<script type="application/json" id="bc-seg">[{"box_id": -1, "end": 4.85, "kind": "open", "start": 0.0, "text": "This is HN Weekly, your week on Hacker News in two minutes.", "title": "HN Weekly open"}, {"box_id": 0, "end": 17.7, "kind": "story", "start": 5.25, "text": "Patrick Stewart, famous for Captain Picard in Star Trek, has passed away. HN honors his vision of ethical leadership, sparking debate on the actor versus character\u0027s impact.", "title": "Patrick Stewart Dies"}, {"box_id": 1, "end": 34.3, "kind": "story", "start": 18.2, "text": "Binance lost about five point six billion dollars in a twenty-minute hack via a compromised engineer\u0027s laptop, linked to North Korean hackers. HN questions Binance\u0027s security, hot wallet risks, and the investigation\u0027s attribution claims.", "title": "Binance Loses $5.6B"}, {"box_id": 2, "end": 51.9, "kind": "story", "start": 34.8, "text": "Anthropic filed for IPO showing strong AI-driven growth but warned of risks like customer concentration, geopolitics, and open-source competition. HN is skeptical about sustained demand and sees AI startups as speculative investments.", "title": "Anthropic IPO Risks"}, {"box_id": 3, "end": 63.55, "kind": "rapid", "start": 52.4, "text": "HackerTube launched a curated tech video platform favored by HN for quality content, though concerns remain about moderation and sustainability.", "title": "HackerTube Launch"}, {"box_id": 4, "end": 76.8, "kind": "rapid", "start": 63.8, "text": "OpenAI revealed AI-assisted discoveries in math and physics, including a subexponential time result, impressing HN but raising questions on scientific credit and practical impact.", "title": "OpenAI AI Discoveries"}, {"box_id": 5, "end": 87.7, "kind": "rapid", "start": 77.05, "text": "Malicious versions of the Claude Code extension installed an SSH backdoor via the Cursor Marketplace, alarming HN over supply-chain security risks.", "title": "Claude Code Backdoor"}, {"box_id": 6, "end": 98.3, "kind": "rapid", "start": 87.95, "text": "Google\u0027s Gemini 4 Carbon AI excels in cybersecurity but is not public, with HN mixed on limited access and benchmarking clarity.", "title": "Google Gemini 4 Carbon"}, {"box_id": 7, "end": 107.8, "kind": "rapid", "start": 98.55, "text": "Microsoft offered voluntary buyouts to a quarter of its workforce, with HN noting pressure on employees and doubts about AI\u0027s role in cuts.", "title": "Microsoft 25% Buyouts"}, {"author": "halflife", "box_id": 0, "end": 118.55, "kind": "quote", "quote": "Watching him in Star Trek TNG made me reevaluate how management of people should be done, his character was assertive but compassionate.", "start": 108.05, "text": "User halflife wrote: Watching him in Star Trek TNG made me reevaluate how management of people should be done, his character was assertive but compassionate.", "title": "Comment of the week"}, {"box_id": -1, "end": 122.3, "kind": "signoff", "start": 118.95, "text": "That\u0027s the week. See you next Monday.", "title": "Signoff"}]</script>
 
 
 
@@ -329,7 +331,7 @@ body.staged { overflow: hidden; }
       <span class="mood v-skeptical">🤨 skeptical</span>
       <p class="take">“Security practices questioned; skepticism on N.Korean attribution and hot wallet risks.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 0:50</span>
+        <span class="at" title="Play this story">▶ 0:18</span>
         
         <details class="threads">
           <summary>+1 thread</summary>
@@ -353,7 +355,7 @@ body.staged { overflow: hidden; }
       <span class="mood v-divided">😐 divided</span>
       <p class="take">“Seen as serious supply-chain attack exposing risks of third-party marketplaces.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 2:27</span>
+        <span class="at" title="Play this story">▶ 1:17</span>
         
         <details class="threads">
           <summary>+2 threads</summary>
@@ -368,7 +370,7 @@ body.staged { overflow: hidden; }
     </article>
   
     
-    <article class="box seekable" data-box-id="8">
+    <article class="box" data-box-id="8">
       <div class="top">
         <h3><a href="https://www.wired.com/story/ice-is-running-one-of-the-largest-anti-left-surveillance-operations-in-us-history/">ICE Surveillance Operation</a></h3>
         <span class="flames f2" title="Activity: 2,246 points + comments">🔥🔥</span>
@@ -377,7 +379,7 @@ body.staged { overflow: hidden; }
       <span class="mood v-skeptical">🤨 skeptical</span>
       <p class="take">“Viewed as government overreach echoing COINTELPRO with civil liberty concerns.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 3:17</span>
+        
         
         <a class="discuss" href="https://news.ycombinator.com/item?id=50272749">discuss →</a>
       </div>
@@ -480,7 +482,7 @@ body.staged { overflow: hidden; }
       <span class="mood v-enthusiastic">🎉 excited</span>
       <p class="take">“Widely revered as inspiring, though some separate actor from character lore.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 0:18</span>
+        <span class="at" title="Play this story">▶ 0:05</span>
         
         <details class="threads">
           <summary>+2 threads</summary>
@@ -556,7 +558,7 @@ body.staged { overflow: hidden; }
       <span class="mood v-divided">😐 divided</span>
       <p class="take">“Impressive advancements; skepticism over OpenAI&#39;s role and real-world impact.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 2:09</span>
+        <span class="at" title="Play this story">▶ 1:03</span>
         
         <details class="threads">
           <summary>+1 thread</summary>
@@ -580,7 +582,7 @@ body.staged { overflow: hidden; }
       <span class="mood v-divided">😐 divided</span>
       <p class="take">“Technically strong but criticized for limited access and unclear benchmarking.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 2:46</span>
+        <span class="at" title="Play this story">▶ 1:27</span>
         
         <details class="threads">
           <summary>+1 thread</summary>
@@ -595,7 +597,7 @@ body.staged { overflow: hidden; }
     </article>
   
     
-    <article class="box seekable" data-box-id="9">
+    <article class="box" data-box-id="9">
       <div class="top">
         <h3><a href="https://mistral.ai/news/mistral-large-4-oss/">Mistral Large 4 Weights Released</a></h3>
         <span class="flames f2" title="Activity: 2,173 points + comments">🔥🔥</span>
@@ -604,7 +606,7 @@ body.staged { overflow: hidden; }
       <span class="mood v-divided">😐 divided</span>
       <p class="take">“Praised for openness and EU origin; doubts about competitiveness and licensing.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 3:33</span>
+        
         
         <a class="discuss" href="https://news.ycombinator.com/item?id=50289418">discuss →</a>
       </div>
@@ -649,7 +651,7 @@ body.staged { overflow: hidden; }
       <span class="mood v-skeptical">🤨 skeptical</span>
       <p class="take">“Growth impressive but skeptics warn of market volatility and open-source competition.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 1:31</span>
+        <span class="at" title="Play this story">▶ 0:34</span>
         
         <details class="threads">
           <summary>+1 thread</summary>
@@ -673,7 +675,7 @@ body.staged { overflow: hidden; }
       <span class="mood v-divided">😐 divided</span>
       <p class="take">“Seen as tough choice; workforce bloated, AI impact debated skeptically by insiders.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 3:01</span>
+        <span class="at" title="Play this story">▶ 1:38</span>
         
         <a class="discuss" href="https://news.ycombinator.com/item?id=50245524">discuss →</a>
       </div>
@@ -701,7 +703,7 @@ body.staged { overflow: hidden; }
       <span class="mood v-enthusiastic">🎉 excited</span>
       <p class="take">“Appreciated as a fresh niche; concerns over moderation and sustainability arise.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 3:47</span>
+        <span class="at" title="Play this story">▶ 0:52</span>
         
         <a class="discuss" href="https://news.ycombinator.com/item?id=50319510">discuss →</a>
       </div>
@@ -709,7 +711,7 @@ body.staged { overflow: hidden; }
     </article>
   
     
-    <article class="box seekable" data-box-id="10">
+    <article class="box" data-box-id="10">
       <div class="top">
         <h3><a href="https://hackerbooks.org">HackerBooks Aggregates Books</a></h3>
         <span class="flames f2" title="Activity: 2,166 points + comments">🔥🔥</span>
@@ -718,7 +720,7 @@ body.staged { overflow: hidden; }
       <span class="mood v-informative">💡 informative</span>
       <p class="take">“Liked conceptually; concerns about data gaps, categorization, and declining book mentions.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 4:02</span>
+        
         
         <a class="discuss" href="https://news.ycombinator.com/item?id=50326821">discuss →</a>
       </div>
@@ -726,7 +728,7 @@ body.staged { overflow: hidden; }
     </article>
   
     
-    <article class="box seekable" data-box-id="13">
+    <article class="box" data-box-id="13">
       <div class="top">
         <h3><a href="https://ghostty.org/docs/install/release-notes/1-4-0">Ghostty 1.4 Terminal Update</a></h3>
         <span class="flames f1" title="Activity: 1,805 points + comments">🔥</span>
@@ -735,7 +737,7 @@ body.staged { overflow: hidden; }
       <span class="mood v-divided">😐 divided</span>
       <p class="take">“Loved for cross-platform library; some holdouts prefer mature alternatives like iTerm2.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 4:16</span>
+        
         
         <a class="discuss" href="https://news.ycombinator.com/item?id=50261998">discuss →</a>
       </div>
@@ -780,49 +782,37 @@ body.staged { overflow: hidden; }
   <ol>
   
     <li data-seg="0"><button class="ts" data-t="0.0">0:00</button>
-      <span class="tk">Headlines</span> Welcome to HN Weekly covering the week from October twenty sixth to November first, twenty twenty six. This week, we reflect on Patrick Stewart&#39;s legacy, Binance&#39;s $5.6 billion hack, and risks in Anthropic&#39;s IPO filing.</li>
+      <span class="tk">Headlines</span> This is HN Weekly, your week on Hacker News in two minutes.</li>
   
-    <li data-seg="1"><button class="ts" data-t="18.2">0:18</button>
-      <span class="tk">Top story</span> Patrick Stewart, acclaimed for his role as Captain Jean-Luc Picard in Star Trek The Next Generation, has passed away. His character was a beacon of moral leadership and integrity, inspiring many. On Hacker News, the community celebrated Stewart&#39;s influence on leadership and personal values. Discussions noted his versatility beyond Star Trek and debated comparisons to other captains. Overall, users appreciated the hopeful vision his work provided in challenging political times.</li>
+    <li data-seg="1"><button class="ts" data-t="5.25">0:05</button>
+      <span class="tk">Top story</span> Patrick Stewart, famous for Captain Picard in Star Trek, has passed away. HN honors his vision of ethical leadership, sparking debate on the actor versus character&#39;s impact.</li>
   
-    <li data-seg="2"><button class="ts" data-t="50.45">0:50</button>
-      <span class="tk">Top story</span> Binance experienced a massive security breach, losing between five point six and six point three billion dollars of cryptocurrency in just twenty minutes from hot wallets. The attack reportedly exploited a compromised DevOps engineer&#39;s laptop and has been linked to the North Korean hacking group TraderTraitor. On Hacker News, users expressed serious concerns over Binance&#39;s security, questioning how a laptop breach resulted in such a large, rapid theft. Debates also focused on the North Korean attribution, hot wallet risks, and the effectiveness of freezing stolen crypto on blockchains.</li>
+    <li data-seg="2"><button class="ts" data-t="18.2">0:18</button>
+      <span class="tk">Top story</span> Binance lost about five point six billion dollars in a twenty-minute hack via a compromised engineer&#39;s laptop, linked to North Korean hackers. HN questions Binance&#39;s security, hot wallet risks, and the investigation&#39;s attribution claims.</li>
   
-    <li data-seg="3"><button class="ts" data-t="91.55">1:31</button>
-      <span class="tk">Top story</span> Anthropic filed its S-1 IPO prospectus, highlighting rapid AI-driven revenue growth but also revealing risks like customer concentration, geopolitical tensions, and open-source competition. Blackstone doubts Anthropic will secure an investment-grade credit rating post-IPO. On Hacker News, the community recognized Anthropic&#39;s growth and AI coding advances but remained skeptical about sustained demand amid fierce competition and market volatility. The mood was cautious optimism mixed with concerns over financial stability and speculative risk.</li>
+    <li data-seg="3"><button class="ts" data-t="34.8">0:34</button>
+      <span class="tk">Top story</span> Anthropic filed for IPO showing strong AI-driven growth but warned of risks like customer concentration, geopolitics, and open-source competition. HN is skeptical about sustained demand and sees AI startups as speculative investments.</li>
   
-    <li data-seg="4"><button class="ts" data-t="129.5">2:09</button>
-      <span class="tk">In other news</span> OpenAI announced AI-assisted breakthroughs in mathematics, computer science, and physics, including a refutation of the Exponential Time Hypothesis. Hacker News users were impressed but debated OpenAI&#39;s role in science and urged caution on practical impacts.</li>
+    <li data-seg="4"><button class="ts" data-t="52.4">0:52</button>
+      <span class="tk">Quick hits</span> HackerTube launched a curated tech video platform favored by HN for quality content, though concerns remain about moderation and sustainability.</li>
   
-    <li data-seg="5"><button class="ts" data-t="147.6">2:27</button>
-      <span class="tk">In other news</span> The Claude Code VS Code extension was compromised with an SSH reverse backdoor affecting thousands, exposing supply-chain weaknesses. Hacker News highlighted the severity and ongoing trust concerns in third-party marketplaces despite swift remediation.</li>
+    <li data-seg="5"><button class="ts" data-t="63.8">1:03</button>
+      <span class="tk">Quick hits</span> OpenAI revealed AI-assisted discoveries in math and physics, including a subexponential time result, impressing HN but raising questions on scientific credit and practical impact.</li>
   
-    <li data-seg="6"><button class="ts" data-t="166.3">2:46</button>
-      <span class="tk">In other news</span> Google released Gemini 4 Carbon, a powerful AI model excelling in cybersecurity, but it remains unavailable publicly. The community praised its capabilities yet criticized limited access and unclear benchmarking.</li>
+    <li data-seg="6"><button class="ts" data-t="77.05">1:17</button>
+      <span class="tk">Quick hits</span> Malicious versions of the Claude Code extension installed an SSH backdoor via the Cursor Marketplace, alarming HN over supply-chain security risks.</li>
   
-    <li data-seg="7"><button class="ts" data-t="181.85">3:01</button>
-      <span class="tk">In other news</span> Microsoft offered voluntary buyouts to about twenty five percent of its workforce, aiming to reduce costs without layoffs. Hacker News users noted the hard choice for employees and expressed skepticism about AI&#39;s influence on staffing changes.</li>
+    <li data-seg="7"><button class="ts" data-t="87.95">1:27</button>
+      <span class="tk">Quick hits</span> Google&#39;s Gemini 4 Carbon AI excels in cybersecurity but is not public, with HN mixed on limited access and benchmarking clarity.</li>
   
-    <li data-seg="8"><button class="ts" data-t="197.5">3:17</button>
-      <span class="tk">In other news</span> ICE conducted intrusive surveillance on left-wing activists using aggressive techniques. The Hacker News community condemned this as government overreach threatening civil liberties, drawing parallels to historical abuses.</li>
+    <li data-seg="8"><button class="ts" data-t="98.55">1:38</button>
+      <span class="tk">Quick hits</span> Microsoft offered voluntary buyouts to a quarter of its workforce, with HN noting pressure on employees and doubts about AI&#39;s role in cuts.</li>
   
-    <li data-seg="9"><button class="ts" data-t="213.1">3:33</button>
-      <span class="tk">In other news</span> Mistral AI released open weights for its Large 4 multimodal model optimized for coding and cybersecurity. Users appreciated improved pricing but questioned competitiveness and licensing restrictions.</li>
+    <li data-seg="9"><button class="ts" data-t="108.05">1:48</button>
+      <span class="tk">Comment of the week</span> User halflife wrote: Watching him in Star Trek TNG made me reevaluate how management of people should be done, his character was assertive but compassionate.</li>
   
-    <li data-seg="10"><button class="ts" data-t="227.75">3:47</button>
-      <span class="tk">Launches</span> HackerTube launched a YouTube-like platform curating nerd-focused videos favored by Hacker News, avoiding clickbait. The community valued its quality content and technical achievement using AI tools.</li>
-  
-    <li data-seg="11"><button class="ts" data-t="242.05">4:02</button>
-      <span class="tk">Launches</span> HackerBooks aggregates and ranks books mentioned on Hacker News, reshuffling daily. The community welcomed the curated collection but noted categorization and data limitations.</li>
-  
-    <li data-seg="12"><button class="ts" data-t="256.6">4:16</button>
-      <span class="tk">Launches</span> Ghostty version one point four features performance improvements, full Kitty protocol support, and better SSH integration. Hacker News praised its modern design though some remain cautious about missing features.</li>
-  
-    <li data-seg="13"><button class="ts" data-t="271.6">4:31</button>
-      <span class="tk">Comment of the week</span> Our comment of the week comes from the Patrick Stewart Dies thread. User halflife wrote: Watching him in Star Trek TNG made me reevaluate how management of people should be done, his character was assertive but compassionate. High morals coupled with grounded reason.</li>
-  
-    <li data-seg="14"><button class="ts" data-t="291.5">4:51</button>
-      <span class="tk">Sign-off</span> That&#39;s all for this week on Hacker News. Stay curious and see you next time.</li>
+    <li data-seg="10"><button class="ts" data-t="118.95">1:58</button>
+      <span class="tk">Sign-off</span> That&#39;s the week. See you next Monday.</li>
   
   </ol>
 </details>
@@ -830,7 +820,7 @@ body.staged { overflow: hidden; }
 
 
 
-<div class="stage" id="stage" hidden role="dialog" aria-modal="true" aria-label="HN Weekly bulletin">
+<div class="stage" id="stage" role="dialog" aria-modal="true" aria-label="HN Weekly bulletin">
   <div class="st-bar">
     <span class="brand"><span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4M16.2 7.8a6 6 0 0 1 0 8.4M4.9 4.9a10 10 0 0 0 0 14.2M19.1 4.9a10 10 0 0 1 0 14.2"/></svg></span>HN WEEKLY</span>
     <span class="onair"><span class="dot"></span>ON AIR</span>
@@ -847,6 +837,7 @@ body.staged { overflow: hidden; }
       <div class="s-kicker">This week on Hacker News</div>
       <div class="s-date">Oct 26 – Nov 1, 2026</div>
       <h2 class="s-head">Binance lost $5.6B in a 20-minute hack, OpenAI showcased AI-assisted proofs, Anthropic filed risky IPO, and Serbian students ended 14 years of authoritarian rule.</h2>
+      <div class="s-actions s-startrow"><button class="s-replay" id="st-start">▶ Play the bulletin · 2:02</button><button class="s-plain" id="st-skip">Skip to the stories</button></div>
       <div class="s-coming"><span>Coming up</span>
         <ol><li>Patrick Stewart Dies</li><li>Binance Loses $5.6B</li><li>Anthropic IPO Filing Risks</li></ol>
       </div>
@@ -917,121 +908,7 @@ body.staged { overflow: hidden; }
     
       
       
-      <div class="s-kicker">In other news<span class="s-sec">AI &amp; ML</span><span class="flames f3">🔥🔥🔥</span></div>
-      <h2 class="s-title">OpenAI AI Discoveries</h2>
-      <p class="s-gist">OpenAI announced AI-assisted proofs in math, CS, and physics including ETH refutation.</p>
-      <div class="s-hn">
-        <span class="s-hn-label">On Hacker News</span>
-        <span class="mood v-divided">😐 divided</span>
-        <p class="s-take">“Impressive advancements; skepticism over OpenAI&#39;s role and real-world impact.”</p>
-      </div>
-      <a class="s-link" href="https://news.ycombinator.com/item?id=50251344" target="_blank" rel="noopener">Join the discussion →</a>
-    
-      </div>
-    </section>
-  
-    
-    <section class="slide k-rapid" data-i="5" aria-hidden="true">
-      <div class="s-inner">
-    
-      
-      
-      <div class="s-kicker">In other news<span class="s-sec">Security &amp; Privacy</span><span class="flames f2">🔥🔥</span></div>
-      <h2 class="s-title">Claude Code Extension Backdoor</h2>
-      <p class="s-gist">Malicious versions of Claude Code VS Code extension had SSH reverse backdoor.</p>
-      <div class="s-hn">
-        <span class="s-hn-label">On Hacker News</span>
-        <span class="mood v-divided">😐 divided</span>
-        <p class="s-take">“Seen as serious supply-chain attack exposing risks of third-party marketplaces.”</p>
-      </div>
-      <a class="s-link" href="https://news.ycombinator.com/item?id=50300683" target="_blank" rel="noopener">Join the discussion →</a>
-    
-      </div>
-    </section>
-  
-    
-    <section class="slide k-rapid" data-i="6" aria-hidden="true">
-      <div class="s-inner">
-    
-      
-      
-      <div class="s-kicker">In other news<span class="s-sec">AI &amp; ML</span><span class="flames f2">🔥🔥</span></div>
-      <h2 class="s-title">Google Gemini 4 Carbon</h2>
-      <p class="s-gist">Google launched Gemini 4 Carbon AI, top-ranked in cybersecurity but not public yet.</p>
-      <div class="s-hn">
-        <span class="s-hn-label">On Hacker News</span>
-        <span class="mood v-divided">😐 divided</span>
-        <p class="s-take">“Technically strong but criticized for limited access and unclear benchmarking.”</p>
-      </div>
-      <a class="s-link" href="https://news.ycombinator.com/item?id=50276792" target="_blank" rel="noopener">Join the discussion →</a>
-    
-      </div>
-    </section>
-  
-    
-    <section class="slide k-rapid" data-i="7" aria-hidden="true">
-      <div class="s-inner">
-    
-      
-      
-      <div class="s-kicker">In other news<span class="s-sec">Business &amp; Startups</span><span class="flames f2">🔥🔥</span></div>
-      <h2 class="s-title">Microsoft 25% Buyouts</h2>
-      <p class="s-gist">Microsoft offers voluntary buyouts to 60K employees to cut costs amid AI shifts.</p>
-      <div class="s-hn">
-        <span class="s-hn-label">On Hacker News</span>
-        <span class="mood v-divided">😐 divided</span>
-        <p class="s-take">“Seen as tough choice; workforce bloated, AI impact debated skeptically by insiders.”</p>
-      </div>
-      <a class="s-link" href="https://news.ycombinator.com/item?id=50245524" target="_blank" rel="noopener">Join the discussion →</a>
-    
-      </div>
-    </section>
-  
-    
-    <section class="slide k-rapid" data-i="8" aria-hidden="true">
-      <div class="s-inner">
-    
-      
-      
-      <div class="s-kicker">In other news<span class="s-sec">Security &amp; Privacy</span><span class="flames f2">🔥🔥</span></div>
-      <h2 class="s-title">ICE Surveillance Operation</h2>
-      <p class="s-gist">ICE conducted intrusive undercover surveillance on left-wing activist groups.</p>
-      <div class="s-hn">
-        <span class="s-hn-label">On Hacker News</span>
-        <span class="mood v-skeptical">🤨 skeptical</span>
-        <p class="s-take">“Viewed as government overreach echoing COINTELPRO with civil liberty concerns.”</p>
-      </div>
-      <a class="s-link" href="https://news.ycombinator.com/item?id=50272749" target="_blank" rel="noopener">Join the discussion →</a>
-    
-      </div>
-    </section>
-  
-    
-    <section class="slide k-rapid" data-i="9" aria-hidden="true">
-      <div class="s-inner">
-    
-      
-      
-      <div class="s-kicker">In other news<span class="s-sec">AI &amp; ML</span><span class="flames f2">🔥🔥</span></div>
-      <h2 class="s-title">Mistral Large 4 Weights Released</h2>
-      <p class="s-gist">Mistral AI released open weights for 1T-parameter Mistral Large 4 multimodal model.</p>
-      <div class="s-hn">
-        <span class="s-hn-label">On Hacker News</span>
-        <span class="mood v-divided">😐 divided</span>
-        <p class="s-take">“Praised for openness and EU origin; doubts about competitiveness and licensing.”</p>
-      </div>
-      <a class="s-link" href="https://news.ycombinator.com/item?id=50289418" target="_blank" rel="noopener">Join the discussion →</a>
-    
-      </div>
-    </section>
-  
-    
-    <section class="slide k-launches" data-i="10" aria-hidden="true">
-      <div class="s-inner">
-    
-      
-      
-      <div class="s-kicker">Launches<span class="s-sec">Launches &amp; Repos</span><span class="flames f3">🔥🔥🔥</span></div>
+      <div class="s-kicker">Quick hits<span class="s-sec">Launches &amp; Repos</span><span class="flames f3">🔥🔥🔥</span></div>
       <h2 class="s-title">HackerTube Curates Videos</h2>
       <p class="s-gist">HackerTube launched as HN-curated YouTube alternative filtering quality nerd content.</p>
       <div class="s-hn">
@@ -1045,61 +922,99 @@ body.staged { overflow: hidden; }
     </section>
   
     
-    <section class="slide k-launches" data-i="11" aria-hidden="true">
+    <section class="slide k-rapid" data-i="5" aria-hidden="true">
       <div class="s-inner">
     
       
       
-      <div class="s-kicker">Launches<span class="s-sec">Launches &amp; Repos</span><span class="flames f2">🔥🔥</span></div>
-      <h2 class="s-title">HackerBooks Aggregates Books</h2>
-      <p class="s-gist">HackerBooks ranks books mentioned on Hacker News, reshuffling daily by mentions.</p>
-      <div class="s-hn">
-        <span class="s-hn-label">On Hacker News</span>
-        <span class="mood v-informative">💡 informative</span>
-        <p class="s-take">“Liked conceptually; concerns about data gaps, categorization, and declining book mentions.”</p>
-      </div>
-      <a class="s-link" href="https://news.ycombinator.com/item?id=50326821" target="_blank" rel="noopener">Join the discussion →</a>
-    
-      </div>
-    </section>
-  
-    
-    <section class="slide k-launches" data-i="12" aria-hidden="true">
-      <div class="s-inner">
-    
-      
-      
-      <div class="s-kicker">Launches<span class="s-sec">Launches &amp; Repos</span><span class="flames f1">🔥</span></div>
-      <h2 class="s-title">Ghostty 1.4 Terminal Update</h2>
-      <p class="s-gist">Ghostty 1.4 adds Kitty protocol, SSH improvements, bug fixes, and memory optimization.</p>
+      <div class="s-kicker">Quick hits<span class="s-sec">AI &amp; ML</span><span class="flames f3">🔥🔥🔥</span></div>
+      <h2 class="s-title">OpenAI AI Discoveries</h2>
+      <p class="s-gist">OpenAI announced AI-assisted proofs in math, CS, and physics including ETH refutation.</p>
       <div class="s-hn">
         <span class="s-hn-label">On Hacker News</span>
         <span class="mood v-divided">😐 divided</span>
-        <p class="s-take">“Loved for cross-platform library; some holdouts prefer mature alternatives like iTerm2.”</p>
+        <p class="s-take">“Impressive advancements; skepticism over OpenAI&#39;s role and real-world impact.”</p>
       </div>
-      <a class="s-link" href="https://news.ycombinator.com/item?id=50261998" target="_blank" rel="noopener">Join the discussion →</a>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50251344" target="_blank" rel="noopener">Join the discussion →</a>
     
       </div>
     </section>
   
     
-    <section class="slide k-quote" data-i="13" aria-hidden="true">
+    <section class="slide k-rapid" data-i="6" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Quick hits<span class="s-sec">Security &amp; Privacy</span><span class="flames f2">🔥🔥</span></div>
+      <h2 class="s-title">Claude Code Extension Backdoor</h2>
+      <p class="s-gist">Malicious versions of Claude Code VS Code extension had SSH reverse backdoor.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Seen as serious supply-chain attack exposing risks of third-party marketplaces.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50300683" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-rapid" data-i="7" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Quick hits<span class="s-sec">AI &amp; ML</span><span class="flames f2">🔥🔥</span></div>
+      <h2 class="s-title">Google Gemini 4 Carbon</h2>
+      <p class="s-gist">Google launched Gemini 4 Carbon AI, top-ranked in cybersecurity but not public yet.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Technically strong but criticized for limited access and unclear benchmarking.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50276792" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-rapid" data-i="8" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Quick hits<span class="s-sec">Business &amp; Startups</span><span class="flames f2">🔥🔥</span></div>
+      <h2 class="s-title">Microsoft 25% Buyouts</h2>
+      <p class="s-gist">Microsoft offers voluntary buyouts to 60K employees to cut costs amid AI shifts.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Seen as tough choice; workforce bloated, AI impact debated skeptically by insiders.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50245524" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-quote" data-i="9" aria-hidden="true">
       <div class="s-inner">
     
       <div class="s-kicker">Comment of the week</div>
-      <blockquote class="s-quote">Watching him in Star Trek TNG made me reevaluate how management of people should be done, his character was assertive but compassionate. High morals coupled with grounded reason.</blockquote>
+      <blockquote class="s-quote">Watching him in Star Trek TNG made me reevaluate how management of people should be done, his character was assertive but compassionate.</blockquote>
       <div class="s-by"><b>halflife</b> on Patrick Stewart Dies · <a href="https://news.ycombinator.com/item?id=50294702" target="_blank" rel="noopener">read the thread →</a></div>
     
       </div>
     </section>
   
     
-    <section class="slide k-signoff" data-i="14" aria-hidden="true">
+    <section class="slide k-signoff" data-i="10" aria-hidden="true">
       <div class="s-inner">
     
       <div class="s-kicker">HN Weekly</div>
       <h2 class="s-title">That's the week.</h2>
-      <p class="s-gist">That&#39;s all for this week on Hacker News. Stay curious and see you next time.</p>
+      <p class="s-gist">That&#39;s the week. See you next Monday.</p>
       <div class="s-actions"><button class="s-replay" id="st-replay">↺ Watch again</button><button class="s-plain" id="st-browse">Browse all 20 stories</button></div>
     
       </div>
@@ -1107,7 +1022,7 @@ body.staged { overflow: hidden; }
   
   </div>
   <div class="st-low">
-    <div class="caption" id="caption"></div>
+    <div class="caption empty" id="caption"></div>
     <div class="lower3"><span class="l3-kind" id="l3-kind">HN Weekly</span><span class="l3-title" id="l3-title">Oct 26 – Nov 1, 2026</span></div>
   </div>
   <div class="st-ctrl">
@@ -1117,8 +1032,8 @@ body.staged { overflow: hidden; }
       <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
     </button>
     <button class="st-btn" id="st-next" aria-label="Next segment" title="Next (→)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M5 5l10 7-10 7z"/></svg></button>
-    <div class="chapters"><button class="ch" style="flex-grow: 17.6" data-i="0" aria-label="HN Weekly Intro" title="HN Weekly Intro"><i><b></b></i></button><button class="ch" style="flex-grow: 31.6" data-i="1" aria-label="Patrick Stewart&#39;s Legacy" title="Patrick Stewart&#39;s Legacy"><i><b></b></i></button><button class="ch" style="flex-grow: 40.4" data-i="2" aria-label="Binance Loses $5.6B" title="Binance Loses $5.6B"><i><b></b></i></button><button class="ch" style="flex-grow: 37.3" data-i="3" aria-label="Anthropic IPO Risks" title="Anthropic IPO Risks"><i><b></b></i></button><button class="ch" style="flex-grow: 17.8" data-i="4" aria-label="OpenAI AI Discoveries" title="OpenAI AI Discoveries"><i><b></b></i></button><button class="ch" style="flex-grow: 18.3" data-i="5" aria-label="Claude Extension Backdoor" title="Claude Extension Backdoor"><i><b></b></i></button><button class="ch" style="flex-grow: 15.2" data-i="6" aria-label="Google Gemini 4 Carbon" title="Google Gemini 4 Carbon"><i><b></b></i></button><button class="ch" style="flex-grow: 15.3" data-i="7" aria-label="Microsoft 25 Percent Buyouts" title="Microsoft 25 Percent Buyouts"><i><b></b></i></button><button class="ch" style="flex-grow: 15.2" data-i="8" aria-label="ICE Surveillance Operation" title="ICE Surveillance Operation"><i><b></b></i></button><button class="ch" style="flex-grow: 14.3" data-i="9" aria-label="Mistral Large 4 Weights Released" title="Mistral Large 4 Weights Released"><i><b></b></i></button><button class="ch" style="flex-grow: 13.9" data-i="10" aria-label="HackerTube Curates Videos" title="HackerTube Curates Videos"><i><b></b></i></button><button class="ch" style="flex-grow: 14.2" data-i="11" aria-label="HackerBooks Aggregates Books" title="HackerBooks Aggregates Books"><i><b></b></i></button><button class="ch" style="flex-grow: 14.6" data-i="12" aria-label="Ghostty Terminal Update" title="Ghostty Terminal Update"><i><b></b></i></button><button class="ch" style="flex-grow: 19.3" data-i="13" aria-label="Comment of the week" title="Comment of the week"><i><b></b></i></button><button class="ch" style="flex-grow: 5.6" data-i="14" aria-label="HN Weekly Signoff" title="HN Weekly Signoff"><i><b></b></i></button></div>
-    <span class="st-time" id="st-time">0:00 / 4:57</span>
+    <div class="chapters"><button class="ch" style="flex-grow: 4.8" data-i="0" aria-label="HN Weekly open" title="HN Weekly open"><i><b></b></i></button><button class="ch" style="flex-grow: 12.4" data-i="1" aria-label="Patrick Stewart Dies" title="Patrick Stewart Dies"><i><b></b></i></button><button class="ch" style="flex-grow: 16.1" data-i="2" aria-label="Binance Loses $5.6B" title="Binance Loses $5.6B"><i><b></b></i></button><button class="ch" style="flex-grow: 17.1" data-i="3" aria-label="Anthropic IPO Risks" title="Anthropic IPO Risks"><i><b></b></i></button><button class="ch" style="flex-grow: 11.1" data-i="4" aria-label="HackerTube Launch" title="HackerTube Launch"><i><b></b></i></button><button class="ch" style="flex-grow: 13.0" data-i="5" aria-label="OpenAI AI Discoveries" title="OpenAI AI Discoveries"><i><b></b></i></button><button class="ch" style="flex-grow: 10.7" data-i="6" aria-label="Claude Code Backdoor" title="Claude Code Backdoor"><i><b></b></i></button><button class="ch" style="flex-grow: 10.3" data-i="7" aria-label="Google Gemini 4 Carbon" title="Google Gemini 4 Carbon"><i><b></b></i></button><button class="ch" style="flex-grow: 9.2" data-i="8" aria-label="Microsoft 25% Buyouts" title="Microsoft 25% Buyouts"><i><b></b></i></button><button class="ch" style="flex-grow: 10.5" data-i="9" aria-label="Comment of the week" title="Comment of the week"><i><b></b></i></button><button class="ch" style="flex-grow: 3.3" data-i="10" aria-label="Signoff" title="Signoff"><i><b></b></i></button></div>
+    <span class="st-time" id="st-time">0:00 / 2:02</span>
     <button class="st-btn st-cc" id="st-cc" aria-pressed="true" title="Subtitles (C)">CC</button>
   </div>
 </div>
@@ -1149,7 +1064,7 @@ body.staged { overflow: hidden; }
 <script>
 (() => {
   const segs = JSON.parse(document.getElementById('bc-seg').textContent);
-  const kinds = {"launches": "Launches", "open": "Headlines", "quote": "Comment of the week", "rapid": "In other news", "signoff": "Sign-off", "story": "Top story"};
+  const kinds = {"launches": "Launches", "open": "Headlines", "quote": "Comment of the week", "rapid": "Quick hits", "signoff": "Sign-off", "story": "Top story"};
   const $ = id => document.getElementById(id);
   const audio = $('audio'), player = $('player'), fill = $('fill'), track = $('track'), stage = $('stage');
   const slides = [...stage.querySelectorAll('.slide')], chs = [...stage.querySelectorAll('.ch b')];
@@ -1169,6 +1084,7 @@ body.staged { overflow: hidden; }
 
   audio.addEventListener('error', () => {
     player.hidden = true; $('watch-btn').hidden = true; $('onair') && ($('onair').hidden = true);
+    stage.hidden = true; document.body.classList.remove('staged');  // no audio → plain boxes page
   });
 
   function segAt(t) {
@@ -1261,12 +1177,12 @@ body.staged { overflow: hidden; }
     if (cur < 0) setSeg(0);
     tick(); $('st-play').focus();
     if (audio.paused && audio.currentTime < 1) audio.play();
-    history.replaceState(null, '', '#watch');
+    history.replaceState(null, '', location.pathname + location.search);
   }
   function closeStage() {
     if (document.fullscreenElement) document.exitFullscreen();
     stage.hidden = true; document.body.classList.remove('staged');
-    history.replaceState(null, '', location.pathname + location.search);
+    history.replaceState(null, '', '#boxes');  // reload stays on the boxes
     $('watch-btn').focus();
   }
   const setCC = on => { stage.classList.toggle('no-cc', !on); $('st-cc').setAttribute('aria-pressed', on); store('hnw-cc', on ? '1' : '0'); };
@@ -1278,6 +1194,8 @@ body.staged { overflow: hidden; }
   $('st-prev').addEventListener('click', prev);
   $('st-cc').addEventListener('click', () => setCC(stage.classList.contains('no-cc')));
   $('st-replay').addEventListener('click', () => seek(0));
+  $('st-start').addEventListener('click', () => seek(0));
+  $('st-skip').addEventListener('click', () => $('st-browse').click());
   $('st-browse').addEventListener('click', () => { audio.pause(); closeStage(); document.querySelector('.sec')?.scrollIntoView(); });
   stage.querySelectorAll('.ch').forEach(c => c.addEventListener('click', () => seek(segs[+c.dataset.i].start)));
   const canFull = !!stage.requestFullscreen;
@@ -1306,7 +1224,9 @@ body.staged { overflow: hidden; }
       e.preventDefault(); toggle();
     }
   });
-  if (location.hash === '#watch') { stage.hidden = false; document.body.classList.add('staged'); setSeg(0); tick(); }
+  // Slides are the default view; #boxes (set when you close them) opens the box page instead.
+  if (location.hash === '#boxes') { stage.hidden = true; document.body.classList.remove('staged'); }
+  else { setSeg(0); tick(); }
 })();
 </script>
 

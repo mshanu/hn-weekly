@@ -1,4 +1,4 @@
-"""The 5-minute audio bulletin: an anchor script (LLM) read aloud by OpenAI TTS.
+"""The 2-minute audio bulletin: an anchor script (LLM) read aloud by OpenAI TTS.
 
 Stage 6 writes `6_script.json`: segments, each tied to a box (or to none).
 Stage 7 synthesizes each segment as raw PCM, so every segment's duration is exact.
@@ -18,10 +18,11 @@ from .summarize import Summarizer, _schema, STR
 
 SAMPLE_RATE = 24_000          # OpenAI TTS PCM: 24kHz, 16-bit, mono
 BYTES_PER_SEC = SAMPLE_RATE * 2
-PAUSE = {"open": 0.6, "story": 0.7, "rapid": 0.35, "launches": 0.35, "quote": 0.6, "signoff": 0.0}
+PAUSE = {"open": 0.4, "story": 0.5, "rapid": 0.25, "launches": 0.25, "quote": 0.4, "signoff": 0.0}
 KINDS = ["open", "story", "rapid", "launches", "quote", "signoff"]
-WORD_TARGET, WORD_MAX = 570, 630   # measured ~120 wpm → ≈ 4:45 of audio
-QUOTE_MAX = 40
+WORD_TARGET, WORD_MAX = 235, 260   # measured ~120 wpm → ≈ 2:00 of audio
+QUOTE_MAX = 22
+N_TOP, N_QUICK = 3, 5
 
 SCRIPT_FORMAT = _schema("bulletin", {
     "segments": {"type": "array", "items": {
@@ -38,21 +39,21 @@ SCRIPT_FORMAT = _schema("bulletin", {
     }},
 })
 
-SCRIPT_PROMPT = f"""You are the anchor of "HN Weekly", a 5-minute spoken news bulletin about last week on Hacker News.
+SCRIPT_PROMPT = f"""You are the anchor of "HN Weekly", a 2-minute spoken news bulletin about last week on Hacker News.
+Viewers see a slide with the details while you speak, so say only the essentials, like a TV headline bulletin.
 Write the script as segments, in this order:
-1. open (box_id -1): greet and give the week's dates, then tease the 3 TOP stories in one sentence. ~35 words.
-2. story: exactly one per TOP box, in the given order: what happened, then pivot with a phrase like
-   "On Hacker News…" and give the community's reaction, including the main disagreement. ~95 words each.
-3. rapid: exactly one per RAPID box, in order: "In other news" style, one or two sentences combining the fact and
-   the HN reaction. ~22 words each.
-4. launches: exactly one per LAUNCH box: what was built and how HN received it. ~22 words each.
+1. open (box_id -1): ONE line, e.g. "This is HN Weekly, your week on Hacker News in two minutes." ~12 words.
+2. story: exactly one per TOP box, in the given order. Exactly two sentences: what happened, then what
+   Hacker News thinks (the main reaction or disagreement). ~45 words each.
+3. rapid: exactly one per QUICK box, in order (launches included). ONE short sentence of fact plus the HN verdict,
+   e.g. "Mistral released Large 4 weights, and HN cheered the open license." ~12 words each.
 Never move a box to a different kind of segment, and never cover boxes that are not listed.
-5. quote (box_id = the box the comment is from): introduce and read ONE striking comment from CANDIDATE COMMENTS.
-   Put the exact quoted words in "quote". They must be copied VERBATIM, max 35 words, from one candidate, and
-   also spoken in "text" with attribution like "user jstummbillig wrote: …". ~40 words.
-6. signoff (box_id -1): one short sentence. ~12 words.
+4. quote (box_id = the box the comment is from): ONE striking comment from CANDIDATE COMMENTS.
+   Put the exact quoted words in "quote": copied VERBATIM, a complete sentence, max 20 words, from one candidate.
+   In "text" say only "User <name> wrote:" followed by the same words. ~22 words.
+5. signoff (box_id -1): e.g. "That's the week. See you next Monday." ~7 words.
 Rules:
-- Total about {WORD_TARGET} words. NEVER exceed {WORD_MAX}.
+- Total about {WORD_TARGET} words. NEVER exceed {WORD_MAX}. Cut adjectives, filler and transitions.
 - This is read aloud by a text-to-speech voice. Write for the ear: short sentences, no markdown, no emoji, no URLs,
   no parentheses. Write numbers, money and abbreviations the way they are spoken
   ("five point six billion dollars", "C-V-E", "M6 chip").
@@ -84,9 +85,7 @@ def build_inputs(digest: dict, wdir: Path) -> tuple[str, dict[int, list[tuple[st
         return (f"[box {b['id']}] {b['title']} (section: {b['section']}, mood: {b['mood']})\n"
                 f"  what: {t['gist']}\n  hn: {t['pulse']}")
 
-    top = boxes[:3]
-    launches = [b for b in boxes[3:] if b["section"] == "Launches & Repos"]
-    rapid = [b for b in boxes[3:] if b not in launches][:6]
+    top, rapid = boxes[:N_TOP], boxes[N_TOP:N_TOP + N_QUICK]
 
     candidates: dict[int, list[tuple[str, str]]] = {}
     lines = []
@@ -101,11 +100,10 @@ def build_inputs(digest: dict, wdir: Path) -> tuple[str, dict[int, list[tuple[st
 
     prompt = (f"WEEK: {digest['range']}\nHEADLINE: {digest['headline']}\n\n"
               "TOP:\n" + "\n".join(map(describe, top)) +
-              "\n\nRAPID:\n" + "\n".join(map(describe, rapid)) +
-              "\n\nLAUNCH:\n" + ("\n".join(map(describe, launches)) or "(none)") +
+              "\n\nQUICK:\n" + "\n".join(map(describe, rapid)) +
               "\n\nCANDIDATE COMMENTS:\n" + "\n".join(lines))
     rundown = {"story": [b["id"] for b in top], "rapid": [b["id"] for b in rapid],
-               "launches": [b["id"] for b in launches]}
+               "launches": []}
     return prompt, candidates, rundown
 
 
@@ -150,19 +148,18 @@ def validate_script(segments: list[dict], digest: dict, candidates: dict[int, li
 
 
 def fallback_quote(digest: dict, candidates) -> dict | None:
-    """Deterministic verbatim quote: the leading sentences (<= 35 words) of a top comment on the hottest topics."""
+    """Deterministic verbatim quote: the leading sentences (<= QUOTE_MAX words) of a top comment on the hottest topics."""
     titles = {b["id"]: b["title"] for s in digest["sections"] for b in s["boxes"]}
     for box_id in sorted(candidates):
         for author, text in candidates[box_id]:
             excerpt = ""
             for sent in re.split(r"(?<=[.!?])\s+", " ".join(text.split())):
-                if len((excerpt + " " + sent).split()) > 35:
+                if len((excerpt + " " + sent).split()) > QUOTE_MAX:
                     break
                 excerpt = (excerpt + " " + sent).strip()
-            if len(excerpt.split()) >= 8:
+            if len(excerpt.split()) >= 6:
                 return {"kind": "quote", "box_id": box_id, "title": "Comment of the week", "quote": excerpt,
-                        "text": f"Our comment of the week comes from the {titles[box_id]} thread. "
-                                f"User {author} wrote: {excerpt}"}
+                        "text": f"User {author} wrote: {excerpt}"}
     return None
 
 
