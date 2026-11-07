@@ -20,7 +20,7 @@ import httpx
 
 from .config import SECTIONS, load_config
 from .extract import build_raw
-from .broadcast import stage_broadcast
+from .broadcast import load_broadcast, stage_broadcast
 from .heat import apply_heat
 from .fetch import UA, collect_week, previous_week, week_days
 from .render import render_week
@@ -198,7 +198,7 @@ async def main() -> int:
         digest = apply_heat(read_json(wdir / "5_digest.json"), wdir)
         bpath = wdir / "7_broadcast.json"
         if bpath.exists() and (cfg.output_dir / f"audio/{week}.mp3").exists():
-            digest["broadcast"] = read_json(bpath)
+            digest["broadcast"] = load_broadcast(bpath, wdir)
         log(f"Re-rendered {render_week(digest, cfg.output_dir)}")
         return 0
 

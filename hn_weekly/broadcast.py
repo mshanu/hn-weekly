@@ -201,12 +201,32 @@ def encode_mp3(pcm: bytes) -> bytes:
     return bytes(enc.encode(pcm) + enc.flush())
 
 
+def slide_fields(seg: dict) -> dict:
+    """Extra fields the presentation needs: the verbatim quote and who wrote it."""
+    if seg["kind"] != "quote":
+        return {}
+    m = re.search(r"\buser\s+([\w.-]+?)[,:]?\s+(?:wrote|said|put it)", seg["text"], re.I)
+    return {"quote": seg.get("quote", ""), "author": m.group(1) if m else ""}
+
+
+def load_broadcast(bpath: Path, wdir: Path) -> dict:
+    """Read 7_broadcast.json, backfilling slide fields from 6_script.json for older builds."""
+    bc = json.loads(bpath.read_text())
+    spath = wdir / "6_script.json"
+    if spath.exists() and any(s["kind"] == "quote" and "quote" not in s for s in bc["segments"]):
+        script = json.loads(spath.read_text())
+        if len(script) == len(bc["segments"]):
+            for seg, src in zip(bc["segments"], script):
+                seg.update(slide_fields(src))
+    return bc
+
+
 async def stage_broadcast(cfg, llm: Summarizer, digest: dict, week: str, wdir: Path, log) -> dict | None:
     audio_rel = f"audio/{week}.mp3"
     audio_path = cfg.output_dir / audio_rel
     bpath = wdir / "7_broadcast.json"
     if bpath.exists() and audio_path.exists():
-        return json.loads(bpath.read_text())
+        return load_broadcast(bpath, wdir)
 
     spath = wdir / "6_script.json"
     if spath.exists():
@@ -223,7 +243,8 @@ async def stage_broadcast(cfg, llm: Summarizer, digest: dict, week: str, wdir: P
     for seg, clip in zip(segments, clips):
         dur = len(clip) / BYTES_PER_SEC
         timeline.append({"kind": seg["kind"], "box_id": seg["box_id"], "title": seg["title"],
-                         "text": seg["text"], "start": round(t, 2), "end": round(t + dur, 2)})
+                         "text": seg["text"], "start": round(t, 2), "end": round(t + dur, 2),
+                         **slide_fields(seg)})
         pause = PAUSE.get(seg["kind"], 0.4)
         pcm += clip + bytes(int(pause * SAMPLE_RATE) * 2)
         t += dur + pause

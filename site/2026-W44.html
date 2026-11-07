@@ -163,6 +163,108 @@ body.has-ticker { padding-bottom: 40px; }
   .play { width: 42px; height: 42px; }
   .ticker-label { padding: 0 8px; font-size: 10px; }
 }
+
+/* ---------- Presentation (stage) ---------- */
+.watch { display: inline-flex; align-items: center; gap: 10px; margin: -6px 0 18px; padding: 10px 18px 10px 14px;
+  border: 0; border-radius: 999px; background: var(--ink); color: var(--ink-text); font: 600 15px/1 inherit;
+  font-family: inherit; cursor: pointer; box-shadow: 0 4px 14px rgba(0, 0, 0, .12); }
+.watch svg { width: 18px; height: 18px; fill: var(--accent); }
+.watch span { font-weight: 500; color: #b9b6ad; font-variant-numeric: tabular-nums; }
+.watch:hover { outline: 2px solid var(--accent); }
+@media (prefers-color-scheme: dark) { .watch { background: var(--accent); color: #fff; } .watch svg { fill: #fff; } .watch span { color: #ffe3d4; } }
+body.staged { overflow: hidden; }
+.stage { position: fixed; inset: 0; z-index: 100; display: grid; grid-template-rows: auto 1fr auto auto;
+  color: #f4f2ec; background: radial-gradient(1200px 600px at 80% -10%, rgba(240, 122, 62, .22), transparent 60%),
+  radial-gradient(900px 500px at -10% 110%, rgba(55, 105, 168, .25), transparent 60%), #0d0d0c;
+  --accent: #f07a3e; --muted: #a8a59b; --line: #34322d;
+  --v-enthusiastic: #6cc48f; --v-skeptical: #ee8a76; --v-divided: #bb9be6; --v-informative: #86afe6; }
+.stage[hidden] { display: none; }
+.st-bar { display: flex; align-items: center; gap: 14px; padding: 12px 20px; }
+.st-bar .brand { color: #f4f2ec; }
+.st-date { margin-left: auto; font-size: 13px; color: var(--muted); }
+.st-btn { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; border: 1px solid transparent;
+  background: rgba(255, 255, 255, .07); color: #f4f2ec; cursor: pointer; font: 700 12px/1 inherit; font-family: inherit; }
+.st-btn:hover { background: rgba(255, 255, 255, .14); }
+.st-btn[hidden] { display: none; }
+.st-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#st-prev svg, #st-next svg { fill: currentColor; }
+.st-cc[aria-pressed="true"] { background: #f4f2ec; color: #0d0d0c; }
+
+.slides { position: relative; min-height: 0; cursor: pointer; }
+.slide { position: absolute; inset: 0; display: flex; align-items: center; overflow-y: auto;
+  opacity: 0; visibility: hidden; transform: translateY(18px); }
+.slide.past { transform: translateY(-18px); }
+.slide.cur { opacity: 1; visibility: visible; transform: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .slide { transition: opacity .5s ease, transform .6s cubic-bezier(.2, .7, .2, 1), visibility 0s linear .6s; }
+  .slide.cur { transition: opacity .5s ease .1s, transform .6s cubic-bezier(.2, .7, .2, 1) .1s, visibility 0s; }
+  .slide.cur .s-inner > * { animation: rise .6s cubic-bezier(.2, .7, .2, 1) both; }
+  .slide.cur .s-inner > :nth-child(2) { animation-delay: .12s; }
+  .slide.cur .s-inner > :nth-child(3) { animation-delay: .24s; }
+  .slide.cur .s-inner > :nth-child(4) { animation-delay: .9s; }
+  .slide.cur .s-inner > :nth-child(5) { animation-delay: 1.1s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+}
+.s-inner { width: 100%; max-width: 980px; margin: auto; padding: 24px clamp(20px, 5vw, 56px); cursor: auto; }
+.s-kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; color: var(--accent); font-weight: 800;
+  font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
+.s-sec { color: var(--muted); font-weight: 600; letter-spacing: .06em; }
+.s-sec::before { content: "·"; margin-right: 12px; color: var(--muted); }
+.s-kicker .flames { letter-spacing: -2px; }
+.s-title { font-size: clamp(30px, 5.4vw, 64px); line-height: 1.05; letter-spacing: -.02em; margin: 14px 0 18px; max-width: 18ch; }
+.s-gist { font-size: clamp(19px, 2.4vw, 28px); line-height: 1.35; margin: 0 0 28px; max-width: 34ch; color: #e6e3db; }
+.s-hn { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 10px 14px; max-width: 760px;
+  padding: 16px 20px; border-left: 4px solid var(--accent); background: rgba(255, 255, 255, .05); border-radius: 0 12px 12px 0; }
+.s-hn-label { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.s-hn .mood { justify-self: start; font-size: 13px; }
+.s-take { grid-column: 1 / -1; margin: 0; font-size: clamp(17px, 2vw, 22px); font-style: italic; color: #d9d6cd; }
+.s-link { display: inline-block; margin-top: 22px; color: var(--accent); text-decoration: none; font-weight: 600; }
+.s-link:hover { text-decoration: underline; }
+.k-rapid .s-title, .k-launches .s-title { font-size: clamp(28px, 4.6vw, 54px); }
+.s-date { font-size: clamp(16px, 2vw, 20px); color: var(--muted); margin-top: 10px; }
+.s-head { font-size: clamp(28px, 4.4vw, 52px); line-height: 1.12; letter-spacing: -.015em; margin: 12px 0 30px; max-width: 24ch; }
+.s-coming span { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.s-coming ol { list-style: none; counter-reset: c; padding: 0; margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.s-coming li { counter-increment: c; padding: 10px 16px; border-radius: 10px; background: rgba(255, 255, 255, .07);
+  font-size: clamp(15px, 1.7vw, 18px); font-weight: 600; }
+.s-coming li::before { content: counter(c); color: var(--accent); margin-right: 10px; font-weight: 800; }
+.s-quote { position: relative; margin: 22px 0 22px; padding-left: clamp(36px, 6vw, 72px); font-size: clamp(24px, 3.6vw, 42px);
+  line-height: 1.25; font-weight: 600; letter-spacing: -.01em; max-width: 30ch; }
+.s-quote::before { content: "“"; position: absolute; left: 0; top: -.18em; font-size: 2.6em; line-height: 1; color: var(--accent); font-family: Georgia, serif; }
+.s-by { padding-left: clamp(36px, 6vw, 72px); color: var(--muted); font-size: clamp(15px, 1.7vw, 18px); }
+.s-by b { color: #f4f2ec; }
+.s-by a { color: var(--accent); text-decoration: none; }
+.s-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.s-replay, .s-plain { font: 600 16px/1 inherit; font-family: inherit; padding: 12px 18px; border-radius: 999px; cursor: pointer; }
+.s-replay { border: 0; background: var(--accent); color: #fff; }
+.s-plain { border: 1px solid rgba(255, 255, 255, .25); background: transparent; color: #f4f2ec; }
+
+.st-low { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 20px 10px; }
+.caption { max-width: min(900px, 100%); min-height: 1.4em; padding: 6px 14px; border-radius: 6px; text-align: center;
+  background: rgba(0, 0, 0, .65); font-size: clamp(16px, 1.9vw, 21px); line-height: 1.4; }
+.caption.empty, .no-cc .caption { visibility: hidden; }
+.lower3 { align-self: stretch; display: flex; max-width: 980px; width: 100%; margin: 0 auto; font-weight: 700; overflow: hidden; border-radius: 4px; }
+.l3-kind { flex: none; padding: 8px 14px; background: var(--live); color: #fff; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; display: flex; align-items: center; }
+.l3-title { flex: 1; min-width: 0; padding: 8px 14px; background: #f4f2ec; color: #121212; font-size: 15px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.st-ctrl { display: flex; align-items: center; gap: 12px; padding: 10px 20px 16px; max-width: 1020px; width: 100%; margin: 0 auto; }
+.st-ctrl .play { width: 52px; height: 52px; }
+.chapters { flex: 1; display: flex; gap: 3px; min-width: 0; }
+.ch { flex: 1 1 0; min-width: 4px; height: 26px; padding: 10px 0; border: 0; background: none; cursor: pointer; }
+.ch i { display: block; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, .2); overflow: hidden; }
+.ch:hover i { background: rgba(255, 255, 255, .35); }
+.ch b { display: block; height: 100%; width: 0; background: var(--accent); }
+.st-time { flex: none; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+@media (max-width: 560px) {
+  .st-bar { padding: 10px 12px; gap: 10px; }
+  .st-bar .onair { display: none; }
+  .st-ctrl { flex-wrap: wrap; gap: 8px; padding: 6px 12px 14px; }
+  .chapters { order: -1; flex-basis: 100%; }
+  .st-time { margin-left: auto; }
+  .s-hn { grid-template-columns: 1fr; }
+  .st-low { padding: 0 12px 6px; }
+}
+@media (max-height: 560px) { .lower3 { display: none; } }
 </style>
 </head>
 <body class="has-ticker">
@@ -185,14 +287,15 @@ body.has-ticker { padding-bottom: 40px; }
 <section class="lead">
   <div class="kicker">This week on Hacker News · 5-minute bulletin</div>
   <h1>Binance lost $5.6B in a 20-minute hack, OpenAI showcased AI-assisted proofs, Anthropic filed risky IPO, and Serbian students ended 14 years of authoritarian rule.</h1>
+  <button class="watch" id="watch-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch the bulletin<span>4:57</span></button>
 </section>
 
 
 <div class="player" id="player">
   <audio id="audio" preload="metadata" src="audio/2026-W44.mp3"></audio>
   <button class="play" id="play" aria-label="Play bulletin">
-    <svg id="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-    <svg id="ico-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
   </button>
   <div class="pmain">
     <div class="now"><span class="now-kind" id="now-kind">Press play</span><span class="now-title" id="now-title">Oct 26 – Nov 1, 2026 in under 5 minutes</span></div>
@@ -204,7 +307,7 @@ body.has-ticker { padding-bottom: 40px; }
   </div>
   <button class="speed" id="speed" aria-label="Playback speed">1×</button>
 </div>
-<script type="application/json" id="bc-seg">[{"box_id": -1, "end": 17.6, "kind": "open", "start": 0.0, "text": "Welcome to HN Weekly covering the week from October twenty sixth to November first, twenty twenty six. This week, we reflect on Patrick Stewart\u0027s legacy, Binance\u0027s $5.6 billion hack, and risks in Anthropic\u0027s IPO filing.", "title": "HN Weekly Intro"}, {"box_id": 0, "end": 49.75, "kind": "story", "start": 18.2, "text": "Patrick Stewart, acclaimed for his role as Captain Jean-Luc Picard in Star Trek The Next Generation, has passed away. His character was a beacon of moral leadership and integrity, inspiring many. On Hacker News, the community celebrated Stewart\u0027s influence on leadership and personal values. Discussions noted his versatility beyond Star Trek and debated comparisons to other captains. Overall, users appreciated the hopeful vision his work provided in challenging political times.", "title": "Patrick Stewart\u0027s Legacy"}, {"box_id": 1, "end": 90.85, "kind": "story", "start": 50.45, "text": "Binance experienced a massive security breach, losing between five point six and six point three billion dollars of cryptocurrency in just twenty minutes from hot wallets. The attack reportedly exploited a compromised DevOps engineer\u0027s laptop and has been linked to the North Korean hacking group TraderTraitor. On Hacker News, users expressed serious concerns over Binance\u0027s security, questioning how a laptop breach resulted in such a large, rapid theft. Debates also focused on the North Korean attribution, hot wallet risks, and the effectiveness of freezing stolen crypto on blockchains.", "title": "Binance Loses $5.6B"}, {"box_id": 2, "end": 128.8, "kind": "story", "start": 91.55, "text": "Anthropic filed its S-1 IPO prospectus, highlighting rapid AI-driven revenue growth but also revealing risks like customer concentration, geopolitical tensions, and open-source competition. Blackstone doubts Anthropic will secure an investment-grade credit rating post-IPO. On Hacker News, the community recognized Anthropic\u0027s growth and AI coding advances but remained skeptical about sustained demand amid fierce competition and market volatility. The mood was cautious optimism mixed with concerns over financial stability and speculative risk.", "title": "Anthropic IPO Risks"}, {"box_id": 4, "end": 147.25, "kind": "rapid", "start": 129.5, "text": "OpenAI announced AI-assisted breakthroughs in mathematics, computer science, and physics, including a refutation of the Exponential Time Hypothesis. Hacker News users were impressed but debated OpenAI\u0027s role in science and urged caution on practical impacts.", "title": "OpenAI AI Discoveries"}, {"box_id": 5, "end": 165.95, "kind": "rapid", "start": 147.6, "text": "The Claude Code VS Code extension was compromised with an SSH reverse backdoor affecting thousands, exposing supply-chain weaknesses. Hacker News highlighted the severity and ongoing trust concerns in third-party marketplaces despite swift remediation.", "title": "Claude Extension Backdoor"}, {"box_id": 6, "end": 181.5, "kind": "rapid", "start": 166.3, "text": "Google released Gemini 4 Carbon, a powerful AI model excelling in cybersecurity, but it remains unavailable publicly. The community praised its capabilities yet criticized limited access and unclear benchmarking.", "title": "Google Gemini 4 Carbon"}, {"box_id": 7, "end": 197.15, "kind": "rapid", "start": 181.85, "text": "Microsoft offered voluntary buyouts to about twenty five percent of its workforce, aiming to reduce costs without layoffs. Hacker News users noted the hard choice for employees and expressed skepticism about AI\u0027s influence on staffing changes.", "title": "Microsoft 25 Percent Buyouts"}, {"box_id": 8, "end": 212.75, "kind": "rapid", "start": 197.5, "text": "ICE conducted intrusive surveillance on left-wing activists using aggressive techniques. The Hacker News community condemned this as government overreach threatening civil liberties, drawing parallels to historical abuses.", "title": "ICE Surveillance Operation"}, {"box_id": 9, "end": 227.4, "kind": "rapid", "start": 213.1, "text": "Mistral AI released open weights for its Large 4 multimodal model optimized for coding and cybersecurity. Users appreciated improved pricing but questioned competitiveness and licensing restrictions.", "title": "Mistral Large 4 Weights Released"}, {"box_id": 3, "end": 241.7, "kind": "launches", "start": 227.75, "text": "HackerTube launched a YouTube-like platform curating nerd-focused videos favored by Hacker News, avoiding clickbait. The community valued its quality content and technical achievement using AI tools.", "title": "HackerTube Curates Videos"}, {"box_id": 10, "end": 256.25, "kind": "launches", "start": 242.05, "text": "HackerBooks aggregates and ranks books mentioned on Hacker News, reshuffling daily. The community welcomed the curated collection but noted categorization and data limitations.", "title": "HackerBooks Aggregates Books"}, {"box_id": 13, "end": 271.25, "kind": "launches", "start": 256.6, "text": "Ghostty version one point four features performance improvements, full Kitty protocol support, and better SSH integration. Hacker News praised its modern design though some remain cautious about missing features.", "title": "Ghostty Terminal Update"}, {"box_id": 0, "end": 290.9, "kind": "quote", "start": 271.6, "text": "Our comment of the week comes from the Patrick Stewart Dies thread. User halflife wrote: Watching him in Star Trek TNG made me reevaluate how management of people should be done, his character was assertive but compassionate. High morals coupled with grounded reason.", "title": "Comment of the week"}, {"box_id": -1, "end": 297.1, "kind": "signoff", "start": 291.5, "text": "That\u0027s all for this week on Hacker News. Stay curious and see you next time.", "title": "HN Weekly Signoff"}]</script>
+<script type="application/json" id="bc-seg">[{"box_id": -1, "end": 17.6, "kind": "open", "start": 0.0, "text": "Welcome to HN Weekly covering the week from October twenty sixth to November first, twenty twenty six. This week, we reflect on Patrick Stewart\u0027s legacy, Binance\u0027s $5.6 billion hack, and risks in Anthropic\u0027s IPO filing.", "title": "HN Weekly Intro"}, {"box_id": 0, "end": 49.75, "kind": "story", "start": 18.2, "text": "Patrick Stewart, acclaimed for his role as Captain Jean-Luc Picard in Star Trek The Next Generation, has passed away. His character was a beacon of moral leadership and integrity, inspiring many. On Hacker News, the community celebrated Stewart\u0027s influence on leadership and personal values. Discussions noted his versatility beyond Star Trek and debated comparisons to other captains. Overall, users appreciated the hopeful vision his work provided in challenging political times.", "title": "Patrick Stewart\u0027s Legacy"}, {"box_id": 1, "end": 90.85, "kind": "story", "start": 50.45, "text": "Binance experienced a massive security breach, losing between five point six and six point three billion dollars of cryptocurrency in just twenty minutes from hot wallets. The attack reportedly exploited a compromised DevOps engineer\u0027s laptop and has been linked to the North Korean hacking group TraderTraitor. On Hacker News, users expressed serious concerns over Binance\u0027s security, questioning how a laptop breach resulted in such a large, rapid theft. Debates also focused on the North Korean attribution, hot wallet risks, and the effectiveness of freezing stolen crypto on blockchains.", "title": "Binance Loses $5.6B"}, {"box_id": 2, "end": 128.8, "kind": "story", "start": 91.55, "text": "Anthropic filed its S-1 IPO prospectus, highlighting rapid AI-driven revenue growth but also revealing risks like customer concentration, geopolitical tensions, and open-source competition. Blackstone doubts Anthropic will secure an investment-grade credit rating post-IPO. On Hacker News, the community recognized Anthropic\u0027s growth and AI coding advances but remained skeptical about sustained demand amid fierce competition and market volatility. The mood was cautious optimism mixed with concerns over financial stability and speculative risk.", "title": "Anthropic IPO Risks"}, {"box_id": 4, "end": 147.25, "kind": "rapid", "start": 129.5, "text": "OpenAI announced AI-assisted breakthroughs in mathematics, computer science, and physics, including a refutation of the Exponential Time Hypothesis. Hacker News users were impressed but debated OpenAI\u0027s role in science and urged caution on practical impacts.", "title": "OpenAI AI Discoveries"}, {"box_id": 5, "end": 165.95, "kind": "rapid", "start": 147.6, "text": "The Claude Code VS Code extension was compromised with an SSH reverse backdoor affecting thousands, exposing supply-chain weaknesses. Hacker News highlighted the severity and ongoing trust concerns in third-party marketplaces despite swift remediation.", "title": "Claude Extension Backdoor"}, {"box_id": 6, "end": 181.5, "kind": "rapid", "start": 166.3, "text": "Google released Gemini 4 Carbon, a powerful AI model excelling in cybersecurity, but it remains unavailable publicly. The community praised its capabilities yet criticized limited access and unclear benchmarking.", "title": "Google Gemini 4 Carbon"}, {"box_id": 7, "end": 197.15, "kind": "rapid", "start": 181.85, "text": "Microsoft offered voluntary buyouts to about twenty five percent of its workforce, aiming to reduce costs without layoffs. Hacker News users noted the hard choice for employees and expressed skepticism about AI\u0027s influence on staffing changes.", "title": "Microsoft 25 Percent Buyouts"}, {"box_id": 8, "end": 212.75, "kind": "rapid", "start": 197.5, "text": "ICE conducted intrusive surveillance on left-wing activists using aggressive techniques. The Hacker News community condemned this as government overreach threatening civil liberties, drawing parallels to historical abuses.", "title": "ICE Surveillance Operation"}, {"box_id": 9, "end": 227.4, "kind": "rapid", "start": 213.1, "text": "Mistral AI released open weights for its Large 4 multimodal model optimized for coding and cybersecurity. Users appreciated improved pricing but questioned competitiveness and licensing restrictions.", "title": "Mistral Large 4 Weights Released"}, {"box_id": 3, "end": 241.7, "kind": "launches", "start": 227.75, "text": "HackerTube launched a YouTube-like platform curating nerd-focused videos favored by Hacker News, avoiding clickbait. The community valued its quality content and technical achievement using AI tools.", "title": "HackerTube Curates Videos"}, {"box_id": 10, "end": 256.25, "kind": "launches", "start": 242.05, "text": "HackerBooks aggregates and ranks books mentioned on Hacker News, reshuffling daily. The community welcomed the curated collection but noted categorization and data limitations.", "title": "HackerBooks Aggregates Books"}, {"box_id": 13, "end": 271.25, "kind": "launches", "start": 256.6, "text": "Ghostty version one point four features performance improvements, full Kitty protocol support, and better SSH integration. Hacker News praised its modern design though some remain cautious about missing features.", "title": "Ghostty Terminal Update"}, {"author": "halflife", "box_id": 0, "end": 290.9, "kind": "quote", "quote": "Watching him in Star Trek TNG made me reevaluate how management of people should be done, his character was assertive but compassionate. High morals coupled with grounded reason.", "start": 271.6, "text": "Our comment of the week comes from the Patrick Stewart Dies thread. User halflife wrote: Watching him in Star Trek TNG made me reevaluate how management of people should be done, his character was assertive but compassionate. High morals coupled with grounded reason.", "title": "Comment of the week"}, {"box_id": -1, "end": 297.1, "kind": "signoff", "start": 291.5, "text": "That\u0027s all for this week on Hacker News. Stay curious and see you next time.", "title": "HN Weekly Signoff"}]</script>
 
 
 
@@ -726,6 +829,302 @@ body.has-ticker { padding-bottom: 40px; }
 
 
 
+
+<div class="stage" id="stage" hidden role="dialog" aria-modal="true" aria-label="HN Weekly bulletin">
+  <div class="st-bar">
+    <span class="brand"><span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4M16.2 7.8a6 6 0 0 1 0 8.4M4.9 4.9a10 10 0 0 0 0 14.2M19.1 4.9a10 10 0 0 1 0 14.2"/></svg></span>HN WEEKLY</span>
+    <span class="onair"><span class="dot"></span>ON AIR</span>
+    <span class="st-date">Oct 26 – Nov 1, 2026</span>
+    <button class="st-btn" id="st-full" aria-label="Full screen" title="Full screen (F)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    <button class="st-btn" id="st-close" aria-label="Close presentation" title="Close (Esc)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="slides">
+  
+    
+    <section class="slide k-open" data-i="0" aria-hidden="true">
+      <div class="s-inner">
+    
+      <div class="s-kicker">This week on Hacker News</div>
+      <div class="s-date">Oct 26 – Nov 1, 2026</div>
+      <h2 class="s-head">Binance lost $5.6B in a 20-minute hack, OpenAI showcased AI-assisted proofs, Anthropic filed risky IPO, and Serbian students ended 14 years of authoritarian rule.</h2>
+      <div class="s-coming"><span>Coming up</span>
+        <ol><li>Patrick Stewart Dies</li><li>Binance Loses $5.6B</li><li>Anthropic IPO Filing Risks</li></ol>
+      </div>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-story" data-i="1" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Top story 1 of 3<span class="s-sec">Society, Policy &amp; Culture</span><span class="flames f3">🔥🔥🔥</span></div>
+      <h2 class="s-title">Patrick Stewart Dies</h2>
+      <p class="s-gist">Patrick Stewart passed away, famed for Captain Picard role and moral leadership.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-enthusiastic">🎉 excited</span>
+        <p class="s-take">“Widely revered as inspiring, though some separate actor from character lore.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50294702" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-story" data-i="2" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Top story 2 of 3<span class="s-sec">Security &amp; Privacy</span><span class="flames f3">🔥🔥🔥</span></div>
+      <h2 class="s-title">Binance Loses $5.6B</h2>
+      <p class="s-gist">Binance hacked; $5.6B stolen via compromised DevOps laptop in 20 minutes.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-skeptical">🤨 skeptical</span>
+        <p class="s-take">“Security practices questioned; skepticism on N.Korean attribution and hot wallet risks.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50296470" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-story" data-i="3" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Top story 3 of 3<span class="s-sec">Business &amp; Startups</span><span class="flames f3">🔥🔥🔥</span></div>
+      <h2 class="s-title">Anthropic IPO Filing Risks</h2>
+      <p class="s-gist">Anthropic&#39;s S-1 IPO reveals growth with risks from competition and geopolitical issues.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-skeptical">🤨 skeptical</span>
+        <p class="s-take">“Growth impressive but skeptics warn of market volatility and open-source competition.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50242939" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-rapid" data-i="4" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">In other news<span class="s-sec">AI &amp; ML</span><span class="flames f3">🔥🔥🔥</span></div>
+      <h2 class="s-title">OpenAI AI Discoveries</h2>
+      <p class="s-gist">OpenAI announced AI-assisted proofs in math, CS, and physics including ETH refutation.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Impressive advancements; skepticism over OpenAI&#39;s role and real-world impact.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50251344" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-rapid" data-i="5" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">In other news<span class="s-sec">Security &amp; Privacy</span><span class="flames f2">🔥🔥</span></div>
+      <h2 class="s-title">Claude Code Extension Backdoor</h2>
+      <p class="s-gist">Malicious versions of Claude Code VS Code extension had SSH reverse backdoor.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Seen as serious supply-chain attack exposing risks of third-party marketplaces.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50300683" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-rapid" data-i="6" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">In other news<span class="s-sec">AI &amp; ML</span><span class="flames f2">🔥🔥</span></div>
+      <h2 class="s-title">Google Gemini 4 Carbon</h2>
+      <p class="s-gist">Google launched Gemini 4 Carbon AI, top-ranked in cybersecurity but not public yet.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Technically strong but criticized for limited access and unclear benchmarking.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50276792" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-rapid" data-i="7" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">In other news<span class="s-sec">Business &amp; Startups</span><span class="flames f2">🔥🔥</span></div>
+      <h2 class="s-title">Microsoft 25% Buyouts</h2>
+      <p class="s-gist">Microsoft offers voluntary buyouts to 60K employees to cut costs amid AI shifts.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Seen as tough choice; workforce bloated, AI impact debated skeptically by insiders.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50245524" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-rapid" data-i="8" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">In other news<span class="s-sec">Security &amp; Privacy</span><span class="flames f2">🔥🔥</span></div>
+      <h2 class="s-title">ICE Surveillance Operation</h2>
+      <p class="s-gist">ICE conducted intrusive undercover surveillance on left-wing activist groups.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-skeptical">🤨 skeptical</span>
+        <p class="s-take">“Viewed as government overreach echoing COINTELPRO with civil liberty concerns.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50272749" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-rapid" data-i="9" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">In other news<span class="s-sec">AI &amp; ML</span><span class="flames f2">🔥🔥</span></div>
+      <h2 class="s-title">Mistral Large 4 Weights Released</h2>
+      <p class="s-gist">Mistral AI released open weights for 1T-parameter Mistral Large 4 multimodal model.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Praised for openness and EU origin; doubts about competitiveness and licensing.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50289418" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-launches" data-i="10" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Launches<span class="s-sec">Launches &amp; Repos</span><span class="flames f3">🔥🔥🔥</span></div>
+      <h2 class="s-title">HackerTube Curates Videos</h2>
+      <p class="s-gist">HackerTube launched as HN-curated YouTube alternative filtering quality nerd content.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-enthusiastic">🎉 excited</span>
+        <p class="s-take">“Appreciated as a fresh niche; concerns over moderation and sustainability arise.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50319510" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-launches" data-i="11" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Launches<span class="s-sec">Launches &amp; Repos</span><span class="flames f2">🔥🔥</span></div>
+      <h2 class="s-title">HackerBooks Aggregates Books</h2>
+      <p class="s-gist">HackerBooks ranks books mentioned on Hacker News, reshuffling daily by mentions.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-informative">💡 informative</span>
+        <p class="s-take">“Liked conceptually; concerns about data gaps, categorization, and declining book mentions.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50326821" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-launches" data-i="12" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Launches<span class="s-sec">Launches &amp; Repos</span><span class="flames f1">🔥</span></div>
+      <h2 class="s-title">Ghostty 1.4 Terminal Update</h2>
+      <p class="s-gist">Ghostty 1.4 adds Kitty protocol, SSH improvements, bug fixes, and memory optimization.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Loved for cross-platform library; some holdouts prefer mature alternatives like iTerm2.”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50261998" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-quote" data-i="13" aria-hidden="true">
+      <div class="s-inner">
+    
+      <div class="s-kicker">Comment of the week</div>
+      <blockquote class="s-quote">Watching him in Star Trek TNG made me reevaluate how management of people should be done, his character was assertive but compassionate. High morals coupled with grounded reason.</blockquote>
+      <div class="s-by"><b>halflife</b> on Patrick Stewart Dies · <a href="https://news.ycombinator.com/item?id=50294702" target="_blank" rel="noopener">read the thread →</a></div>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-signoff" data-i="14" aria-hidden="true">
+      <div class="s-inner">
+    
+      <div class="s-kicker">HN Weekly</div>
+      <h2 class="s-title">That's the week.</h2>
+      <p class="s-gist">That&#39;s all for this week on Hacker News. Stay curious and see you next time.</p>
+      <div class="s-actions"><button class="s-replay" id="st-replay">↺ Watch again</button><button class="s-plain" id="st-browse">Browse all 20 stories</button></div>
+    
+      </div>
+    </section>
+  
+  </div>
+  <div class="st-low">
+    <div class="caption" id="caption"></div>
+    <div class="lower3"><span class="l3-kind" id="l3-kind">HN Weekly</span><span class="l3-title" id="l3-title">Oct 26 – Nov 1, 2026</span></div>
+  </div>
+  <div class="st-ctrl">
+    <button class="st-btn" id="st-prev" aria-label="Previous segment" title="Previous (←)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M19 5l-10 7 10 7z"/></svg></button>
+    <button class="play" id="st-play" aria-label="Play bulletin">
+      <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </button>
+    <button class="st-btn" id="st-next" aria-label="Next segment" title="Next (→)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M5 5l10 7-10 7z"/></svg></button>
+    <div class="chapters"><button class="ch" style="flex-grow: 17.6" data-i="0" aria-label="HN Weekly Intro" title="HN Weekly Intro"><i><b></b></i></button><button class="ch" style="flex-grow: 31.6" data-i="1" aria-label="Patrick Stewart&#39;s Legacy" title="Patrick Stewart&#39;s Legacy"><i><b></b></i></button><button class="ch" style="flex-grow: 40.4" data-i="2" aria-label="Binance Loses $5.6B" title="Binance Loses $5.6B"><i><b></b></i></button><button class="ch" style="flex-grow: 37.3" data-i="3" aria-label="Anthropic IPO Risks" title="Anthropic IPO Risks"><i><b></b></i></button><button class="ch" style="flex-grow: 17.8" data-i="4" aria-label="OpenAI AI Discoveries" title="OpenAI AI Discoveries"><i><b></b></i></button><button class="ch" style="flex-grow: 18.3" data-i="5" aria-label="Claude Extension Backdoor" title="Claude Extension Backdoor"><i><b></b></i></button><button class="ch" style="flex-grow: 15.2" data-i="6" aria-label="Google Gemini 4 Carbon" title="Google Gemini 4 Carbon"><i><b></b></i></button><button class="ch" style="flex-grow: 15.3" data-i="7" aria-label="Microsoft 25 Percent Buyouts" title="Microsoft 25 Percent Buyouts"><i><b></b></i></button><button class="ch" style="flex-grow: 15.2" data-i="8" aria-label="ICE Surveillance Operation" title="ICE Surveillance Operation"><i><b></b></i></button><button class="ch" style="flex-grow: 14.3" data-i="9" aria-label="Mistral Large 4 Weights Released" title="Mistral Large 4 Weights Released"><i><b></b></i></button><button class="ch" style="flex-grow: 13.9" data-i="10" aria-label="HackerTube Curates Videos" title="HackerTube Curates Videos"><i><b></b></i></button><button class="ch" style="flex-grow: 14.2" data-i="11" aria-label="HackerBooks Aggregates Books" title="HackerBooks Aggregates Books"><i><b></b></i></button><button class="ch" style="flex-grow: 14.6" data-i="12" aria-label="Ghostty Terminal Update" title="Ghostty Terminal Update"><i><b></b></i></button><button class="ch" style="flex-grow: 19.3" data-i="13" aria-label="Comment of the week" title="Comment of the week"><i><b></b></i></button><button class="ch" style="flex-grow: 5.6" data-i="14" aria-label="HN Weekly Signoff" title="HN Weekly Signoff"><i><b></b></i></button></div>
+    <span class="st-time" id="st-time">0:00 / 4:57</span>
+    <button class="st-btn st-cc" id="st-cc" aria-pressed="true" title="Subtitles (C)">CC</button>
+  </div>
+</div>
+
+
+
 <details class="more">
   <summary>108 more stories this week</summary>
   <ul>
@@ -752,13 +1151,25 @@ body.has-ticker { padding-bottom: 40px; }
   const segs = JSON.parse(document.getElementById('bc-seg').textContent);
   const kinds = {"launches": "Launches", "open": "Headlines", "quote": "Comment of the week", "rapid": "In other news", "signoff": "Sign-off", "story": "Top story"};
   const $ = id => document.getElementById(id);
-  const audio = $('audio'), player = $('player'), fill = $('fill'), track = $('track');
+  const audio = $('audio'), player = $('player'), fill = $('fill'), track = $('track'), stage = $('stage');
+  const slides = [...stage.querySelectorAll('.slide')], chs = [...stage.querySelectorAll('.ch b')];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
   const dur = () => audio.duration || segs[segs.length - 1].end;
-  let cur = -1;
+  const store = (k, v) => { try { return v === undefined ? localStorage.getItem(k) : localStorage.setItem(k, v); } catch { return null; } };
+  let cur = -1, cap = '';
 
-  audio.addEventListener('error', () => { player.hidden = true; $('onair') && ($('onair').hidden = true); });
+  // Subtitles: split each segment into sentences, timed by their share of the segment's characters.
+  segs.forEach(s => {
+    const parts = s.text.match(/[^.!?]+[.!?]+["'”’]*\s*|[^.!?]+$/g) || [s.text];
+    const total = parts.reduce((n, p) => n + p.length, 0);
+    let t = s.start;
+    s.lines = parts.map(p => { const l = { at: t, text: p.trim() }; t += (s.end - s.start) * p.length / total; return l; });
+  });
+
+  audio.addEventListener('error', () => {
+    player.hidden = true; $('watch-btn').hidden = true; $('onair') && ($('onair').hidden = true);
+  });
 
   function segAt(t) {
     for (let i = segs.length - 1; i >= 0; i--) if (t >= segs[i].start) return i;
@@ -772,39 +1183,56 @@ body.has-ticker { padding-bottom: 40px; }
     if (i === cur) return;
     cur = i;
     const s = segs[i];
-    $('now-kind').textContent = kinds[s.kind] || s.kind;
-    $('now-title').textContent = s.title;
+    $('now-kind').textContent = $('l3-kind').textContent = kinds[s.kind] || s.kind;
+    $('now-title').textContent = $('l3-title').textContent = s.title;
+    slides.forEach((el, j) => { el.classList.toggle('cur', j === i); el.classList.toggle('past', j < i); el.setAttribute('aria-hidden', j !== i); });
     document.querySelectorAll('.box.on-air').forEach(b => b.classList.remove('on-air'));
     document.querySelectorAll('.transcript li.cur').forEach(li => li.classList.remove('cur'));
     document.querySelector(`.transcript li[data-seg="${i}"]`)?.classList.add('cur');
     const box = s.box_id >= 0 && document.querySelector(`.box[data-box-id="${s.box_id}"]`);
     if (box) {
       box.classList.add('on-air');
-      if (!audio.paused && !inView(box)) box.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      if (stage.hidden && !audio.paused && !inView(box)) box.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
     }
   }
   function seek(t, play = true) {
-    audio.currentTime = t; setSeg(segAt(t + 0.01));
+    audio.currentTime = t; setSeg(segAt(t + 0.01)); tick();
     if (play) audio.play();
   }
+  function tick() {
+    const t = audio.currentTime;
+    fill.style.width = (100 * t / dur()) + '%';
+    $('t-cur').textContent = fmt(t);
+    $('st-time').textContent = `${fmt(t)} / ${fmt(dur())}`;
+    setSeg(segAt(t));
+    chs.forEach((b, j) => {
+      const s = segs[j];
+      b.style.width = (j < cur ? 100 : j > cur ? 0 : Math.min(100, 100 * (t - s.start) / (s.end - s.start))) + '%';
+    });
+    const lines = segs[cur].lines, line = [...lines].reverse().find(l => t >= l.at) || lines[0];
+    const text = audio.paused && t === 0 ? '' : line.text;
+    if (text !== cap) { cap = text; $('caption').textContent = text; $('caption').classList.toggle('empty', !text); }
+  }
 
-  audio.addEventListener('timeupdate', () => {
-    fill.style.width = (100 * audio.currentTime / dur()) + '%';
-    $('t-cur').textContent = fmt(audio.currentTime);
-    setSeg(segAt(audio.currentTime));
-  });
-  audio.addEventListener('loadedmetadata', () => { $('t-dur').textContent = fmt(audio.duration); });
+  audio.addEventListener('timeupdate', tick);
+  audio.addEventListener('loadedmetadata', () => { $('t-dur').textContent = fmt(audio.duration); tick(); });
   const sync = () => {
     const playing = !audio.paused;
-    $('ico-play').hidden = playing; $('ico-pause').hidden = !playing;
-    $('play').setAttribute('aria-label', playing ? 'Pause bulletin' : 'Play bulletin');
+    document.querySelectorAll('.ico-play').forEach(i => i.hidden = playing);
+    document.querySelectorAll('.ico-pause').forEach(i => i.hidden = !playing);
+    for (const b of [$('play'), $('st-play')]) b.setAttribute('aria-label', playing ? 'Pause bulletin' : 'Play bulletin');
     document.body.classList.toggle('playing', playing);
     $('onair-label').textContent = playing ? 'ON AIR' : (audio.currentTime > 0 ? 'PAUSED' : 'ON AIR');
   };
+  const toggle = () => audio.paused ? audio.play() : audio.pause();
   audio.addEventListener('play', sync); audio.addEventListener('pause', sync);
-  audio.addEventListener('ended', () => { document.querySelectorAll('.box.on-air').forEach(b => b.classList.remove('on-air')); });
+  audio.addEventListener('ended', () => {
+    document.querySelectorAll('.box.on-air').forEach(b => b.classList.remove('on-air'));
+    setSeg(segs.length - 1);
+  });
 
-  $('play').addEventListener('click', () => audio.paused ? audio.play() : audio.pause());
+  $('play').addEventListener('click', toggle);
+  $('st-play').addEventListener('click', toggle);
   const speeds = [1, 1.25, 1.5];
   $('speed').addEventListener('click', e => {
     audio.playbackRate = speeds[(speeds.indexOf(audio.playbackRate) + 1) % speeds.length];
@@ -824,11 +1252,61 @@ body.has-ticker { padding-bottom: 40px; }
     if (i >= 0) seek(segs[i].start);
   }));
   document.querySelectorAll('.transcript .ts').forEach(b => b.addEventListener('click', () => seek(+b.dataset.t)));
+
+  // ---- Presentation mode ----
+  const next = () => cur < segs.length - 1 && seek(segs[cur + 1].start, !audio.paused);
+  const prev = () => seek(audio.currentTime - segs[cur].start > 2 || cur === 0 ? segs[cur].start : segs[cur - 1].start, !audio.paused);
+  function openStage() {
+    stage.hidden = false; document.body.classList.add('staged');
+    if (cur < 0) setSeg(0);
+    tick(); $('st-play').focus();
+    if (audio.paused && audio.currentTime < 1) audio.play();
+    history.replaceState(null, '', '#watch');
+  }
+  function closeStage() {
+    if (document.fullscreenElement) document.exitFullscreen();
+    stage.hidden = true; document.body.classList.remove('staged');
+    history.replaceState(null, '', location.pathname + location.search);
+    $('watch-btn').focus();
+  }
+  const setCC = on => { stage.classList.toggle('no-cc', !on); $('st-cc').setAttribute('aria-pressed', on); store('hnw-cc', on ? '1' : '0'); };
+  setCC(store('hnw-cc') !== '0');
+
+  $('watch-btn').addEventListener('click', openStage);
+  $('st-close').addEventListener('click', closeStage);
+  $('st-next').addEventListener('click', next);
+  $('st-prev').addEventListener('click', prev);
+  $('st-cc').addEventListener('click', () => setCC(stage.classList.contains('no-cc')));
+  $('st-replay').addEventListener('click', () => seek(0));
+  $('st-browse').addEventListener('click', () => { audio.pause(); closeStage(); document.querySelector('.sec')?.scrollIntoView(); });
+  stage.querySelectorAll('.ch').forEach(c => c.addEventListener('click', () => seek(segs[+c.dataset.i].start)));
+  const canFull = !!stage.requestFullscreen;
+  $('st-full').hidden = !canFull;
+  const full = () => document.fullscreenElement ? document.exitFullscreen() : stage.requestFullscreen();
+  $('st-full').addEventListener('click', full);
+  // Tap/click on the slide itself toggles play, like a video.
+  stage.querySelector('.slides').addEventListener('click', e => { if (!e.target.closest('a, button')) toggle(); });
+
   document.addEventListener('keydown', e => {
-    if (e.code === 'Space' && !e.target.closest('input, textarea, button, [contenteditable]')) {
-      e.preventDefault(); audio.paused ? audio.play() : audio.pause();
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (!stage.hidden) {
+      const k = e.key;
+      if (k === 'Escape') { e.preventDefault(); return closeStage(); }
+      if (k === 'ArrowRight') { e.preventDefault(); return next(); }
+      if (k === 'ArrowLeft') { e.preventDefault(); return prev(); }
+      if (k === 'f' && canFull) return full();
+      if (k === 'c') return setCC(stage.classList.contains('no-cc'));
+      if (k === 'Tab') {  // keep focus inside the dialog
+        const f = [...stage.querySelectorAll('button:not([hidden]), a')].filter(x => x.offsetParent);
+        if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+      }
+    }
+    if (e.code === 'Space' && !e.target.closest('input, textarea, button, a, [contenteditable]')) {
+      e.preventDefault(); toggle();
     }
   });
+  if (location.hash === '#watch') { stage.hidden = false; document.body.classList.add('staged'); setSeg(0); tick(); }
 })();
 </script>
 

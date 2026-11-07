@@ -31,14 +31,15 @@
 <section class="lead">
   <div class="kicker">This week on Hacker News{% if bc %} · {{ (bc.duration / 60)|round(0, 'ceil')|int }}-minute bulletin{% endif %}</div>
   <h1>{{ d.headline }}</h1>
+  {% if bc %}<button class="watch" id="watch-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch the bulletin<span>{{ bc.duration|mmss }}</span></button>{% endif %}
 </section>
 
 {% if bc %}
 <div class="player" id="player">
   <audio id="audio" preload="metadata" src="{{ bc.audio }}"></audio>
   <button class="play" id="play" aria-label="Play bulletin">
-    <svg id="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-    <svg id="ico-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
   </button>
   <div class="pmain">
     <div class="now"><span class="now-kind" id="now-kind">Press play</span><span class="now-title" id="now-title">{{ d.range }} in under {{ (bc.duration / 60)|round(0, 'ceil')|int }} minutes</span></div>
@@ -100,6 +101,76 @@
   {% endfor %}
   </ol>
 </details>
+
+{% set by_id = {} %}{% for s in d.sections %}{% for b in s.boxes %}{% set _ = by_id.update({b.id: b}) %}{% endfor %}{% endfor %}
+{% set n_story = bc.segments|selectattr("kind", "equalto", "story")|list|length %}
+{% set ns = namespace(story=0) %}
+<div class="stage" id="stage" hidden role="dialog" aria-modal="true" aria-label="HN Weekly bulletin">
+  <div class="st-bar">
+    <span class="brand"><span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4M16.2 7.8a6 6 0 0 1 0 8.4M4.9 4.9a10 10 0 0 0 0 14.2M19.1 4.9a10 10 0 0 1 0 14.2"/></svg></span>HN WEEKLY</span>
+    <span class="onair"><span class="dot"></span>ON AIR</span>
+    <span class="st-date">{{ d.range }}</span>
+    <button class="st-btn" id="st-full" aria-label="Full screen" title="Full screen (F)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    <button class="st-btn" id="st-close" aria-label="Close presentation" title="Close (Esc)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="slides">
+  {% for s in bc.segments %}
+    {% set b = by_id.get(s.box_id) %}
+    <section class="slide k-{{ s.kind }}" data-i="{{ loop.index0 }}" aria-hidden="true">
+      <div class="s-inner">
+    {% if s.kind == "open" %}
+      <div class="s-kicker">This week on Hacker News</div>
+      <div class="s-date">{{ d.range }}</div>
+      <h2 class="s-head">{{ d.headline }}</h2>
+      <div class="s-coming"><span>Coming up</span>
+        <ol>{% for x in bc.segments if x.kind == "story" %}{% set xb = by_id.get(x.box_id) %}<li>{{ xb.title if xb else x.title }}</li>{% endfor %}</ol>
+      </div>
+    {% elif s.kind == "quote" %}
+      <div class="s-kicker">Comment of the week</div>
+      <blockquote class="s-quote">{{ s.quote or s.text }}</blockquote>
+      <div class="s-by">{% if s.author %}<b>{{ s.author }}</b> on {% endif %}{{ b.title if b else "Hacker News" }}{% if b %} · <a href="{{ b.hn_url }}" target="_blank" rel="noopener">read the thread →</a>{% endif %}</div>
+    {% elif s.kind == "signoff" %}
+      <div class="s-kicker">HN Weekly</div>
+      <h2 class="s-title">That's the week.</h2>
+      <p class="s-gist">{{ s.text }}</p>
+      <div class="s-actions"><button class="s-replay" id="st-replay">↺ Watch again</button><button class="s-plain" id="st-browse">Browse all {{ by_id|length }} stories</button></div>
+    {% elif b %}
+      {% set m = moods.get(b.mood, ("💬", b.mood)) %}
+      {% if s.kind == "story" %}{% set ns.story = ns.story + 1 %}{% endif %}
+      <div class="s-kicker">{% if s.kind == "story" %}Top story {{ ns.story }} of {{ n_story }}{% else %}{{ kinds.get(s.kind, s.kind) }}{% endif %}<span class="s-sec">{{ b.section }}</span><span class="flames f{{ b.flames }}">{{ "🔥" * b.flames }}</span></div>
+      <h2 class="s-title">{{ b.title }}</h2>
+      <p class="s-gist">{{ b.gist }}</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-{{ b.mood }}">{{ m[0] }} {{ m[1] }}</span>
+        <p class="s-take">“{{ b.take }}”</p>
+      </div>
+      <a class="s-link" href="{{ b.hn_url }}" target="_blank" rel="noopener">Join the discussion →</a>
+    {% else %}
+      <div class="s-kicker">{{ kinds.get(s.kind, s.kind) }}</div>
+      <h2 class="s-title">{{ s.title }}</h2>
+      <p class="s-gist">{{ s.text }}</p>
+    {% endif %}
+      </div>
+    </section>
+  {% endfor %}
+  </div>
+  <div class="st-low">
+    <div class="caption" id="caption"></div>
+    <div class="lower3"><span class="l3-kind" id="l3-kind">HN Weekly</span><span class="l3-title" id="l3-title">{{ d.range }}</span></div>
+  </div>
+  <div class="st-ctrl">
+    <button class="st-btn" id="st-prev" aria-label="Previous segment" title="Previous (←)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M19 5l-10 7 10 7z"/></svg></button>
+    <button class="play" id="st-play" aria-label="Play bulletin">
+      <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </button>
+    <button class="st-btn" id="st-next" aria-label="Next segment" title="Next (→)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M5 5l10 7-10 7z"/></svg></button>
+    <div class="chapters">{% for s in bc.segments %}<button class="ch" style="flex-grow: {{ (s.end - s.start)|round(1) }}" data-i="{{ loop.index0 }}" aria-label="{{ s.title }}" title="{{ s.title }}"><i><b></b></i></button>{% endfor %}</div>
+    <span class="st-time" id="st-time">0:00 / {{ bc.duration|mmss }}</span>
+    <button class="st-btn st-cc" id="st-cc" aria-pressed="true" title="Subtitles (C)">CC</button>
+  </div>
+</div>
 {% endif %}
 
 {% if d.more %}
@@ -129,13 +200,25 @@
   const segs = JSON.parse(document.getElementById('bc-seg').textContent);
   const kinds = {{ kinds|tojson }};
   const $ = id => document.getElementById(id);
-  const audio = $('audio'), player = $('player'), fill = $('fill'), track = $('track');
+  const audio = $('audio'), player = $('player'), fill = $('fill'), track = $('track'), stage = $('stage');
+  const slides = [...stage.querySelectorAll('.slide')], chs = [...stage.querySelectorAll('.ch b')];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
   const dur = () => audio.duration || segs[segs.length - 1].end;
-  let cur = -1;
+  const store = (k, v) => { try { return v === undefined ? localStorage.getItem(k) : localStorage.setItem(k, v); } catch { return null; } };
+  let cur = -1, cap = '';
 
-  audio.addEventListener('error', () => { player.hidden = true; $('onair') && ($('onair').hidden = true); });
+  // Subtitles: split each segment into sentences, timed by their share of the segment's characters.
+  segs.forEach(s => {
+    const parts = s.text.match(/[^.!?]+[.!?]+["'”’]*\s*|[^.!?]+$/g) || [s.text];
+    const total = parts.reduce((n, p) => n + p.length, 0);
+    let t = s.start;
+    s.lines = parts.map(p => { const l = { at: t, text: p.trim() }; t += (s.end - s.start) * p.length / total; return l; });
+  });
+
+  audio.addEventListener('error', () => {
+    player.hidden = true; $('watch-btn').hidden = true; $('onair') && ($('onair').hidden = true);
+  });
 
   function segAt(t) {
     for (let i = segs.length - 1; i >= 0; i--) if (t >= segs[i].start) return i;
@@ -149,39 +232,56 @@
     if (i === cur) return;
     cur = i;
     const s = segs[i];
-    $('now-kind').textContent = kinds[s.kind] || s.kind;
-    $('now-title').textContent = s.title;
+    $('now-kind').textContent = $('l3-kind').textContent = kinds[s.kind] || s.kind;
+    $('now-title').textContent = $('l3-title').textContent = s.title;
+    slides.forEach((el, j) => { el.classList.toggle('cur', j === i); el.classList.toggle('past', j < i); el.setAttribute('aria-hidden', j !== i); });
     document.querySelectorAll('.box.on-air').forEach(b => b.classList.remove('on-air'));
     document.querySelectorAll('.transcript li.cur').forEach(li => li.classList.remove('cur'));
     document.querySelector(`.transcript li[data-seg="${i}"]`)?.classList.add('cur');
     const box = s.box_id >= 0 && document.querySelector(`.box[data-box-id="${s.box_id}"]`);
     if (box) {
       box.classList.add('on-air');
-      if (!audio.paused && !inView(box)) box.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      if (stage.hidden && !audio.paused && !inView(box)) box.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
     }
   }
   function seek(t, play = true) {
-    audio.currentTime = t; setSeg(segAt(t + 0.01));
+    audio.currentTime = t; setSeg(segAt(t + 0.01)); tick();
     if (play) audio.play();
   }
+  function tick() {
+    const t = audio.currentTime;
+    fill.style.width = (100 * t / dur()) + '%';
+    $('t-cur').textContent = fmt(t);
+    $('st-time').textContent = `${fmt(t)} / ${fmt(dur())}`;
+    setSeg(segAt(t));
+    chs.forEach((b, j) => {
+      const s = segs[j];
+      b.style.width = (j < cur ? 100 : j > cur ? 0 : Math.min(100, 100 * (t - s.start) / (s.end - s.start))) + '%';
+    });
+    const lines = segs[cur].lines, line = [...lines].reverse().find(l => t >= l.at) || lines[0];
+    const text = audio.paused && t === 0 ? '' : line.text;
+    if (text !== cap) { cap = text; $('caption').textContent = text; $('caption').classList.toggle('empty', !text); }
+  }
 
-  audio.addEventListener('timeupdate', () => {
-    fill.style.width = (100 * audio.currentTime / dur()) + '%';
-    $('t-cur').textContent = fmt(audio.currentTime);
-    setSeg(segAt(audio.currentTime));
-  });
-  audio.addEventListener('loadedmetadata', () => { $('t-dur').textContent = fmt(audio.duration); });
+  audio.addEventListener('timeupdate', tick);
+  audio.addEventListener('loadedmetadata', () => { $('t-dur').textContent = fmt(audio.duration); tick(); });
   const sync = () => {
     const playing = !audio.paused;
-    $('ico-play').hidden = playing; $('ico-pause').hidden = !playing;
-    $('play').setAttribute('aria-label', playing ? 'Pause bulletin' : 'Play bulletin');
+    document.querySelectorAll('.ico-play').forEach(i => i.hidden = playing);
+    document.querySelectorAll('.ico-pause').forEach(i => i.hidden = !playing);
+    for (const b of [$('play'), $('st-play')]) b.setAttribute('aria-label', playing ? 'Pause bulletin' : 'Play bulletin');
     document.body.classList.toggle('playing', playing);
     $('onair-label').textContent = playing ? 'ON AIR' : (audio.currentTime > 0 ? 'PAUSED' : 'ON AIR');
   };
+  const toggle = () => audio.paused ? audio.play() : audio.pause();
   audio.addEventListener('play', sync); audio.addEventListener('pause', sync);
-  audio.addEventListener('ended', () => { document.querySelectorAll('.box.on-air').forEach(b => b.classList.remove('on-air')); });
+  audio.addEventListener('ended', () => {
+    document.querySelectorAll('.box.on-air').forEach(b => b.classList.remove('on-air'));
+    setSeg(segs.length - 1);
+  });
 
-  $('play').addEventListener('click', () => audio.paused ? audio.play() : audio.pause());
+  $('play').addEventListener('click', toggle);
+  $('st-play').addEventListener('click', toggle);
   const speeds = [1, 1.25, 1.5];
   $('speed').addEventListener('click', e => {
     audio.playbackRate = speeds[(speeds.indexOf(audio.playbackRate) + 1) % speeds.length];
@@ -201,11 +301,61 @@
     if (i >= 0) seek(segs[i].start);
   }));
   document.querySelectorAll('.transcript .ts').forEach(b => b.addEventListener('click', () => seek(+b.dataset.t)));
+
+  // ---- Presentation mode ----
+  const next = () => cur < segs.length - 1 && seek(segs[cur + 1].start, !audio.paused);
+  const prev = () => seek(audio.currentTime - segs[cur].start > 2 || cur === 0 ? segs[cur].start : segs[cur - 1].start, !audio.paused);
+  function openStage() {
+    stage.hidden = false; document.body.classList.add('staged');
+    if (cur < 0) setSeg(0);
+    tick(); $('st-play').focus();
+    if (audio.paused && audio.currentTime < 1) audio.play();
+    history.replaceState(null, '', '#watch');
+  }
+  function closeStage() {
+    if (document.fullscreenElement) document.exitFullscreen();
+    stage.hidden = true; document.body.classList.remove('staged');
+    history.replaceState(null, '', location.pathname + location.search);
+    $('watch-btn').focus();
+  }
+  const setCC = on => { stage.classList.toggle('no-cc', !on); $('st-cc').setAttribute('aria-pressed', on); store('hnw-cc', on ? '1' : '0'); };
+  setCC(store('hnw-cc') !== '0');
+
+  $('watch-btn').addEventListener('click', openStage);
+  $('st-close').addEventListener('click', closeStage);
+  $('st-next').addEventListener('click', next);
+  $('st-prev').addEventListener('click', prev);
+  $('st-cc').addEventListener('click', () => setCC(stage.classList.contains('no-cc')));
+  $('st-replay').addEventListener('click', () => seek(0));
+  $('st-browse').addEventListener('click', () => { audio.pause(); closeStage(); document.querySelector('.sec')?.scrollIntoView(); });
+  stage.querySelectorAll('.ch').forEach(c => c.addEventListener('click', () => seek(segs[+c.dataset.i].start)));
+  const canFull = !!stage.requestFullscreen;
+  $('st-full').hidden = !canFull;
+  const full = () => document.fullscreenElement ? document.exitFullscreen() : stage.requestFullscreen();
+  $('st-full').addEventListener('click', full);
+  // Tap/click on the slide itself toggles play, like a video.
+  stage.querySelector('.slides').addEventListener('click', e => { if (!e.target.closest('a, button')) toggle(); });
+
   document.addEventListener('keydown', e => {
-    if (e.code === 'Space' && !e.target.closest('input, textarea, button, [contenteditable]')) {
-      e.preventDefault(); audio.paused ? audio.play() : audio.pause();
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (!stage.hidden) {
+      const k = e.key;
+      if (k === 'Escape') { e.preventDefault(); return closeStage(); }
+      if (k === 'ArrowRight') { e.preventDefault(); return next(); }
+      if (k === 'ArrowLeft') { e.preventDefault(); return prev(); }
+      if (k === 'f' && canFull) return full();
+      if (k === 'c') return setCC(stage.classList.contains('no-cc'));
+      if (k === 'Tab') {  // keep focus inside the dialog
+        const f = [...stage.querySelectorAll('button:not([hidden]), a')].filter(x => x.offsetParent);
+        if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+      }
+    }
+    if (e.code === 'Space' && !e.target.closest('input, textarea, button, a, [contenteditable]')) {
+      e.preventDefault(); toggle();
     }
   });
+  if (location.hash === '#watch') { stage.hidden = false; document.body.classList.add('staged'); setSeg(0); tick(); }
 })();
 </script>
 {% endif %}
