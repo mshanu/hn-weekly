@@ -2,7 +2,7 @@ name: weekly-digest
 
 on:
   schedule:
-    - cron: "30 2 * * 1"   # Monday 02:30 UTC = 08:00 IST
+    - cron: "17 2 * * 1"   # Monday 02:17 UTC = 07:47 IST (off-peak minute; :00/:30 runs get dropped more)
   workflow_dispatch:
     inputs:
       week:
