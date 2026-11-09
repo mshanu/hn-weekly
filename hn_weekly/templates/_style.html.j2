@@ -219,12 +219,9 @@ body.staged { overflow: hidden; }
 .s-coming li { counter-increment: c; padding: 10px 16px; border-radius: 10px; background: rgba(255, 255, 255, .07);
   font-size: clamp(15px, 1.7vw, 18px); font-weight: 600; }
 .s-coming li::before { content: counter(c); color: var(--accent); margin-right: 10px; font-weight: 800; }
-.s-quote { position: relative; margin: 22px 0 22px; padding-left: clamp(36px, 6vw, 72px); font-size: clamp(24px, 3.6vw, 42px);
-  line-height: 1.25; font-weight: 600; letter-spacing: -.01em; max-width: 30ch; }
-.s-quote::before { content: "“"; position: absolute; left: 0; top: -.18em; font-size: 2.6em; line-height: 1; color: var(--accent); font-family: Georgia, serif; }
-.s-by { padding-left: clamp(36px, 6vw, 72px); color: var(--muted); font-size: clamp(15px, 1.7vw, 18px); }
-.s-by b { color: #f4f2ec; }
-.s-by a { color: var(--accent); text-decoration: none; }
+.s-wrap { margin: 22px 0; padding-left: clamp(18px, 3vw, 32px); border-left: 4px solid var(--accent);
+  font-size: clamp(24px, 3.6vw, 42px); line-height: 1.25; font-weight: 600; letter-spacing: -.01em; max-width: 30ch; }
+.s-by { color: var(--muted); font-size: clamp(15px, 1.7vw, 18px); }
 .s-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .s-replay, .s-plain { font: 600 16px/1 inherit; font-family: inherit; padding: 12px 18px; border-radius: 999px; cursor: pointer; }
 .s-replay { border: 0; background: var(--accent); color: #fff; }

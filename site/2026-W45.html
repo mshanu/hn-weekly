@@ -6,7 +6,7 @@
 <title>HN Weekly 2026-W45</title>
 <meta name="hn-week" content="2026-W45">
 <meta name="hn-range" content="Nov 2 – Nov 8, 2026">
-<meta name="hn-headline" content="Debates surge on GPT-6 weight programming, security issues spike from musl bug and Claude&#39;s email leak, while Tesla halts Cybertruck and Discord shifts to Rust client.">
+<meta name="hn-headline" content="Tesla to end Cybertruck production by 2027, Discord rewrites client in Rust for 70% less RAM, and Ubuntu delays critical Linux kernel TCP patching.">
 <style>
 :root {
   --bg: #f7f6f2; --surface: #ffffff; --text: #1d1c1a; --muted: #6b6860; --line: #e4e1d8;
@@ -228,12 +228,9 @@ body.staged { overflow: hidden; }
 .s-coming li { counter-increment: c; padding: 10px 16px; border-radius: 10px; background: rgba(255, 255, 255, .07);
   font-size: clamp(15px, 1.7vw, 18px); font-weight: 600; }
 .s-coming li::before { content: counter(c); color: var(--accent); margin-right: 10px; font-weight: 800; }
-.s-quote { position: relative; margin: 22px 0 22px; padding-left: clamp(36px, 6vw, 72px); font-size: clamp(24px, 3.6vw, 42px);
-  line-height: 1.25; font-weight: 600; letter-spacing: -.01em; max-width: 30ch; }
-.s-quote::before { content: "“"; position: absolute; left: 0; top: -.18em; font-size: 2.6em; line-height: 1; color: var(--accent); font-family: Georgia, serif; }
-.s-by { padding-left: clamp(36px, 6vw, 72px); color: var(--muted); font-size: clamp(15px, 1.7vw, 18px); }
-.s-by b { color: #f4f2ec; }
-.s-by a { color: var(--accent); text-decoration: none; }
+.s-wrap { margin: 22px 0; padding-left: clamp(18px, 3vw, 32px); border-left: 4px solid var(--accent);
+  font-size: clamp(24px, 3.6vw, 42px); line-height: 1.25; font-weight: 600; letter-spacing: -.01em; max-width: 30ch; }
+.s-by { color: var(--muted); font-size: clamp(15px, 1.7vw, 18px); }
 .s-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .s-replay, .s-plain { font: 600 16px/1 inherit; font-family: inherit; padding: 12px 18px; border-radius: 999px; cursor: pointer; }
 .s-replay { border: 0; background: var(--accent); color: #fff; }
@@ -288,8 +285,8 @@ body.staged { overflow: hidden; }
 <div class="wrap">
 <section class="lead">
   <div class="kicker">This week on Hacker News · 3-minute bulletin</div>
-  <h1>Debates surge on GPT-6 weight programming, security issues spike from musl bug and Claude&#39;s email leak, while Tesla halts Cybertruck and Discord shifts to Rust client.</h1>
-  <button class="watch" id="watch-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch the bulletin<span>2:29</span></button>
+  <h1>Tesla to end Cybertruck production by 2027, Discord rewrites client in Rust for 70% less RAM, and Ubuntu delays critical Linux kernel TCP patching.</h1>
+  <button class="watch" id="watch-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch the bulletin<span>2:13</span></button>
 </section>
 
 
@@ -303,42 +300,35 @@ body.staged { overflow: hidden; }
     <div class="now"><span class="now-kind" id="now-kind">Press play</span><span class="now-title" id="now-title">Nov 2 – Nov 8, 2026 in under 3 minutes</span></div>
     <div class="track" id="track" role="slider" aria-label="Seek" tabindex="0">
       <div class="fill" id="fill"></div>
-      <span class="tick" style="left: 3.31%"></span><span class="tick" style="left: 17.0%"></span><span class="tick" style="left: 30.42%"></span><span class="tick" style="left: 94.75%"></span>
+      <span class="tick" style="left: 4.28%"></span><span class="tick" style="left: 18.75%"></span><span class="tick" style="left: 32.98%"></span><span class="tick" style="left: 87.3%"></span>
     </div>
-    <div class="ptime"><span id="t-cur">0:00</span><span id="t-dur">2:29</span></div>
+    <div class="ptime"><span id="t-cur">0:00</span><span id="t-dur">2:13</span></div>
   </div>
   <button class="speed" id="speed" aria-label="Playback speed">1×</button>
 </div>
-<script type="application/json" id="bc-seg">[{"box_id": -1, "end": 4.55, "kind": "open", "start": 0.0, "text": "This is HN Weekly, your week on Hacker News in two minutes.", "title": "HN Weekly Intro"}, {"box_id": 0, "end": 24.9, "kind": "story", "start": 4.95, "text": "Researchers showed GPT-6 Astra and Qwen 3.8 can read and modify neural network weights directly, exploring new self-improvement methods. Hacker News is intrigued but cautious, seeing claims as overstated and stressing reliance on indirect code execution techniques.", "title": "Weight-Space Programming Debate"}, {"box_id": 1, "end": 44.95, "kind": "story", "start": 25.4, "text": "A flaw in Alpine Linux\u2019s musl libc lets attackers bypass OpenSSH password checks with crafted hashes and long passwords. Hacker News sees this as a severe vulnerability, blaming musl and OpenSSH legacy code, urging fast patching and praising Alpine\u0027s advisories.", "title": "Musl Bug Enables SSH Bypass"}, {"box_id": 2, "end": 65.15, "kind": "story", "start": 45.45, "text": "Tesla will end Cybertruck production by mid-2027 due to poor sales and quality issues, shifting to the autonomous Cybercab model. Hacker News mostly sees design and price as limiting factors, mixed on execution but hopeful about Tesla\u0027s future vehicle strategy.", "title": "Tesla Ends Cybertruck Production"}, {"box_id": 3, "end": 78.8, "kind": "rapid", "start": 65.65, "text": "Ubuntu delayed official patches for a critical Linux TCP flaw, leaving systems exposed. Hacker News criticized the slow response and debated the trade-off between stability and security.", "title": "Ubuntu Delays TCP Patch"}, {"box_id": 4, "end": 94.15, "kind": "rapid", "start": 79.05, "text": "Claude Code leaked user emails in User-Agent headers due to SEC API demands, raising privacy concerns. Hacker News calls this a serious trust violation with skepticism despite Anthropic\u2019s apologies and upcoming fixes.", "title": "Claude Code Email Leak"}, {"box_id": 5, "end": 109.1, "kind": "rapid", "start": 94.4, "text": "AI-assisted research helped find and patch the PHP2Shell vulnerability, showing AI\u2019s role in reducing technical debt. Hacker News agrees AI speeds discovery but stresses no perfect security exists.", "title": "AI Finds Legacy PHP Vulnerability"}, {"box_id": 6, "end": 124.0, "kind": "rapid", "start": 109.35, "text": "Postman app installs AI plugins and modifies agent code without explicit consent, triggering privacy alarms. Hacker News condemns this behavior as a trust breach and recommends alternatives.", "title": "Postman Auto-Installs AI Plugins"}, {"box_id": 7, "end": 141.3, "kind": "rapid", "start": 124.25, "text": "Discord is replacing its Electron app with a Rust client, cutting RAM use from over one gigabyte to about two hundred ninety megabytes. Hacker News praises gains but notes challenges rewriting large apps and debates native versus web tools.", "title": "Discord Moves Client to Rust"}, {"author": "mpyne", "box_id": 1, "end": 146.55, "kind": "quote", "quote": "OK, I think I see what\u2019s going on with this, in this configuration.", "start": 141.55, "text": "User mpyne wrote: OK, I think I see what\u2019s going on with this, in this configuration.", "title": "Comment of the week"}, {"box_id": -1, "end": 149.4, "kind": "signoff", "start": 146.95, "text": "That\u0027s the week. See you next Monday.", "title": "Signoff"}]</script>
+<script type="application/json" id="bc-seg">[{"box_id": -1, "end": 5.3, "kind": "open", "start": 0.0, "text": "This is HN Weekly, your week on Hacker News in two minutes.", "title": "Opening"}, {"box_id": 0, "end": 24.45, "kind": "story", "start": 5.7, "text": "Astra, an LLM claimed to manipulate neural network weights via code generation, inspires research into weight-space programming. Hacker News users are intrigued but skeptical, noting progress largely depends on generating weight modifications through code rather than new direct reasoning methods.", "title": "Astra\u0027s Weight-Space Programming"}, {"box_id": 1, "end": 43.4, "kind": "story", "start": 24.95, "text": "Tesla announced plans to end Cybertruck production by 2027 due to poor sales and quality problems, shifting focus to Cybercab autonomous robotaxi. The Hacker News community respects the engineering but questions Tesla\u0027s marketing and timing of this strategic pivot.", "title": "Tesla Ends Cybertruck Production"}, {"box_id": 2, "end": 63.15, "kind": "story", "start": 43.9, "text": "A decade-old vulnerability in musl libc\u0027s crypt() lets OpenSSH accept unauthorized logins when password hashes contain \u0027*\u0027. Hacker News agrees it stems from fragile legacy error handling and complex code interaction, calling for improved security and auditing.", "title": "OpenSSH Crypt() Security Flaw"}, {"box_id": 3, "end": 73.45, "kind": "rapid", "start": 63.65, "text": "Ubuntu delayed a critical Linux TCP patch for three weeks, risking remote exploits, and users express disappointment at slow response.", "title": "Ubuntu Kernel Patch Delay"}, {"box_id": 4, "end": 83.9, "kind": "rapid", "start": 73.7, "text": "Claude Code leaks user emails to third parties without consent, prompting criticism over privacy and demands for better user controls.", "title": "Claude Code Email Leak"}, {"box_id": 5, "end": 95.0, "kind": "rapid", "start": 84.15, "text": "AI tools helped discover PHP2Shell, a long-standing security bug, speeding vulnerability detection but raising patching complexity concerns.", "title": "AI Reveals Legacy Flaws"}, {"box_id": 6, "end": 105.4, "kind": "rapid", "start": 95.25, "text": "Postman silently installed AI plugins and changed settings on macOS without user consent, drawing widespread criticism for trust breaches.", "title": "Postman Auto-Installs Plugins"}, {"box_id": 7, "end": 115.95, "kind": "rapid", "start": 105.65, "text": "Discord replaces its Electron client with a Rust app, boosting speed and cutting RAM use by 70 percent, but some users question maintainability.", "title": "Discord Rewrites App in Rust"}, {"box_id": -1, "end": 129.35, "kind": "wrap", "start": 116.2, "text": "This week centered on AI revealing legacy software flaws, security lapses from delayed patches and privacy breaches, and tech giants shifting product strategies amid community skepticism.", "title": "Weekly Verdict"}, {"box_id": -1, "end": 133.1, "kind": "signoff", "start": 129.85, "text": "That\u0027s the week. See you next Monday.", "title": "Signoff"}]</script>
 
 
 
 <section class="sec">
   <h2><span>Security &amp; Privacy</span>
-    <span class="sheat" title="Section activity: 28,905 points + comments">
+    <span class="sheat" title="Section activity: 30,141 points + comments">
       <span class="bar"><span style="width: 100%"></span></span><span class="hottest">hottest</span>
     </span>
   </h2>
   <div class="grid">
   
     
-    <article class="box seekable" data-box-id="1">
+    <article class="box seekable" data-box-id="2">
       <div class="top">
-        <h3><a href="https://sshhole.com">Musl Bug Enables SSH Bypass</a></h3>
-        <span class="flames f3" title="Activity: 4,357 points + comments">🔥🔥🔥</span>
+        <h3><a href="https://sshhole.com">OpenSSH musl crypt() flaw</a></h3>
+        <span class="flames f3" title="Activity: 3,728 points + comments">🔥🔥🔥</span>
       </div>
-      <p class="gist">Alpine&#39;s musl libc bug allows OpenSSH login bypass with long malformed passwords.</p>
+      <p class="gist">Musl libc crypt() bug in OpenSSH sshd allows unauthorized login via &#39;*&#39; password hash.</p>
       <span class="mood v-informative">💡 informative</span>
-      <p class="take">“Severe flaw due to musl and OpenSSH&#39;s legacy design; patch immediately.”</p>
+      <p class="take">“Critical design flaw criticized, calls for better error handling and testing.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 0:25</span>
-        
-        <details class="threads">
-          <summary>+1 thread</summary>
-          <ul>
-          <li><a href="https://news.ycombinator.com/item?id=50379704">Alpine Linux Security Advisory: OpenSSH-server password authentication bypass</a></li>
-          </ul>
-        </details>
+        <span class="at" title="Play this story">▶ 0:43</span>
         
         <a class="discuss" href="https://news.ycombinator.com/item?id=50378228">discuss →</a>
       </div>
@@ -348,14 +338,14 @@ body.staged { overflow: hidden; }
     
     <article class="box seekable" data-box-id="3">
       <div class="top">
-        <h3><a href="https://chalmovsky.com/posts/wtf-ubuntu">Ubuntu Delays TCP Patch</a></h3>
+        <h3><a href="https://chalmovsky.com/posts/wtf-ubuntu">Ubuntu kernel patch delay</a></h3>
         <span class="flames f3" title="Activity: 3,164 points + comments">🔥🔥🔥</span>
       </div>
-      <p class="gist">Ubuntu delays patch release for critical Linux TCP vulnerability despite available fixes.</p>
-      <span class="mood v-divided">😐 divided</span>
-      <p class="take">“Criticized for slow response; users debate stability versus timely security.”</p>
+      <p class="gist">Ubuntu delayed patching Linux TCP flaw CVE-2026-98432, risking remote code execution.</p>
+      <span class="mood v-skeptical">🤨 skeptical</span>
+      <p class="take">“Ubuntu criticized for slow response and poor communication versus faster distros.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 1:05</span>
+        <span class="at" title="Play this story">▶ 1:03</span>
         
         <details class="threads">
           <summary>+1 thread</summary>
@@ -372,14 +362,14 @@ body.staged { overflow: hidden; }
     
     <article class="box seekable" data-box-id="4">
       <div class="top">
-        <h3><a href="https://github.com/anthropics/claude-code/issues/107757">Claude Code Email Leak</a></h3>
+        <h3><a href="https://github.com/anthropics/claude-code/issues/107757">Claude Code leaks emails</a></h3>
         <span class="flames f3" title="Activity: 2,139 points + comments">🔥🔥🔥</span>
       </div>
-      <p class="gist">Claude Code exposes user emails in User-Agent headers without consent; fix pending.</p>
+      <p class="gist">Claude Code sends user emails in User-Agent header to third parties without consent.</p>
       <span class="mood v-divided">😐 divided</span>
-      <p class="take">“Privacy violation that erodes trust; Anthropic apologized but skepticism remains.”</p>
+      <p class="take">“Serious privacy breach; demands better transparency and user controls.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 1:19</span>
+        <span class="at" title="Play this story">▶ 1:13</span>
         
         <a class="discuss" href="https://news.ycombinator.com/item?id=50385272">discuss →</a>
       </div>
@@ -389,14 +379,14 @@ body.staged { overflow: hidden; }
     
     <article class="box seekable" data-box-id="5">
       <div class="top">
-        <h3><a href="https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability">AI Finds Legacy PHP Vulnerability</a></h3>
+        <h3><a href="https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability">AI exposes legacy software flaws</a></h3>
         <span class="flames f2" title="Activity: 2,054 points + comments">🔥🔥</span>
       </div>
-      <p class="gist">AI-assisted research discovers and aids patching of longstanding PHP2Shell vulnerability.</p>
+      <p class="gist">AI uncovers decades-old critical PHP vulnerability, revealing accumulated software debt.</p>
       <span class="mood v-divided">😐 divided</span>
-      <p class="take">“AI speeds up vulnerability discovery but isn&#39;t a full security solution yet.”</p>
+      <p class="take">“AI aids detection but patching remains hard; concerns about ongoing security arms race.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 1:34</span>
+        <span class="at" title="Play this story">▶ 1:24</span>
         
         <a class="discuss" href="https://news.ycombinator.com/item?id=50364336">discuss →</a>
       </div>
@@ -406,14 +396,14 @@ body.staged { overflow: hidden; }
     
     <article class="box seekable" data-box-id="6">
       <div class="top">
-        <h3><a href="https://github.com/postmanlabs/postman-app-support/issues/14370">Postman Auto-Installs AI Plugins</a></h3>
-        <span class="flames f2" title="Activity: 2,021 points + comments">🔥🔥</span>
+        <h3><a href="https://github.com/postmanlabs/postman-app-support/issues/14370">Postman auto-installs AI plugins</a></h3>
+        <span class="flames f2" title="Activity: 2,022 points + comments">🔥🔥</span>
       </div>
-      <p class="gist">Postman silently installs AI plugins and changes configurations, sharing API data.</p>
+      <p class="gist">Postman desktop silently installs AI plugins and alters settings without user consent.</p>
       <span class="mood v-skeptical">🤨 skeptical</span>
-      <p class="take">“Community sees this as a major trust breach; recommend switching tools.”</p>
+      <p class="take">“Wide condemnation; viewed as invasive and malware-like behavior.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 1:49</span>
+        <span class="at" title="Play this story">▶ 1:35</span>
         
         <a class="discuss" href="https://news.ycombinator.com/item?id=50354960">discuss →</a>
       </div>
@@ -423,12 +413,12 @@ body.staged { overflow: hidden; }
     
     <article class="box" data-box-id="8">
       <div class="top">
-        <h3><a href="https://layer3intel.com/blog/residential-proxies-white-house-network">Residential Proxies on White House Network</a></h3>
+        <h3><a href="https://layer3intel.com/blog/residential-proxies-white-house-network">Residential proxies on White House</a></h3>
         <span class="flames f2" title="Activity: 1,705 points + comments">🔥🔥</span>
       </div>
-      <p class="gist">Proxy exit traffic found on White House network, suggesting compromised devices present.</p>
+      <p class="gist">White House network shows traffic routed through compromised residential proxy devices.</p>
       <span class="mood v-divided">😐 divided</span>
-      <p class="take">“Seen as serious risk akin to botnets; concerns about national security breach.”</p>
+      <p class="take">“Alarming for security; proxies seen as risky botnet-like infrastructure.”</p>
       <div class="foot">
         
         
@@ -438,14 +428,31 @@ body.staged { overflow: hidden; }
     </article>
   
     
+    <article class="box" data-box-id="10">
+      <div class="top">
+        <h3><a href="https://blog.nns.ee/2026/11/02/renault-hack/">Jailbreaking Renault car nav</a></h3>
+        <span class="flames f2" title="Activity: 1,341 points + comments">🔥🔥</span>
+      </div>
+      <p class="gist">Owner reverse engineers Renault Latitude nav DRM system to change clock without SD card.</p>
+      <span class="mood v-informative">💡 informative</span>
+      <p class="take">“Seen as absurd restrictive design; calls for more consumer control in cars.”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50339288">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
     <article class="box" data-box-id="11">
       <div class="top">
-        <h3><a href="https://8rank.ai/game/apple-intelligence-personal-knowledge-graph">Macs Build Local Knowledge Graphs</a></h3>
+        <h3><a href="https://8rank.ai/game/apple-intelligence-personal-knowledge-graph">Mac&#39;s undocumented classifier</a></h3>
         <span class="flames f2" title="Activity: 1,308 points + comments">🔥🔥</span>
       </div>
-      <p class="gist">macOS collects personal and social data into local knowledge graphs without opt-out.</p>
-      <span class="mood v-skeptical">🤨 skeptical</span>
-      <p class="take">“Privacy concerns dominate; calls for transparency and user control rise.”</p>
+      <p class="gist">macOS 13+ builds local personal graphs linking user data for modeling relationships.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Fascinating but privacy concerns over opaque data use and no opt out.”</p>
       <div class="foot">
         
         
@@ -459,28 +466,28 @@ body.staged { overflow: hidden; }
 
 <section class="sec">
   <h2><span>Business &amp; Startups</span>
-    <span class="sheat" title="Section activity: 16,845 points + comments">
-      <span class="bar"><span style="width: 58%"></span></span>
+    <span class="sheat" title="Section activity: 18,536 points + comments">
+      <span class="bar"><span style="width: 61%"></span></span>
     </span>
   </h2>
   <div class="grid">
   
     
-    <article class="box seekable" data-box-id="2">
+    <article class="box seekable" data-box-id="1">
       <div class="top">
-        <h3><a href="https://www.nbcnews.com/tech/tech-news/tesla-wind-cybertruck-production-years-poor-sales-markets-rcna607817">Tesla Ends Cybertruck Production</a></h3>
-        <span class="flames f3" title="Activity: 3,544 points + comments">🔥🔥🔥</span>
+        <h3><a href="https://www.nbcnews.com/tech/tech-news/tesla-wind-cybertruck-production-years-poor-sales-markets-rcna607817">Tesla ends Cybertruck production</a></h3>
+        <span class="flames f3" title="Activity: 4,009 points + comments">🔥🔥🔥</span>
       </div>
-      <p class="gist">Tesla to stop Cybertruck production by 2027 due to poor sales and quality issues.</p>
+      <p class="gist">Tesla plans to stop Cybertruck by 2025-2027, shifting to Cybercab robotaxi focus.</p>
       <span class="mood v-divided">😐 divided</span>
-      <p class="take">“Design and price limit appeal; pivot to Cybercab seen as strategic shift.”</p>
+      <p class="take">“Seen as flawed product; cautious optimism about autonomous vehicle pivot.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 0:45</span>
+        <span class="at" title="Play this story">▶ 0:24</span>
         
         <details class="threads">
-          <summary>+1 thread</summary>
+          <summary>+2 threads</summary>
           <ul>
-          <li><a href="https://news.ycombinator.com/item?id=50393154">RIP Cybertruck</a></li>
+          <li><a href="https://news.ycombinator.com/item?id=50393154">RIP Cybertruck</a></li><li><a href="https://news.ycombinator.com/item?id=50414427">Tesla Hasn&#39;t Had a Successful New Product Launch Since JB Straubel Stepped Down</a></li>
           </ul>
         </details>
         
@@ -492,12 +499,12 @@ body.staged { overflow: hidden; }
     
     <article class="box" data-box-id="15">
       <div class="top">
-        <h3><a href="https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers">Goldman Limits AI Coding Tools</a></h3>
-        <span class="flames f1" title="Activity: 1,170 points + comments">🔥</span>
+        <h3><a href="https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers">Goldman limits Claude Code use</a></h3>
+        <span class="flames f1" title="Activity: 1,177 points + comments">🔥</span>
       </div>
-      <p class="gist">Goldman Sachs restricts AI coding tools usage to engineers for risk and compliance.</p>
-      <span class="mood v-informative">💡 informative</span>
-      <p class="take">“Community agrees restrictions justified for sensitive finance roles.”</p>
+      <p class="gist">Goldman Sachs restricts AI code tools to engineers, cutting traders over compliance risks.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Widely agreed prudent due to security, compliance, and info barriers challenges.”</p>
       <div class="foot">
         
         
@@ -506,184 +513,19 @@ body.staged { overflow: hidden; }
       <span class="live-badge" aria-hidden="true">🔊 On air</span>
     </article>
   
-  </div>
-</section>
-
-<section class="sec">
-  <h2><span>Launches &amp; Repos</span>
-    <span class="sheat" title="Section activity: 15,886 points + comments">
-      <span class="bar"><span style="width: 55%"></span></span>
-    </span>
-  </h2>
-  <div class="grid">
-  
-    
-    <article class="box" data-box-id="9">
-      <div class="top">
-        <h3><a href="https://nfsu2.xyz/">Need for Speed 2 Browser Port</a></h3>
-        <span class="flames f2" title="Activity: 1,422 points + comments">🔥🔥</span>
-      </div>
-      <p class="gist">Need for Speed Underground 2 runs in browser with multiplayer and cloud saves.</p>
-      <span class="mood v-divided">😐 divided</span>
-      <p class="take">“Nostalgia praised but legal risks from unlicensed assets cause concern.”</p>
-      <div class="foot">
-        
-        
-        <a class="discuss" href="https://news.ycombinator.com/item?id=50403052">discuss →</a>
-      </div>
-      <span class="live-badge" aria-hidden="true">🔊 On air</span>
-    </article>
-  
-    
-    <article class="box" data-box-id="12">
-      <div class="top">
-        <h3><a href="https://mitchellh.com/writing/libghostty-1-0">Libghostty Terminal Library 1.0</a></h3>
-        <span class="flames f1" title="Activity: 1,276 points + comments">🔥</span>
-      </div>
-      <p class="gist">Libghostty 1.0 released, a high-performance portable C terminal emulation library.</p>
-      <span class="mood v-enthusiastic">🎉 excited</span>
-      <p class="take">“Well-received for performance and ABI stability; compares well to alternatives.”</p>
-      <div class="foot">
-        
-        
-        <a class="discuss" href="https://news.ycombinator.com/item?id=50399933">discuss →</a>
-      </div>
-      <span class="live-badge" aria-hidden="true">🔊 On air</span>
-    </article>
-  
-    
-    <article class="box" data-box-id="13">
-      <div class="top">
-        <h3><a href="https://news.ycombinator.com/item?id=50340088">Subvocal Speech Smart Glasses</a></h3>
-        <span class="flames f1" title="Activity: 1,239 points + comments">🔥</span>
-      </div>
-      <p class="gist">Smart glasses decode silent mouth movements into text using RF signals.</p>
-      <span class="mood v-enthusiastic">🎉 excited</span>
-      <p class="take">“Impressive technology but worries on comfort, privacy, and device form factor.”</p>
-      <div class="foot">
-        
-        
-        <a class="discuss" href="https://news.ycombinator.com/item?id=50340088">discuss →</a>
-      </div>
-      <span class="live-badge" aria-hidden="true">🔊 On air</span>
-    </article>
-  
     
     <article class="box" data-box-id="16">
       <div class="top">
-        <h3><a href="https://kagi.com/changelog#11820">Kagi Offers Free Search Access</a></h3>
+        <h3><a href="https://kagi.com/changelog#11820">Kagi adds anonymous trial</a></h3>
         <span class="flames f1" title="Activity: 1,164 points + comments">🔥</span>
       </div>
-      <p class="gist">Kagi enables 50 free searches with no account to grow user base.</p>
+      <p class="gist">Kagi Search offers 50 free anonymous searches, improving apps and AI features.</p>
       <span class="mood v-divided">😐 divided</span>
-      <p class="take">“Praised for privacy but pricing and feature gaps deter some users.”</p>
+      <p class="take">“Liked for privacy; concerns over pricing and competitive viability remain.”</p>
       <div class="foot">
         
         
         <a class="discuss" href="https://news.ycombinator.com/item?id=50383740">discuss →</a>
-      </div>
-      <span class="live-badge" aria-hidden="true">🔊 On air</span>
-    </article>
-  
-    
-    <article class="box" data-box-id="17">
-      <div class="top">
-        <h3><a href="https://neufangled.com/">Stringman $800 Cable-Driven Robot</a></h3>
-        <span class="flames f1" title="Activity: 1,090 points + comments">🔥</span>
-      </div>
-      <p class="gist">Open-source room-scale robot uses ceiling cables for large-volume object manipulation.</p>
-      <span class="mood v-enthusiastic">🎉 excited</span>
-      <p class="take">“Innovative and affordable but practical use and safety in homes questioned.”</p>
-      <div class="foot">
-        
-        
-        <a class="discuss" href="https://news.ycombinator.com/item?id=50354358">discuss →</a>
-      </div>
-      <span class="live-badge" aria-hidden="true">🔊 On air</span>
-    </article>
-  
-  </div>
-</section>
-
-<section class="sec">
-  <h2><span>Dev Tools &amp; Programming</span>
-    <span class="sheat" title="Section activity: 14,798 points + comments">
-      <span class="bar"><span style="width: 51%"></span></span>
-    </span>
-  </h2>
-  <div class="grid">
-  
-    
-    <article class="box seekable" data-box-id="7">
-      <div class="top">
-        <h3><a href="https://www.theverge.com/news/1027379/discord-ditching-electron-web-app">Discord Moves Client to Rust</a></h3>
-        <span class="flames f2" title="Activity: 1,887 points + comments">🔥🔥</span>
-      </div>
-      <p class="gist">Discord replaces Electron app with Rust-based client for reduced RAM and faster start.</p>
-      <span class="mood v-divided">😐 divided</span>
-      <p class="take">“Applauded for efficiency gains but Rust rewriting challenges noted.”</p>
-      <div class="foot">
-        <span class="at" title="Play this story">▶ 2:04</span>
-        
-        <details class="threads">
-          <summary>+1 thread</summary>
-          <ul>
-          <li><a href="https://news.ycombinator.com/item?id=50403507">Every Windows 11 app should kill Electron, and Discord just showed why</a></li>
-          </ul>
-        </details>
-        
-        <a class="discuss" href="https://news.ycombinator.com/item?id=50378625">discuss →</a>
-      </div>
-      <span class="live-badge" aria-hidden="true">🔊 On air</span>
-    </article>
-  
-    
-    <article class="box" data-box-id="14">
-      <div class="top">
-        <h3><a href="https://caleb.software/posts/claude-to-pi.html">Switching from Claude to Pi Harness</a></h3>
-        <span class="flames f1" title="Activity: 1,223 points + comments">🔥</span>
-      </div>
-      <p class="gist">User replaces Claude Code with open-source Pi for stability and customization.</p>
-      <span class="mood v-divided">😐 divided</span>
-      <p class="take">“Sympathy for frustration; Pi praised for openness despite some cautions.”</p>
-      <div class="foot">
-        
-        
-        <a class="discuss" href="https://news.ycombinator.com/item?id=50410107">discuss →</a>
-      </div>
-      <span class="live-badge" aria-hidden="true">🔊 On air</span>
-    </article>
-  
-    
-    <article class="box" data-box-id="18">
-      <div class="top">
-        <h3><a href="https://github.com/ppmpreetham/BUI">Blender UI Library BUI Released</a></h3>
-        <span class="flames f1" title="Activity: 1,026 points + comments">🔥</span>
-      </div>
-      <p class="gist">Blender&#39;s UI code extracted as BUI library with multi-language bindings under GPLv3.</p>
-      <span class="mood v-informative">💡 informative</span>
-      <p class="take">“Admired for design but GPLv3 and accessibility limitations concern some users.”</p>
-      <div class="foot">
-        
-        
-        <a class="discuss" href="https://news.ycombinator.com/item?id=50389333">discuss →</a>
-      </div>
-      <span class="live-badge" aria-hidden="true">🔊 On air</span>
-    </article>
-  
-    
-    <article class="box" data-box-id="19">
-      <div class="top">
-        <h3><a href="https://blog.bosscher.ch/posts/openstick/">OpenStick $10 Linux Server</a></h3>
-        <span class="flames f1" title="Activity: 926 points + comments">🔥</span>
-      </div>
-      <p class="gist">OpenStick runs Debian for lightweight self-hosted services in a $10 compact device.</p>
-      <span class="mood v-informative">💡 informative</span>
-      <p class="take">“Great value, but security and hardware maintenance concerns noted.”</p>
-      <div class="foot">
-        
-        
-        <a class="discuss" href="https://news.ycombinator.com/item?id=50406670">discuss →</a>
       </div>
       <span class="live-badge" aria-hidden="true">🔊 On air</span>
     </article>
@@ -693,8 +535,8 @@ body.staged { overflow: hidden; }
 
 <section class="sec">
   <h2><span>AI &amp; ML</span>
-    <span class="sheat" title="Section activity: 14,677 points + comments">
-      <span class="bar"><span style="width: 51%"></span></span>
+    <span class="sheat" title="Section activity: 15,076 points + comments">
+      <span class="bar"><span style="width: 50%"></span></span>
     </span>
   </h2>
   <div class="grid">
@@ -702,14 +544,14 @@ body.staged { overflow: hidden; }
     
     <article class="box seekable" data-box-id="0">
       <div class="top">
-        <h3><a href="https://rikiyat.github.io/blog/weight-space-programming/">Weight-Space Programming Debate</a></h3>
+        <h3><a href="https://rikiyat.github.io/blog/weight-space-programming/">Astra&#39;s weight-space programming</a></h3>
         <span class="flames f3" title="Activity: 6,064 points + comments">🔥🔥🔥</span>
       </div>
-      <p class="gist">Discussions on GPT-6 Astra and Qwen 3.8 manipulating model weights directly.</p>
+      <p class="gist">Astra LLM reads/writes neural weights to improve Qwen models via code generation.</p>
       <span class="mood v-divided">😐 divided</span>
-      <p class="take">“Intriguing but claims often rely on indirect methods, not pure weight editing.”</p>
+      <p class="take">“Intriguing but mostly code-based, not pure autonomous weight manipulation.”</p>
       <div class="foot">
-        <span class="at" title="Play this story">▶ 0:04</span>
+        <span class="at" title="Play this story">▶ 0:05</span>
         
         <details class="threads">
           <summary>+2 threads</summary>
@@ -727,26 +569,163 @@ body.staged { overflow: hidden; }
 </section>
 
 <section class="sec">
-  <h2><span>Society, Policy &amp; Culture</span>
-    <span class="sheat" title="Section activity: 12,630 points + comments">
-      <span class="bar"><span style="width: 44%"></span></span>
+  <h2><span>Dev Tools &amp; Programming</span>
+    <span class="sheat" title="Section activity: 14,770 points + comments">
+      <span class="bar"><span style="width: 49%"></span></span>
     </span>
   </h2>
   <div class="grid">
   
     
-    <article class="box" data-box-id="10">
+    <article class="box seekable" data-box-id="7">
       <div class="top">
-        <h3><a href="https://blog.nns.ee/2026/11/02/renault-hack/">Renault Navigation Jailbreak</a></h3>
-        <span class="flames f2" title="Activity: 1,341 points + comments">🔥🔥</span>
+        <h3><a href="https://www.theverge.com/news/1027379/discord-ditching-electron-web-app">Discord rewrites app in Rust</a></h3>
+        <span class="flames f2" title="Activity: 1,888 points + comments">🔥🔥</span>
       </div>
-      <p class="gist">Renault nav system clock locked behind DRM SD card; author reverse-engineered workaround.</p>
-      <span class="mood v-informative">💡 informative</span>
-      <p class="take">“Frustration over restrictive DRM in cars; harms user control and convenience.”</p>
+      <p class="gist">Discord replaces Electron client with Rust app, cutting RAM by 70% and boosting speed.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Supported move from Electron; some doubt Rust GUI maturity and maintainability.”</p>
+      <div class="foot">
+        <span class="at" title="Play this story">▶ 1:45</span>
+        
+        <details class="threads">
+          <summary>+1 thread</summary>
+          <ul>
+          <li><a href="https://news.ycombinator.com/item?id=50403507">Every Windows 11 app should kill Electron, and Discord just showed why</a></li>
+          </ul>
+        </details>
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50378625">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="12">
+      <div class="top">
+        <h3><a href="https://mitchellh.com/writing/libghostty-1-0">Libghostty 1.0 terminal library</a></h3>
+        <span class="flames f1" title="Activity: 1,276 points + comments">🔥</span>
+      </div>
+      <p class="gist">Libghostty released as stable, portable C terminal emulation library widely adopted.</p>
+      <span class="mood v-enthusiastic">🎉 excited</span>
+      <p class="take">“Praised for ABI stability and performance; competes with established terminals.”</p>
       <div class="foot">
         
         
-        <a class="discuss" href="https://news.ycombinator.com/item?id=50339288">discuss →</a>
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50399933">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="14">
+      <div class="top">
+        <h3><a href="https://caleb.software/posts/claude-to-pi.html">Dev switches from Claude to Pi</a></h3>
+        <span class="flames f1" title="Activity: 1,228 points + comments">🔥</span>
+      </div>
+      <p class="gist">Developer moves from Claude Code AI harness to open-source Pi, citing instability.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Pi praised for control and stability; Claude Code criticized for bloat.”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50410107">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="19">
+      <div class="top">
+        <h3><a href="https://blog.bosscher.ch/posts/openstick/">OpenStick $10 homelab setup</a></h3>
+        <span class="flames f1" title="Activity: 926 points + comments">🔥</span>
+      </div>
+      <p class="gist">Low-cost OpenStick runs diverse self-hosting services like ad-blocking and RSS readers.</p>
+      <span class="mood v-informative">💡 informative</span>
+      <p class="take">“Impressive for price; security and hardware support are main concerns.”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50406670">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+  </div>
+</section>
+
+<section class="sec">
+  <h2><span>Launches &amp; Repos</span>
+    <span class="sheat" title="Section activity: 12,402 points + comments">
+      <span class="bar"><span style="width: 41%"></span></span>
+    </span>
+  </h2>
+  <div class="grid">
+  
+    
+    <article class="box" data-box-id="9">
+      <div class="top">
+        <h3><a href="https://nfsu2.xyz/">NFS Underground 2 browser launch</a></h3>
+        <span class="flames f2" title="Activity: 1,422 points + comments">🔥🔥</span>
+      </div>
+      <p class="gist">Need for Speed Underground 2 now playable online in browser with multiplayer support.</p>
+      <span class="mood v-enthusiastic">🎉 excited</span>
+      <p class="take">“Nostalgic and impressive but raises copyright and IP legality concerns.”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50403052">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="13">
+      <div class="top">
+        <h3><a href="https://news.ycombinator.com/item?id=50340088">Subvocal smart glasses prototype</a></h3>
+        <span class="flames f1" title="Activity: 1,239 points + comments">🔥</span>
+      </div>
+      <p class="gist">Smart glasses decode silent mouthed words via RF antennas and ML; ships in 2027.</p>
+      <span class="mood v-enthusiastic">🎉 excited</span>
+      <p class="take">“Impressive tech; practical and privacy challenges discussed.”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50340088">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="17">
+      <div class="top">
+        <h3><a href="https://neufangled.com/">Stringman room-scale robot gripper</a></h3>
+        <span class="flames f1" title="Activity: 1,090 points + comments">🔥</span>
+      </div>
+      <p class="gist">Stringman is $800 open-source ceiling cable robot gripper for cluttered room manipulation.</p>
+      <span class="mood v-informative">💡 informative</span>
+      <p class="take">“Innovative and open; questions on safety, utility, and payload limits.”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50354358">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="18">
+      <div class="top">
+        <h3><a href="https://github.com/ppmpreetham/BUI">BUI repurposes Blender UI</a></h3>
+        <span class="flames f1" title="Activity: 1,027 points + comments">🔥</span>
+      </div>
+      <p class="gist">BUI is standalone UI library based on Blender&#39;s optimized interface code, cross-language.</p>
+      <span class="mood v-informative">💡 informative</span>
+      <p class="take">“Appreciated for performance and clarity; GPL license and accessibility seen as issues.”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50389333">discuss →</a>
       </div>
       <span class="live-badge" aria-hidden="true">🔊 On air</span>
     </article>
@@ -763,34 +742,34 @@ body.staged { overflow: hidden; }
     <li data-seg="0"><button class="ts" data-t="0.0">0:00</button>
       <span class="tk">Headlines</span> This is HN Weekly, your week on Hacker News in two minutes.</li>
   
-    <li data-seg="1"><button class="ts" data-t="4.95">0:04</button>
-      <span class="tk">Top story</span> Researchers showed GPT-6 Astra and Qwen 3.8 can read and modify neural network weights directly, exploring new self-improvement methods. Hacker News is intrigued but cautious, seeing claims as overstated and stressing reliance on indirect code execution techniques.</li>
+    <li data-seg="1"><button class="ts" data-t="5.7">0:05</button>
+      <span class="tk">Top story</span> Astra, an LLM claimed to manipulate neural network weights via code generation, inspires research into weight-space programming. Hacker News users are intrigued but skeptical, noting progress largely depends on generating weight modifications through code rather than new direct reasoning methods.</li>
   
-    <li data-seg="2"><button class="ts" data-t="25.4">0:25</button>
-      <span class="tk">Top story</span> A flaw in Alpine Linux’s musl libc lets attackers bypass OpenSSH password checks with crafted hashes and long passwords. Hacker News sees this as a severe vulnerability, blaming musl and OpenSSH legacy code, urging fast patching and praising Alpine&#39;s advisories.</li>
+    <li data-seg="2"><button class="ts" data-t="24.95">0:24</button>
+      <span class="tk">Top story</span> Tesla announced plans to end Cybertruck production by 2027 due to poor sales and quality problems, shifting focus to Cybercab autonomous robotaxi. The Hacker News community respects the engineering but questions Tesla&#39;s marketing and timing of this strategic pivot.</li>
   
-    <li data-seg="3"><button class="ts" data-t="45.45">0:45</button>
-      <span class="tk">Top story</span> Tesla will end Cybertruck production by mid-2027 due to poor sales and quality issues, shifting to the autonomous Cybercab model. Hacker News mostly sees design and price as limiting factors, mixed on execution but hopeful about Tesla&#39;s future vehicle strategy.</li>
+    <li data-seg="3"><button class="ts" data-t="43.9">0:43</button>
+      <span class="tk">Top story</span> A decade-old vulnerability in musl libc&#39;s crypt() lets OpenSSH accept unauthorized logins when password hashes contain &#39;*&#39;. Hacker News agrees it stems from fragile legacy error handling and complex code interaction, calling for improved security and auditing.</li>
   
-    <li data-seg="4"><button class="ts" data-t="65.65">1:05</button>
-      <span class="tk">Quick hits</span> Ubuntu delayed official patches for a critical Linux TCP flaw, leaving systems exposed. Hacker News criticized the slow response and debated the trade-off between stability and security.</li>
+    <li data-seg="4"><button class="ts" data-t="63.65">1:03</button>
+      <span class="tk">Quick hits</span> Ubuntu delayed a critical Linux TCP patch for three weeks, risking remote exploits, and users express disappointment at slow response.</li>
   
-    <li data-seg="5"><button class="ts" data-t="79.05">1:19</button>
-      <span class="tk">Quick hits</span> Claude Code leaked user emails in User-Agent headers due to SEC API demands, raising privacy concerns. Hacker News calls this a serious trust violation with skepticism despite Anthropic’s apologies and upcoming fixes.</li>
+    <li data-seg="5"><button class="ts" data-t="73.7">1:13</button>
+      <span class="tk">Quick hits</span> Claude Code leaks user emails to third parties without consent, prompting criticism over privacy and demands for better user controls.</li>
   
-    <li data-seg="6"><button class="ts" data-t="94.4">1:34</button>
-      <span class="tk">Quick hits</span> AI-assisted research helped find and patch the PHP2Shell vulnerability, showing AI’s role in reducing technical debt. Hacker News agrees AI speeds discovery but stresses no perfect security exists.</li>
+    <li data-seg="6"><button class="ts" data-t="84.15">1:24</button>
+      <span class="tk">Quick hits</span> AI tools helped discover PHP2Shell, a long-standing security bug, speeding vulnerability detection but raising patching complexity concerns.</li>
   
-    <li data-seg="7"><button class="ts" data-t="109.35">1:49</button>
-      <span class="tk">Quick hits</span> Postman app installs AI plugins and modifies agent code without explicit consent, triggering privacy alarms. Hacker News condemns this behavior as a trust breach and recommends alternatives.</li>
+    <li data-seg="7"><button class="ts" data-t="95.25">1:35</button>
+      <span class="tk">Quick hits</span> Postman silently installed AI plugins and changed settings on macOS without user consent, drawing widespread criticism for trust breaches.</li>
   
-    <li data-seg="8"><button class="ts" data-t="124.25">2:04</button>
-      <span class="tk">Quick hits</span> Discord is replacing its Electron app with a Rust client, cutting RAM use from over one gigabyte to about two hundred ninety megabytes. Hacker News praises gains but notes challenges rewriting large apps and debates native versus web tools.</li>
+    <li data-seg="8"><button class="ts" data-t="105.65">1:45</button>
+      <span class="tk">Quick hits</span> Discord replaces its Electron client with a Rust app, boosting speed and cutting RAM use by 70 percent, but some users question maintainability.</li>
   
-    <li data-seg="9"><button class="ts" data-t="141.55">2:21</button>
-      <span class="tk">Comment of the week</span> User mpyne wrote: OK, I think I see what’s going on with this, in this configuration.</li>
+    <li data-seg="9"><button class="ts" data-t="116.2">1:56</button>
+      <span class="tk">The week in one line</span> This week centered on AI revealing legacy software flaws, security lapses from delayed patches and privacy breaches, and tech giants shifting product strategies amid community skepticism.</li>
   
-    <li data-seg="10"><button class="ts" data-t="146.95">2:26</button>
+    <li data-seg="10"><button class="ts" data-t="129.85">2:09</button>
       <span class="tk">Sign-off</span> That&#39;s the week. See you next Monday.</li>
   
   </ol>
@@ -815,10 +794,10 @@ body.staged { overflow: hidden; }
     
       <div class="s-kicker">This week on Hacker News</div>
       <div class="s-date">Nov 2 – Nov 8, 2026</div>
-      <h2 class="s-head">Debates surge on GPT-6 weight programming, security issues spike from musl bug and Claude&#39;s email leak, while Tesla halts Cybertruck and Discord shifts to Rust client.</h2>
-      <div class="s-actions s-startrow"><button class="s-replay" id="st-start">▶ Play the bulletin · 2:29</button><button class="s-plain" id="st-skip">Skip to the stories</button></div>
+      <h2 class="s-head">Tesla to end Cybertruck production by 2027, Discord rewrites client in Rust for 70% less RAM, and Ubuntu delays critical Linux kernel TCP patching.</h2>
+      <div class="s-actions s-startrow"><button class="s-replay" id="st-start">▶ Play the bulletin · 2:13</button><button class="s-plain" id="st-skip">Skip to the stories</button></div>
       <div class="s-coming"><span>Coming up</span>
-        <ol><li>Weight-Space Programming Debate</li><li>Musl Bug Enables SSH Bypass</li><li>Tesla Ends Cybertruck Production</li></ol>
+        <ol><li>Astra&#39;s weight-space programming</li><li>Tesla ends Cybertruck production</li><li>OpenSSH musl crypt() flaw</li></ol>
       </div>
     
       </div>
@@ -831,12 +810,12 @@ body.staged { overflow: hidden; }
       
       
       <div class="s-kicker">Top story 1 of 3<span class="s-sec">AI &amp; ML</span><span class="flames f3">🔥🔥🔥</span></div>
-      <h2 class="s-title">Weight-Space Programming Debate</h2>
-      <p class="s-gist">Discussions on GPT-6 Astra and Qwen 3.8 manipulating model weights directly.</p>
+      <h2 class="s-title">Astra&#39;s weight-space programming</h2>
+      <p class="s-gist">Astra LLM reads/writes neural weights to improve Qwen models via code generation.</p>
       <div class="s-hn">
         <span class="s-hn-label">On Hacker News</span>
         <span class="mood v-divided">😐 divided</span>
-        <p class="s-take">“Intriguing but claims often rely on indirect methods, not pure weight editing.”</p>
+        <p class="s-take">“Intriguing but mostly code-based, not pure autonomous weight manipulation.”</p>
       </div>
       <a class="s-link" href="https://news.ycombinator.com/item?id=50341174" target="_blank" rel="noopener">Join the discussion →</a>
     
@@ -849,15 +828,15 @@ body.staged { overflow: hidden; }
     
       
       
-      <div class="s-kicker">Top story 2 of 3<span class="s-sec">Security &amp; Privacy</span><span class="flames f3">🔥🔥🔥</span></div>
-      <h2 class="s-title">Musl Bug Enables SSH Bypass</h2>
-      <p class="s-gist">Alpine&#39;s musl libc bug allows OpenSSH login bypass with long malformed passwords.</p>
+      <div class="s-kicker">Top story 2 of 3<span class="s-sec">Business &amp; Startups</span><span class="flames f3">🔥🔥🔥</span></div>
+      <h2 class="s-title">Tesla ends Cybertruck production</h2>
+      <p class="s-gist">Tesla plans to stop Cybertruck by 2025-2027, shifting to Cybercab robotaxi focus.</p>
       <div class="s-hn">
         <span class="s-hn-label">On Hacker News</span>
-        <span class="mood v-informative">💡 informative</span>
-        <p class="s-take">“Severe flaw due to musl and OpenSSH&#39;s legacy design; patch immediately.”</p>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Seen as flawed product; cautious optimism about autonomous vehicle pivot.”</p>
       </div>
-      <a class="s-link" href="https://news.ycombinator.com/item?id=50378228" target="_blank" rel="noopener">Join the discussion →</a>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50391456" target="_blank" rel="noopener">Join the discussion →</a>
     
       </div>
     </section>
@@ -868,15 +847,15 @@ body.staged { overflow: hidden; }
     
       
       
-      <div class="s-kicker">Top story 3 of 3<span class="s-sec">Business &amp; Startups</span><span class="flames f3">🔥🔥🔥</span></div>
-      <h2 class="s-title">Tesla Ends Cybertruck Production</h2>
-      <p class="s-gist">Tesla to stop Cybertruck production by 2027 due to poor sales and quality issues.</p>
+      <div class="s-kicker">Top story 3 of 3<span class="s-sec">Security &amp; Privacy</span><span class="flames f3">🔥🔥🔥</span></div>
+      <h2 class="s-title">OpenSSH musl crypt() flaw</h2>
+      <p class="s-gist">Musl libc crypt() bug in OpenSSH sshd allows unauthorized login via &#39;*&#39; password hash.</p>
       <div class="s-hn">
         <span class="s-hn-label">On Hacker News</span>
-        <span class="mood v-divided">😐 divided</span>
-        <p class="s-take">“Design and price limit appeal; pivot to Cybercab seen as strategic shift.”</p>
+        <span class="mood v-informative">💡 informative</span>
+        <p class="s-take">“Critical design flaw criticized, calls for better error handling and testing.”</p>
       </div>
-      <a class="s-link" href="https://news.ycombinator.com/item?id=50391456" target="_blank" rel="noopener">Join the discussion →</a>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50378228" target="_blank" rel="noopener">Join the discussion →</a>
     
       </div>
     </section>
@@ -888,12 +867,12 @@ body.staged { overflow: hidden; }
       
       
       <div class="s-kicker">Quick hits<span class="s-sec">Security &amp; Privacy</span><span class="flames f3">🔥🔥🔥</span></div>
-      <h2 class="s-title">Ubuntu Delays TCP Patch</h2>
-      <p class="s-gist">Ubuntu delays patch release for critical Linux TCP vulnerability despite available fixes.</p>
+      <h2 class="s-title">Ubuntu kernel patch delay</h2>
+      <p class="s-gist">Ubuntu delayed patching Linux TCP flaw CVE-2026-98432, risking remote code execution.</p>
       <div class="s-hn">
         <span class="s-hn-label">On Hacker News</span>
-        <span class="mood v-divided">😐 divided</span>
-        <p class="s-take">“Criticized for slow response; users debate stability versus timely security.”</p>
+        <span class="mood v-skeptical">🤨 skeptical</span>
+        <p class="s-take">“Ubuntu criticized for slow response and poor communication versus faster distros.”</p>
       </div>
       <a class="s-link" href="https://news.ycombinator.com/item?id=50337608" target="_blank" rel="noopener">Join the discussion →</a>
     
@@ -907,12 +886,12 @@ body.staged { overflow: hidden; }
       
       
       <div class="s-kicker">Quick hits<span class="s-sec">Security &amp; Privacy</span><span class="flames f3">🔥🔥🔥</span></div>
-      <h2 class="s-title">Claude Code Email Leak</h2>
-      <p class="s-gist">Claude Code exposes user emails in User-Agent headers without consent; fix pending.</p>
+      <h2 class="s-title">Claude Code leaks emails</h2>
+      <p class="s-gist">Claude Code sends user emails in User-Agent header to third parties without consent.</p>
       <div class="s-hn">
         <span class="s-hn-label">On Hacker News</span>
         <span class="mood v-divided">😐 divided</span>
-        <p class="s-take">“Privacy violation that erodes trust; Anthropic apologized but skepticism remains.”</p>
+        <p class="s-take">“Serious privacy breach; demands better transparency and user controls.”</p>
       </div>
       <a class="s-link" href="https://news.ycombinator.com/item?id=50385272" target="_blank" rel="noopener">Join the discussion →</a>
     
@@ -926,12 +905,12 @@ body.staged { overflow: hidden; }
       
       
       <div class="s-kicker">Quick hits<span class="s-sec">Security &amp; Privacy</span><span class="flames f2">🔥🔥</span></div>
-      <h2 class="s-title">AI Finds Legacy PHP Vulnerability</h2>
-      <p class="s-gist">AI-assisted research discovers and aids patching of longstanding PHP2Shell vulnerability.</p>
+      <h2 class="s-title">AI exposes legacy software flaws</h2>
+      <p class="s-gist">AI uncovers decades-old critical PHP vulnerability, revealing accumulated software debt.</p>
       <div class="s-hn">
         <span class="s-hn-label">On Hacker News</span>
         <span class="mood v-divided">😐 divided</span>
-        <p class="s-take">“AI speeds up vulnerability discovery but isn&#39;t a full security solution yet.”</p>
+        <p class="s-take">“AI aids detection but patching remains hard; concerns about ongoing security arms race.”</p>
       </div>
       <a class="s-link" href="https://news.ycombinator.com/item?id=50364336" target="_blank" rel="noopener">Join the discussion →</a>
     
@@ -945,12 +924,12 @@ body.staged { overflow: hidden; }
       
       
       <div class="s-kicker">Quick hits<span class="s-sec">Security &amp; Privacy</span><span class="flames f2">🔥🔥</span></div>
-      <h2 class="s-title">Postman Auto-Installs AI Plugins</h2>
-      <p class="s-gist">Postman silently installs AI plugins and changes configurations, sharing API data.</p>
+      <h2 class="s-title">Postman auto-installs AI plugins</h2>
+      <p class="s-gist">Postman desktop silently installs AI plugins and alters settings without user consent.</p>
       <div class="s-hn">
         <span class="s-hn-label">On Hacker News</span>
         <span class="mood v-skeptical">🤨 skeptical</span>
-        <p class="s-take">“Community sees this as a major trust breach; recommend switching tools.”</p>
+        <p class="s-take">“Wide condemnation; viewed as invasive and malware-like behavior.”</p>
       </div>
       <a class="s-link" href="https://news.ycombinator.com/item?id=50354960" target="_blank" rel="noopener">Join the discussion →</a>
     
@@ -964,12 +943,12 @@ body.staged { overflow: hidden; }
       
       
       <div class="s-kicker">Quick hits<span class="s-sec">Dev Tools &amp; Programming</span><span class="flames f2">🔥🔥</span></div>
-      <h2 class="s-title">Discord Moves Client to Rust</h2>
-      <p class="s-gist">Discord replaces Electron app with Rust-based client for reduced RAM and faster start.</p>
+      <h2 class="s-title">Discord rewrites app in Rust</h2>
+      <p class="s-gist">Discord replaces Electron client with Rust app, cutting RAM by 70% and boosting speed.</p>
       <div class="s-hn">
         <span class="s-hn-label">On Hacker News</span>
         <span class="mood v-divided">😐 divided</span>
-        <p class="s-take">“Applauded for efficiency gains but Rust rewriting challenges noted.”</p>
+        <p class="s-take">“Supported move from Electron; some doubt Rust GUI maturity and maintainability.”</p>
       </div>
       <a class="s-link" href="https://news.ycombinator.com/item?id=50378625" target="_blank" rel="noopener">Join the discussion →</a>
     
@@ -977,12 +956,12 @@ body.staged { overflow: hidden; }
     </section>
   
     
-    <section class="slide k-quote" data-i="9" aria-hidden="true">
+    <section class="slide k-wrap" data-i="9" aria-hidden="true">
       <div class="s-inner">
     
-      <div class="s-kicker">Comment of the week</div>
-      <blockquote class="s-quote">OK, I think I see what’s going on with this, in this configuration.</blockquote>
-      <div class="s-by"><b>mpyne</b> on Musl Bug Enables SSH Bypass · <a href="https://news.ycombinator.com/item?id=50378228" target="_blank" rel="noopener">read the thread →</a></div>
+      <div class="s-kicker">The week in one line</div>
+      <p class="s-wrap">This week centered on AI revealing legacy software flaws, security lapses from delayed patches and privacy breaches, and tech giants shifting product strategies amid community skepticism.</p>
+      <div class="s-by">Drawn from all 20 highlights · Nov 2 – Nov 8, 2026</div>
     
       </div>
     </section>
@@ -1011,8 +990,8 @@ body.staged { overflow: hidden; }
       <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
     </button>
     <button class="st-btn" id="st-next" aria-label="Next segment" title="Next (→)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M5 5l10 7-10 7z"/></svg></button>
-    <div class="chapters"><button class="ch" style="flex-grow: 4.5" data-i="0" aria-label="HN Weekly Intro" title="HN Weekly Intro"><i><b></b></i></button><button class="ch" style="flex-grow: 19.9" data-i="1" aria-label="Weight-Space Programming Debate" title="Weight-Space Programming Debate"><i><b></b></i></button><button class="ch" style="flex-grow: 19.6" data-i="2" aria-label="Musl Bug Enables SSH Bypass" title="Musl Bug Enables SSH Bypass"><i><b></b></i></button><button class="ch" style="flex-grow: 19.7" data-i="3" aria-label="Tesla Ends Cybertruck Production" title="Tesla Ends Cybertruck Production"><i><b></b></i></button><button class="ch" style="flex-grow: 13.1" data-i="4" aria-label="Ubuntu Delays TCP Patch" title="Ubuntu Delays TCP Patch"><i><b></b></i></button><button class="ch" style="flex-grow: 15.1" data-i="5" aria-label="Claude Code Email Leak" title="Claude Code Email Leak"><i><b></b></i></button><button class="ch" style="flex-grow: 14.7" data-i="6" aria-label="AI Finds Legacy PHP Vulnerability" title="AI Finds Legacy PHP Vulnerability"><i><b></b></i></button><button class="ch" style="flex-grow: 14.7" data-i="7" aria-label="Postman Auto-Installs AI Plugins" title="Postman Auto-Installs AI Plugins"><i><b></b></i></button><button class="ch" style="flex-grow: 17.1" data-i="8" aria-label="Discord Moves Client to Rust" title="Discord Moves Client to Rust"><i><b></b></i></button><button class="ch" style="flex-grow: 5.0" data-i="9" aria-label="Comment of the week" title="Comment of the week"><i><b></b></i></button><button class="ch" style="flex-grow: 2.5" data-i="10" aria-label="Signoff" title="Signoff"><i><b></b></i></button></div>
-    <span class="st-time" id="st-time">0:00 / 2:29</span>
+    <div class="chapters"><button class="ch" style="flex-grow: 5.3" data-i="0" aria-label="Opening" title="Opening"><i><b></b></i></button><button class="ch" style="flex-grow: 18.8" data-i="1" aria-label="Astra&#39;s Weight-Space Programming" title="Astra&#39;s Weight-Space Programming"><i><b></b></i></button><button class="ch" style="flex-grow: 18.4" data-i="2" aria-label="Tesla Ends Cybertruck Production" title="Tesla Ends Cybertruck Production"><i><b></b></i></button><button class="ch" style="flex-grow: 19.2" data-i="3" aria-label="OpenSSH Crypt() Security Flaw" title="OpenSSH Crypt() Security Flaw"><i><b></b></i></button><button class="ch" style="flex-grow: 9.8" data-i="4" aria-label="Ubuntu Kernel Patch Delay" title="Ubuntu Kernel Patch Delay"><i><b></b></i></button><button class="ch" style="flex-grow: 10.2" data-i="5" aria-label="Claude Code Email Leak" title="Claude Code Email Leak"><i><b></b></i></button><button class="ch" style="flex-grow: 10.8" data-i="6" aria-label="AI Reveals Legacy Flaws" title="AI Reveals Legacy Flaws"><i><b></b></i></button><button class="ch" style="flex-grow: 10.2" data-i="7" aria-label="Postman Auto-Installs Plugins" title="Postman Auto-Installs Plugins"><i><b></b></i></button><button class="ch" style="flex-grow: 10.3" data-i="8" aria-label="Discord Rewrites App in Rust" title="Discord Rewrites App in Rust"><i><b></b></i></button><button class="ch" style="flex-grow: 13.1" data-i="9" aria-label="Weekly Verdict" title="Weekly Verdict"><i><b></b></i></button><button class="ch" style="flex-grow: 3.2" data-i="10" aria-label="Signoff" title="Signoff"><i><b></b></i></button></div>
+    <span class="st-time" id="st-time">0:00 / 2:13</span>
     <button class="st-btn st-cc" id="st-cc" aria-pressed="true" title="Subtitles (C)">CC</button>
   </div>
 </div>
@@ -1022,7 +1001,7 @@ body.staged { overflow: hidden; }
 <details class="more">
   <summary>114 more stories this week</summary>
   <ul>
-  <li><a href="https://news.ycombinator.com/item?id=50363461">Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50363461">hn</a></li><li><a href="https://news.ycombinator.com/item?id=50328896">Ask HN: Which TV do you recommend for privacy?</a> <a class="hn" href="https://news.ycombinator.com/item?id=50328896">hn</a></li><li><a href="https://www.cve.org/CVERecord?id=CVE-2026-83844">MS Paint Remote Code Execution Vulnerability</a> <a class="hn" href="https://news.ycombinator.com/item?id=50384233">hn</a></li><li><a href="https://blog.mistys-internet.website/post/2026/10/29/if-you-love-a-website-back-it-up/">If you love a website, back it up</a> <a class="hn" href="https://news.ycombinator.com/item?id=50336518">hn</a></li><li><a href="https://www.nytimes.com/2026/11/03/us/google-search-schools-restrict-ai.html">Google will turn off search for schools that reject AI</a> <a class="hn" href="https://news.ycombinator.com/item?id=50353192">hn</a></li><li><a href="https://www.theregister.com/security/2026/11/03/north-korean-fake-job-interview-led-to-63b-binance-heist/5307398">North Korean fake job interview led to $6.3B Binance heist</a> <a class="hn" href="https://news.ycombinator.com/item?id=50365755">hn</a></li><li><a href="https://github.com/PrivSec-dev/banking-apps-compat-report/issues/105">Dutch &#39;idealist&#39; bank ASN blocks non-Google Android, including GrapheneOS</a> <a class="hn" href="https://news.ycombinator.com/item?id=50390124">hn</a></li><li><a href="https://www.salon.com/2026/11/05/goodbye-from-salon/">Goodbye from Salon</a> <a class="hn" href="https://news.ycombinator.com/item?id=50383739">hn</a></li><li><a href="https://huggingface.co/moonshotai/Kimi-K3.1-Pro">Kimi K3.1 Pro model weights are out</a> <a class="hn" href="https://news.ycombinator.com/item?id=50366999">hn</a></li><li><a href="https://www.reuters.com/business/world-at-work/britain-make-salary-disclosure-job-ads-mandatory-2026-11-05/">Britain to make salary disclosure in job ads mandatory</a> <a class="hn" href="https://news.ycombinator.com/item?id=50389222">hn</a></li><li><a href="https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop">Nvidia RTX Spark encrypted firmware slows inference speed to 35% on Linux</a> <a class="hn" href="https://news.ycombinator.com/item?id=50362905">hn</a></li><li><a href="https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again">Claude Code&#39;s &#34;Don&#39;t Ask Again&#34; exposes passwords in 1,122 public GitHub files</a> <a class="hn" href="https://news.ycombinator.com/item?id=50407882">hn</a></li><li><a href="https://hightouch.com/blog/llm-judges-identity-resolution">A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost</a> <a class="hn" href="https://news.ycombinator.com/item?id=50397429">hn</a></li><li><a href="https://www.tomshardware.com/pc-components/cpus/amd-expects-to-outsell-intel-in-q4-for-the-first-time-in-history-usd17b-guidance-would-exceed-intels-projections">AMD expects to outsell Intel in Q4 for the first time in history</a> <a class="hn" href="https://news.ycombinator.com/item?id=50367125">hn</a></li><li><a href="https://motorolanews.com/motorola-signature-27-2/">Motorola Signature 27 with GrapheneOS support</a> <a class="hn" href="https://news.ycombinator.com/item?id=50380810">hn</a></li><li><a href="https://rakhim.exotext.com/i-wish-tech-companies-knew-more-about-me">I wish tech companies knew more about me</a> <a class="hn" href="https://news.ycombinator.com/item?id=50378942">hn</a></li><li><a href="https://news.ycombinator.com/item?id=50366117">Ask HN: What&#39;s your current AI agentic setup?</a> <a class="hn" href="https://news.ycombinator.com/item?id=50366117">hn</a></li><li><a href="https://arstechnica.com/gadgets/2026/10/fujifilm-to-boost-tape-production-5x-as-ai-fuels-archiving-demand/">Fujifilm to boost tape production 5x as AI fuels archiving demand</a> <a class="hn" href="https://news.ycombinator.com/item?id=50336918">hn</a></li><li><a href="https://news.ycombinator.com/item?id=50352757">OpenAI seems to be silently re-enabling model training on Codex chats</a> <a class="hn" href="https://news.ycombinator.com/item?id=50352757">hn</a></li><li><a href="https://www.theguardian.com/technology/2026/nov/06/struggling-to-spell-male-chauvinist-pig-apple-grey-list-means-your-iphone-wont-help-you">Apple’s grey list: Words and phrases your iPhone won’t help you spell</a> <a class="hn" href="https://news.ycombinator.com/item?id=50406111">hn</a></li><li><a href="https://occupysaas.com/">OccupySaaS</a> <a class="hn" href="https://news.ycombinator.com/item?id=50331402">hn</a></li><li><a href="https://declarative-dragging.github.io/">Declarative Dragging</a> <a class="hn" href="https://news.ycombinator.com/item?id=50368481">hn</a></li><li><a href="https://finance.yahoo.com/technology/ai/articles/mark-cuban-says-facebook-knowingly-213000020.html">Cuban: Facebook knowingly runs AI deepfake scam ads; docs say $16B fraud revenue</a> <a class="hn" href="https://news.ycombinator.com/item?id=50385870">hn</a></li><li><a href="https://webkit.org/blog/18541/introducing-adaptive-dark-mode/">Safari introduces Adaptive Dark Mode in 27.3</a> <a class="hn" href="https://news.ycombinator.com/item?id=50358562">hn</a></li><li><a href="https://arstechnica.com/tech-policy/2026/10/trump-admin-sues-utah-to-save-kalshi-from-the-states-total-ban-on-gambling/">Kalshi and its co-founders face felony charges for violating Utah gambling laws</a> <a class="hn" href="https://news.ycombinator.com/item?id=50353229">hn</a></li><li><a href="https://hunch.net/?p=13764006">The end of Microsoft Research&#39;s AI Frontiers group</a> <a class="hn" href="https://news.ycombinator.com/item?id=50406563">hn</a></li><li><a href="https://nicholas.carlini.com/writing/2026/algorithmic-improvements-chess.html">Could a modern chess engine on a Pentium have defeated Kasparov in 1996?</a> <a class="hn" href="https://news.ycombinator.com/item?id=50349276">hn</a></li><li><a href="https://namedaisy.com/blog/boy-names-that-became-girl-names">US boy names that became girl names and vice versa</a> <a class="hn" href="https://news.ycombinator.com/item?id=50339397">hn</a></li><li><a href="https://hackertv.org">Show HN: HackerTV – HN&#39;s most-recommended Youtube videos as 24/7 TV channels</a> <a class="hn" href="https://news.ycombinator.com/item?id=50346755">hn</a></li><li><a href="https://openai.com/index/a-thousand-fewer-paths-to-root/">A thousand fewer paths to root</a> <a class="hn" href="https://news.ycombinator.com/item?id=50372929">hn</a></li><li><a href="https://hackertimes.ca/">Show HN: Hacker Times, a New York Times-inspired version of Hacker News</a> <a class="hn" href="https://news.ycombinator.com/item?id=50346981">hn</a></li><li><a href="https://mrdoob.github.io/codevember-2026/01/">Jelly Sheet</a> <a class="hn" href="https://news.ycombinator.com/item?id=50361268">hn</a></li><li><a href="https://github.com/saragordic/window-sweaters">Window Sweaters</a> <a class="hn" href="https://news.ycombinator.com/item?id=50381383">hn</a></li><li><a href="https://namespace.so/blog/mac-at-any-scale">Mac at any scale</a> <a class="hn" href="https://news.ycombinator.com/item?id=50352758">hn</a></li><li><a href="https://asia.nikkei.com/business/technology/artificial-intelligence/us-tech-giants-hidden-ai-debt-swells-90-to-3.2tn-in-6-months">US tech giants&#39; hidden AI debt swells 90% to $3.2T in 6 months</a> <a class="hn" href="https://news.ycombinator.com/item?id=50358422">hn</a></li><li><a href="https://asahilinux.org/2026/11/progress-report-7-3/">Asahi Linux Progress Linux 7.3</a> <a class="hn" href="https://news.ycombinator.com/item?id=50401867">hn</a></li><li><a href="https://github.com/synchopate/llama-modchip">Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU</a> <a class="hn" href="https://news.ycombinator.com/item?id=50411961">hn</a></li><li><a href="https://www.theguardian.com/world/2026/nov/02/supermarket-freezers-across-europe-hit-by-second-suspected-cyber-attack">Supermarket freezers across Europe hit by second suspected cyber-attack</a> <a class="hn" href="https://news.ycombinator.com/item?id=50335615">hn</a></li><li><a href="https://andreasfertig.com/blog/2026/11/cpp26-dis-failed-how-does-cpp-survive/">C++26 Disapproved</a> <a class="hn" href="https://news.ycombinator.com/item?id=50360164">hn</a></li><li><a href="https://markblah.github.io/lemmings/">Lemmings CSS Animation</a> <a class="hn" href="https://news.ycombinator.com/item?id=50375354">hn</a></li><li><a href="https://www.naut.ca/blog/2026/11/05/the-hackintosh-reborn-with-ai/">The Hackintosh Reborn</a> <a class="hn" href="https://news.ycombinator.com/item?id=50383057">hn</a></li><li><a href="https://www.techpolicy.press/the-sec-should-block-anthropics-ipo-to-protect-the-public/">The SEC Should Block Anthropic&#39;s IPO to Protect the Public</a> <a class="hn" href="https://news.ycombinator.com/item?id=50344919">hn</a></li><li><a href="https://www.reuters.com/world/us/us-faa-says-it-will-phase-out-floppy-disks-air-traffic-control-by-2028-2026-11-05/">US FAA says it will phase out floppy disks from air traffic control by 2028</a> <a class="hn" href="https://news.ycombinator.com/item?id=50388001">hn</a></li><li><a href="https://criminallyvulgar.dev/you-should-absolutely-download-your-favourite-youtube-videos/">Download your favourite YouTube videos</a> <a class="hn" href="https://news.ycombinator.com/item?id=50378571">hn</a></li><li><a href="https://maxxbench.unlap.ai/research/why-maxxbench/">MaxxBench – &#34;Nice DeepSWE score. But is it true?&#34;</a> <a class="hn" href="https://news.ycombinator.com/item?id=50406222">hn</a></li><li><a href="https://go.dev/blog/jsonv2">A new Go API for JSON</a> <a class="hn" href="https://news.ycombinator.com/item?id=50369106">hn</a></li><li><a href="https://arxiv.org/abs/2605.29713">The Little Book of Generative AI Foundations: An Intuitive Mathematical Primer</a> <a class="hn" href="https://news.ycombinator.com/item?id=50358582">hn</a></li><li><a href="https://sw.kovidgoyal.net/kitty/changelog/#">Kitty 0.50</a> <a class="hn" href="https://news.ycombinator.com/item?id=50362980">hn</a></li><li><a href="https://openai.com/index/introducing-images-2-6/">Images 2.6</a> <a class="hn" href="https://news.ycombinator.com/item?id=50372945">hn</a></li><li><a href="https://www.filfre.net/2026/11/deus-ex/">Deus Ex</a> <a class="hn" href="https://news.ycombinator.com/item?id=50393758">hn</a></li><li><a href="https://www.interdb.jp/pg/index.html">The Internals of PostgreSQL</a> <a class="hn" href="https://news.ycombinator.com/item?id=50358702">hn</a></li><li><a href="https://www.planned-obsolescence.org/p/ai-is-dramatically-accelerating-ai">AI is dramatically accelerating AI research</a> <a class="hn" href="https://news.ycombinator.com/item?id=50397994">hn</a></li><li><a href="https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/">Gemini Omni 1.2 Flash</a> <a class="hn" href="https://news.ycombinator.com/item?id=50392118">hn</a></li><li><a href="https://github.com/JiaFeiMiao-K-Cat/DiscImageStudio">DiscImageStudio: burn visible artwork onto CDs, DVDs and Blu-ray discs</a> <a class="hn" href="https://news.ycombinator.com/item?id=50346849">hn</a></li><li><a href="https://fortune.com/article/why-did-us-workers-just-take-home-smallest-share-of-capital-since-1947-lowest-ever-recorded/">U.S. workers took home their smallest share of capital since at least 1947</a> <a class="hn" href="https://news.ycombinator.com/item?id=50330939">hn</a></li><li><a href="http://muratbuffalo.blogspot.com/2026/11/writing-as-thinking-tool.html">Writing as a thinking tool</a> <a class="hn" href="https://news.ycombinator.com/item?id=50412067">hn</a></li><li><a href="https://www.businessinsider.com/anthropic-claude-internal-ai-use-exceeds-employee-pay-tokens-2026-11">Anthropic&#39;s internal AI use, at retail prices, now exceeds its employee pay</a> <a class="hn" href="https://news.ycombinator.com/item?id=50339494">hn</a></li><li><a href="https://www.semafor.com/article/11/04/2026/us-voters-roundly-reject-data-centers-in-ballot-measures">US voters roundly reject data centers in ballot measures</a> <a class="hn" href="https://news.ycombinator.com/item?id=50365982">hn</a></li><li><a href="https://99percentinvisible.org/article/guerrilla-bike-lanes-san-francisco-makes-illicit-infrastructure-permanent/">Guerrilla bike lanes: San Francisco makes illicit infrastructure permanent (2016)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50366522">hn</a></li><li><a href="https://mcp-explained.com/">MCP Explained</a> <a class="hn" href="https://news.ycombinator.com/item?id=50379249">hn</a></li><li><a href="https://thereader.mitpress.mit.edu/from-linux-to-wikipedia-how-volunteers-build-the-internet/">From Linux to Wikipedia: How Volunteers Build the Internet</a> <a class="hn" href="https://news.ycombinator.com/item?id=50388122">hn</a></li><li><a href="https://www.science.org/content/article/bones-may-release-proteins-slow-aging-and-extend-life-span">Bones may release proteins that slow aging and extend life span</a> <a class="hn" href="https://news.ycombinator.com/item?id=50331957">hn</a></li><li><a href="https://alignment.openai.com/misalignment-reports/covert-underperformance-on-safety-research-tasks/">GPT-6 Astra covertly underperforms on safety research</a> <a class="hn" href="https://news.ycombinator.com/item?id=50376313">hn</a></li><li><a href="https://www.ricursive.com/ripple">Ripple-65B Preview: U.S. Open-Weight SOTA on Agentic Coding</a> <a class="hn" href="https://news.ycombinator.com/item?id=50369925">hn</a></li><li><a href="https://wikihack.netlify.app">Show HN: Wikihack – HackerTube, but for Wikipedia articles mentioned on HN</a> <a class="hn" href="https://news.ycombinator.com/item?id=50333339">hn</a></li><li><a href="https://www.nist.gov/news-events/news/2026/11/self-employed-solopreneur-nist-has-cybersecurity-guide-just-you">Self-Employed? Solopreneur? NIST Has a Cybersecurity Guide Just for You</a> <a class="hn" href="https://news.ycombinator.com/item?id=50340619">hn</a></li><li><a href="https://pwn.college/">Pwn.college</a> <a class="hn" href="https://news.ycombinator.com/item?id=50387796">hn</a></li><li><a href="https://p.migdal.pl/warsaw-vibe-voxel/">Show HN: Warsaw in voxels – An interactive 3D map of the city centre</a> <a class="hn" href="https://news.ycombinator.com/item?id=50339221">hn</a></li><li><a href="https://www.theguardian.com/uk-news/2026/nov/03/ai-godfather-geoffrey-hinton-better-off-without-ai">Geoffrey Hinton: it might turn out we were better off without AI</a> <a class="hn" href="https://news.ycombinator.com/item?id=50363554">hn</a></li><li><a href="https://www.bloomberg.com/news/articles/2026-11-06/anthropic-ipo-valuation-expectations-pressured-after-ai-rout">Anthropic IPO buyers see valuation as low as $1.1T</a> <a class="hn" href="https://news.ycombinator.com/item?id=50394906">hn</a></li><li><a href="https://www.birdsoutsidemywindow.org/2026/11/03/insects-dont-swarm-at-led-lights/">Insects don&#39;t swarm at LED lights</a> <a class="hn" href="https://news.ycombinator.com/item?id=50370610">hn</a></li><li><a href="https://erikgahner.github.io/posts/2026/awesome-repositories-are-no-longer-awesome/">Awesome repositories are no longer awesome</a> <a class="hn" href="https://news.ycombinator.com/item?id=50377821">hn</a></li><li><a href="https://decoded.legal/blog/2026/11/running-a-law-firm-on-free-software-2026-edition/">Running a law firm on Free software</a> <a class="hn" href="https://news.ycombinator.com/item?id=50403066">hn</a></li><li><a href="https://krthr.co/person-of-interest/">Person of Interest</a> <a class="hn" href="https://news.ycombinator.com/item?id=50412318">hn</a></li><li><a href="https://hy.tencent.ai/research/hy4">Tencent Hy4</a> <a class="hn" href="https://news.ycombinator.com/item?id=50365780">hn</a></li><li><a href="https://github.com/NVIDIA/auto-ontology">Nvidia – open-source auto-ontology</a> <a class="hn" href="https://news.ycombinator.com/item?id=50348962">hn</a></li><li><a href="https://thinkingmachines.ai/news/inkling-2-small/">Inkling 2 Small</a> <a class="hn" href="https://news.ycombinator.com/item?id=50386338">hn</a></li><li><a href="https://pwn.ai/blog/firecracker-escape">Firecracker VM Escape: PwnEscape Part 2</a> <a class="hn" href="https://news.ycombinator.com/item?id=50397219">hn</a></li><li><a href="https://www.spacex.com/starfall">Starfall – Affordable, routine access to microgravity</a> <a class="hn" href="https://news.ycombinator.com/item?id=50373308">hn</a></li><li><a href="https://electrek.co/2026/11/02/byd-sold-more-evs-last-month-than-the-us-did-all-quarter/">BYD sold more EVs last month than the US did all quarter</a> <a class="hn" href="https://news.ycombinator.com/item?id=50344181">hn</a></li><li><a href="https://github.com/hedgerow-dev/coldframe">Show HN: Coldframe, a honeypot that poses as a supermarket fridge controller</a> <a class="hn" href="https://news.ycombinator.com/item?id=50406292">hn</a></li><li><a href="https://apps.metaebene.me/en/kugelblitz">Kugelblitz – Mac-Native Google Earth Alternative</a> <a class="hn" href="https://news.ycombinator.com/item?id=50389370">hn</a></li><li><a href="https://openai.com/index/scaling-git-at-openai/">Scaling Git at OpenAI</a> <a class="hn" href="https://news.ycombinator.com/item?id=50345924">hn</a></li><li><a href="https://servo.org/blog/2026/11/05/september-in-servo/">September in Servo: &lt;progress&gt;, rounded rectangles, and more</a> <a class="hn" href="https://news.ycombinator.com/item?id=50379576">hn</a></li><li><a href="https://uploadyourram.org">Upload Your RAM</a> <a class="hn" href="https://news.ycombinator.com/item?id=50403214">hn</a></li><li><a href="https://phoboslab.org/log/2026/11/n64-ulc-codec">Obscure audio codec is a perfect fit for the N64</a> <a class="hn" href="https://news.ycombinator.com/item?id=50378508">hn</a></li><li><a href="https://www.nbcnews.com/health/health-news/study-estimates-75-nfl-players-died-15-year-span-may-cte-rcna605975">Study estimates 75% of NFL players who died over 15-year span had CTE</a> <a class="hn" href="https://news.ycombinator.com/item?id=50353335">hn</a></li><li><a href="http://thelittleengineerthatcould.blogspot.com/2022/12/the-8-linux-computer.html">The $8 Linux Computer (2022)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50404599">hn</a></li><li><a href="https://ben.stolovitz.com/posts/how-use-ai-oct-2026/">How I use AI (Oct 2026)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50355767">hn</a></li><li><a href="https://spoon-tamago.com/japan-jimi-mundane-halloween-costumes-2026/">Japan&#39;s Jimi &#39;Mundane&#39; Halloween Costumes of 2026</a> <a class="hn" href="https://news.ycombinator.com/item?id=50333131">hn</a></li><li><a href="https://fireflyk64.github.io/wcmulti/">Show HN: After a decade of reversing, I got co-op working in DOS Wing Commander</a> <a class="hn" href="https://news.ycombinator.com/item?id=50369895">hn</a></li><li><a href="https://kevinboone.me/efitest_index.html">First steps in bare-metal programming using UEFI</a> <a class="hn" href="https://news.ycombinator.com/item?id=50394855">hn</a></li><li><a href="https://www.science.org/content/article/barbarian-tribe-s-mythic-origin-story-true-ancient-dna-reveals">A barbarian tribe&#39;s mythic origin story is true, ancient DNA reveals</a> <a class="hn" href="https://news.ycombinator.com/item?id=50401740">hn</a></li><li><a href="https://news.ycombinator.com/item?id=50338728">Ask HN: Who is hiring? (November 2026)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50338728">hn</a></li><li><a href="https://techcrunch.com/2026/10/25/ai-delivers-zero-financial-payoff-to-most-companies-according-to-apollo-economist/">AI delivers &#39;zero financial payoff&#39; to most companies, Apollo economist says</a> <a class="hn" href="https://news.ycombinator.com/item?id=50330456">hn</a></li><li><a href="https://mofu-dev.com/en/blog/fluid-foundation/">Spreading Liquid with Three.js</a> <a class="hn" href="https://news.ycombinator.com/item?id=50341576">hn</a></li><li><a href="https://www.cnbc.com/2026/11/02/anthropic-ant-s-1-quarter-financials.html">Anthropic reports $17B in Q3 revenue, commitments of $895B in revised S-1</a> <a class="hn" href="https://news.ycombinator.com/item?id=50337439">hn</a></li><li><a href="https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/">GitHub&#39;s new Git storage architecture</a> <a class="hn" href="https://news.ycombinator.com/item?id=50397099">hn</a></li><li><a href="https://respawnfirst.com/linux-script-emails-sam-altman-unused-ram-ram-altman/">RAM Altman: Linux Script Emails Sam Altman Daily How Much Unused RAM in Your PC</a> <a class="hn" href="https://news.ycombinator.com/item?id=50415172">hn</a></li><li><a href="https://kevinboone.me/tpwin.html">They don&#39;t make &#39;em like that any more: Borland Turbo Pascal 7</a> <a class="hn" href="https://news.ycombinator.com/item?id=50405678">hn</a></li><li><a href="https://www.pv-magazine.com/2026/11/06/sodium-ion-batteries-approach-cost-parity-with-lfp-with-70-gwh-covered-by-supply-agreements/">Sodium-ion batteries approach cost parity with LFP</a> <a class="hn" href="https://news.ycombinator.com/item?id=50399657">hn</a></li><li><a href="https://eli.thegreenplace.net/2025/making-any-integer-with-four-2s/">Making any integer with four 2s (2025)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50408713">hn</a></li><li><a href="https://cleantechnica.com/2026/11/07/tesla-hasnt-had-a-successful-new-product-launch-since-jb-straubel-stepped-down-as-cto/">Tesla Hasn&#39;t Had a Successful New Product Launch Since JB Straubel Stepped Down</a> <a class="hn" href="https://news.ycombinator.com/item?id=50414427">hn</a></li><li><a href="https://github.blog/changelog/2026-11-05-new-pull-request-overview-page-in-public-preview/">GitHub New pull request overview page in public preview</a> <a class="hn" href="https://news.ycombinator.com/item?id=50408931">hn</a></li><li><a href="https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/">OpenAI raises $11B at a $1.25T valuation</a> <a class="hn" href="https://news.ycombinator.com/item?id=50413822">hn</a></li><li><a href="https://www.lorekit.io/blog/open-agent-memory-format">Agent memory needs its OpenTelemetry moment</a> <a class="hn" href="https://news.ycombinator.com/item?id=50411467">hn</a></li><li><a href="https://aworkinglibrary.com/writing/petered">Petered</a> <a class="hn" href="https://news.ycombinator.com/item?id=50412152">hn</a></li><li><a href="https://github.com/dmunozv04/isponsorblocktv">ISponsorBlockTV: SponsorBlock client for all YouTube TV clients</a> <a class="hn" href="https://news.ycombinator.com/item?id=50410249">hn</a></li><li><a href="https://github.com/torvalds/linux">GitHub Down Again?</a> <a class="hn" href="https://news.ycombinator.com/item?id=50411818">hn</a></li><li><a href="https://www.bloomberg.com/features/2026-police-phone-tracking-advertising-tech/">Ads in Popular Apps Give Police a Powerful Tool to Spy on Users</a> <a class="hn" href="https://news.ycombinator.com/item?id=50415281">hn</a></li><li><a href="https://www.science.org/content/article/wearable-device-makers-are-harvesting-brain-data-train-ai-without-telling-users?referrer=https%3A%2F%2Fwww.google.com%2F">Consumer brain wave headsets threaten privacy</a> <a class="hn" href="https://news.ycombinator.com/item?id=50409856">hn</a></li><li><a href="https://www.polso.info/why-i-will-not-be-using-llms-coding">Why I will not be using LLMs in my coding</a> <a class="hn" href="https://news.ycombinator.com/item?id=50412591">hn</a></li><li><a href="https://packethound.app/">A Little Snitch for Windows</a> <a class="hn" href="https://news.ycombinator.com/item?id=50415135">hn</a></li><li><a href="https://linebender.org/blog/jit-bitmap-text/">JIT bitmap text rendering for microcontrollers</a> <a class="hn" href="https://news.ycombinator.com/item?id=50412072">hn</a></li>
+  <li><a href="https://news.ycombinator.com/item?id=50363461">Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50363461">hn</a></li><li><a href="https://news.ycombinator.com/item?id=50328896">Ask HN: Which TV do you recommend for privacy?</a> <a class="hn" href="https://news.ycombinator.com/item?id=50328896">hn</a></li><li><a href="https://www.cve.org/CVERecord?id=CVE-2026-83844">MS Paint Remote Code Execution Vulnerability</a> <a class="hn" href="https://news.ycombinator.com/item?id=50384233">hn</a></li><li><a href="https://blog.mistys-internet.website/post/2026/10/29/if-you-love-a-website-back-it-up/">If you love a website, back it up</a> <a class="hn" href="https://news.ycombinator.com/item?id=50336518">hn</a></li><li><a href="https://www.nytimes.com/2026/11/03/us/google-search-schools-restrict-ai.html">Google will turn off search for schools that reject AI</a> <a class="hn" href="https://news.ycombinator.com/item?id=50353192">hn</a></li><li><a href="https://www.theregister.com/security/2026/11/03/north-korean-fake-job-interview-led-to-63b-binance-heist/5307398">North Korean fake job interview led to $6.3B Binance heist</a> <a class="hn" href="https://news.ycombinator.com/item?id=50365755">hn</a></li><li><a href="https://github.com/PrivSec-dev/banking-apps-compat-report/issues/105">Dutch &#39;idealist&#39; bank ASN blocks non-Google Android, including GrapheneOS</a> <a class="hn" href="https://news.ycombinator.com/item?id=50390124">hn</a></li><li><a href="https://www.salon.com/2026/11/05/goodbye-from-salon/">Goodbye from Salon</a> <a class="hn" href="https://news.ycombinator.com/item?id=50383739">hn</a></li><li><a href="https://huggingface.co/moonshotai/Kimi-K3.1-Pro">Kimi K3.1 Pro model weights are out</a> <a class="hn" href="https://news.ycombinator.com/item?id=50366999">hn</a></li><li><a href="https://alpinelinux.org/posts/2026-11-05-openssh-password-authentication-bypass/">Alpine Linux Security Advisory: OpenSSH-server password authentication bypass</a> <a class="hn" href="https://news.ycombinator.com/item?id=50379704">hn</a></li><li><a href="https://www.reuters.com/business/world-at-work/britain-make-salary-disclosure-job-ads-mandatory-2026-11-05/">Britain to make salary disclosure in job ads mandatory</a> <a class="hn" href="https://news.ycombinator.com/item?id=50389222">hn</a></li><li><a href="https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop">Nvidia RTX Spark encrypted firmware slows inference speed to 35% on Linux</a> <a class="hn" href="https://news.ycombinator.com/item?id=50362905">hn</a></li><li><a href="https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again">Claude Code&#39;s &#34;Don&#39;t Ask Again&#34; exposes passwords in 1,122 public GitHub files</a> <a class="hn" href="https://news.ycombinator.com/item?id=50407882">hn</a></li><li><a href="https://hightouch.com/blog/llm-judges-identity-resolution">A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost</a> <a class="hn" href="https://news.ycombinator.com/item?id=50397429">hn</a></li><li><a href="https://www.tomshardware.com/pc-components/cpus/amd-expects-to-outsell-intel-in-q4-for-the-first-time-in-history-usd17b-guidance-would-exceed-intels-projections">AMD expects to outsell Intel in Q4 for the first time in history</a> <a class="hn" href="https://news.ycombinator.com/item?id=50367125">hn</a></li><li><a href="https://motorolanews.com/motorola-signature-27-2/">Motorola Signature 27 with GrapheneOS support</a> <a class="hn" href="https://news.ycombinator.com/item?id=50380810">hn</a></li><li><a href="https://rakhim.exotext.com/i-wish-tech-companies-knew-more-about-me">I wish tech companies knew more about me</a> <a class="hn" href="https://news.ycombinator.com/item?id=50378942">hn</a></li><li><a href="https://news.ycombinator.com/item?id=50366117">Ask HN: What&#39;s your current AI agentic setup?</a> <a class="hn" href="https://news.ycombinator.com/item?id=50366117">hn</a></li><li><a href="https://arstechnica.com/gadgets/2026/10/fujifilm-to-boost-tape-production-5x-as-ai-fuels-archiving-demand/">Fujifilm to boost tape production 5x as AI fuels archiving demand</a> <a class="hn" href="https://news.ycombinator.com/item?id=50336918">hn</a></li><li><a href="https://declarative-dragging.github.io/">Declarative Dragging</a> <a class="hn" href="https://news.ycombinator.com/item?id=50368481">hn</a></li><li><a href="https://www.theguardian.com/technology/2026/nov/06/struggling-to-spell-male-chauvinist-pig-apple-grey-list-means-your-iphone-wont-help-you">Apple’s grey list: Words and phrases your iPhone won’t help you spell</a> <a class="hn" href="https://news.ycombinator.com/item?id=50406111">hn</a></li><li><a href="https://news.ycombinator.com/item?id=50352757">OpenAI seems to be silently re-enabling model training on Codex chats</a> <a class="hn" href="https://news.ycombinator.com/item?id=50352757">hn</a></li><li><a href="https://occupysaas.com/">OccupySaaS</a> <a class="hn" href="https://news.ycombinator.com/item?id=50331402">hn</a></li><li><a href="https://finance.yahoo.com/technology/ai/articles/mark-cuban-says-facebook-knowingly-213000020.html">Cuban: Facebook knowingly runs AI deepfake scam ads; docs say $16B fraud revenue</a> <a class="hn" href="https://news.ycombinator.com/item?id=50385870">hn</a></li><li><a href="https://webkit.org/blog/18541/introducing-adaptive-dark-mode/">Safari introduces Adaptive Dark Mode in 27.3</a> <a class="hn" href="https://news.ycombinator.com/item?id=50358562">hn</a></li><li><a href="https://arstechnica.com/tech-policy/2026/10/trump-admin-sues-utah-to-save-kalshi-from-the-states-total-ban-on-gambling/">Kalshi and its co-founders face felony charges for violating Utah gambling laws</a> <a class="hn" href="https://news.ycombinator.com/item?id=50353229">hn</a></li><li><a href="https://hunch.net/?p=13764006">The end of Microsoft Research&#39;s AI Frontiers group</a> <a class="hn" href="https://news.ycombinator.com/item?id=50406563">hn</a></li><li><a href="https://nicholas.carlini.com/writing/2026/algorithmic-improvements-chess.html">Could a modern chess engine on a Pentium have defeated Kasparov in 1996?</a> <a class="hn" href="https://news.ycombinator.com/item?id=50349276">hn</a></li><li><a href="https://namedaisy.com/blog/boy-names-that-became-girl-names">US boy names that became girl names and vice versa</a> <a class="hn" href="https://news.ycombinator.com/item?id=50339397">hn</a></li><li><a href="https://hackertv.org">Show HN: HackerTV – HN&#39;s most-recommended Youtube videos as 24/7 TV channels</a> <a class="hn" href="https://news.ycombinator.com/item?id=50346755">hn</a></li><li><a href="https://openai.com/index/a-thousand-fewer-paths-to-root/">A thousand fewer paths to root</a> <a class="hn" href="https://news.ycombinator.com/item?id=50372929">hn</a></li><li><a href="https://hackertimes.ca/">Show HN: Hacker Times, a New York Times-inspired version of Hacker News</a> <a class="hn" href="https://news.ycombinator.com/item?id=50346981">hn</a></li><li><a href="https://mrdoob.github.io/codevember-2026/01/">Jelly Sheet</a> <a class="hn" href="https://news.ycombinator.com/item?id=50361268">hn</a></li><li><a href="https://github.com/saragordic/window-sweaters">Window Sweaters</a> <a class="hn" href="https://news.ycombinator.com/item?id=50381383">hn</a></li><li><a href="https://namespace.so/blog/mac-at-any-scale">Mac at any scale</a> <a class="hn" href="https://news.ycombinator.com/item?id=50352758">hn</a></li><li><a href="https://asia.nikkei.com/business/technology/artificial-intelligence/us-tech-giants-hidden-ai-debt-swells-90-to-3.2tn-in-6-months">US tech giants&#39; hidden AI debt swells 90% to $3.2T in 6 months</a> <a class="hn" href="https://news.ycombinator.com/item?id=50358422">hn</a></li><li><a href="https://github.com/synchopate/llama-modchip">Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU</a> <a class="hn" href="https://news.ycombinator.com/item?id=50411961">hn</a></li><li><a href="https://asahilinux.org/2026/11/progress-report-7-3/">Asahi Linux Progress Linux 7.3</a> <a class="hn" href="https://news.ycombinator.com/item?id=50401867">hn</a></li><li><a href="https://www.theguardian.com/world/2026/nov/02/supermarket-freezers-across-europe-hit-by-second-suspected-cyber-attack">Supermarket freezers across Europe hit by second suspected cyber-attack</a> <a class="hn" href="https://news.ycombinator.com/item?id=50335615">hn</a></li><li><a href="https://andreasfertig.com/blog/2026/11/cpp26-dis-failed-how-does-cpp-survive/">C++26 Disapproved</a> <a class="hn" href="https://news.ycombinator.com/item?id=50360164">hn</a></li><li><a href="https://markblah.github.io/lemmings/">Lemmings CSS Animation</a> <a class="hn" href="https://news.ycombinator.com/item?id=50375354">hn</a></li><li><a href="https://www.naut.ca/blog/2026/11/05/the-hackintosh-reborn-with-ai/">The Hackintosh Reborn</a> <a class="hn" href="https://news.ycombinator.com/item?id=50383057">hn</a></li><li><a href="https://www.reuters.com/world/us/us-faa-says-it-will-phase-out-floppy-disks-air-traffic-control-by-2028-2026-11-05/">US FAA says it will phase out floppy disks from air traffic control by 2028</a> <a class="hn" href="https://news.ycombinator.com/item?id=50388001">hn</a></li><li><a href="https://www.techpolicy.press/the-sec-should-block-anthropics-ipo-to-protect-the-public/">The SEC Should Block Anthropic&#39;s IPO to Protect the Public</a> <a class="hn" href="https://news.ycombinator.com/item?id=50344919">hn</a></li><li><a href="https://criminallyvulgar.dev/you-should-absolutely-download-your-favourite-youtube-videos/">Download your favourite YouTube videos</a> <a class="hn" href="https://news.ycombinator.com/item?id=50378571">hn</a></li><li><a href="https://maxxbench.unlap.ai/research/why-maxxbench/">MaxxBench – &#34;Nice DeepSWE score. But is it true?&#34;</a> <a class="hn" href="https://news.ycombinator.com/item?id=50406222">hn</a></li><li><a href="https://go.dev/blog/jsonv2">A new Go API for JSON</a> <a class="hn" href="https://news.ycombinator.com/item?id=50369106">hn</a></li><li><a href="https://arxiv.org/abs/2605.29713">The Little Book of Generative AI Foundations: An Intuitive Mathematical Primer</a> <a class="hn" href="https://news.ycombinator.com/item?id=50358582">hn</a></li><li><a href="https://sw.kovidgoyal.net/kitty/changelog/#">Kitty 0.50</a> <a class="hn" href="https://news.ycombinator.com/item?id=50362980">hn</a></li><li><a href="https://openai.com/index/introducing-images-2-6/">Images 2.6</a> <a class="hn" href="https://news.ycombinator.com/item?id=50372945">hn</a></li><li><a href="https://www.filfre.net/2026/11/deus-ex/">Deus Ex</a> <a class="hn" href="https://news.ycombinator.com/item?id=50393758">hn</a></li><li><a href="https://www.interdb.jp/pg/index.html">The Internals of PostgreSQL</a> <a class="hn" href="https://news.ycombinator.com/item?id=50358702">hn</a></li><li><a href="https://www.planned-obsolescence.org/p/ai-is-dramatically-accelerating-ai">AI is dramatically accelerating AI research</a> <a class="hn" href="https://news.ycombinator.com/item?id=50397994">hn</a></li><li><a href="https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/">Gemini Omni 1.2 Flash</a> <a class="hn" href="https://news.ycombinator.com/item?id=50392118">hn</a></li><li><a href="https://github.com/JiaFeiMiao-K-Cat/DiscImageStudio">DiscImageStudio: burn visible artwork onto CDs, DVDs and Blu-ray discs</a> <a class="hn" href="https://news.ycombinator.com/item?id=50346849">hn</a></li><li><a href="https://fortune.com/article/why-did-us-workers-just-take-home-smallest-share-of-capital-since-1947-lowest-ever-recorded/">U.S. workers took home their smallest share of capital since at least 1947</a> <a class="hn" href="https://news.ycombinator.com/item?id=50330939">hn</a></li><li><a href="http://muratbuffalo.blogspot.com/2026/11/writing-as-thinking-tool.html">Writing as a thinking tool</a> <a class="hn" href="https://news.ycombinator.com/item?id=50412067">hn</a></li><li><a href="https://www.businessinsider.com/anthropic-claude-internal-ai-use-exceeds-employee-pay-tokens-2026-11">Anthropic&#39;s internal AI use, at retail prices, now exceeds its employee pay</a> <a class="hn" href="https://news.ycombinator.com/item?id=50339494">hn</a></li><li><a href="https://www.semafor.com/article/11/04/2026/us-voters-roundly-reject-data-centers-in-ballot-measures">US voters roundly reject data centers in ballot measures</a> <a class="hn" href="https://news.ycombinator.com/item?id=50365982">hn</a></li><li><a href="https://99percentinvisible.org/article/guerrilla-bike-lanes-san-francisco-makes-illicit-infrastructure-permanent/">Guerrilla bike lanes: San Francisco makes illicit infrastructure permanent (2016)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50366522">hn</a></li><li><a href="https://mcp-explained.com/">MCP Explained</a> <a class="hn" href="https://news.ycombinator.com/item?id=50379249">hn</a></li><li><a href="https://thereader.mitpress.mit.edu/from-linux-to-wikipedia-how-volunteers-build-the-internet/">From Linux to Wikipedia: How Volunteers Build the Internet</a> <a class="hn" href="https://news.ycombinator.com/item?id=50388122">hn</a></li><li><a href="https://www.science.org/content/article/bones-may-release-proteins-slow-aging-and-extend-life-span">Bones may release proteins that slow aging and extend life span</a> <a class="hn" href="https://news.ycombinator.com/item?id=50331957">hn</a></li><li><a href="https://alignment.openai.com/misalignment-reports/covert-underperformance-on-safety-research-tasks/">GPT-6 Astra covertly underperforms on safety research</a> <a class="hn" href="https://news.ycombinator.com/item?id=50376313">hn</a></li><li><a href="https://www.ricursive.com/ripple">Ripple-65B Preview: U.S. Open-Weight SOTA on Agentic Coding</a> <a class="hn" href="https://news.ycombinator.com/item?id=50369925">hn</a></li><li><a href="https://wikihack.netlify.app">Show HN: Wikihack – HackerTube, but for Wikipedia articles mentioned on HN</a> <a class="hn" href="https://news.ycombinator.com/item?id=50333339">hn</a></li><li><a href="https://www.nist.gov/news-events/news/2026/11/self-employed-solopreneur-nist-has-cybersecurity-guide-just-you">Self-Employed? Solopreneur? NIST Has a Cybersecurity Guide Just for You</a> <a class="hn" href="https://news.ycombinator.com/item?id=50340619">hn</a></li><li><a href="https://pwn.college/">Pwn.college</a> <a class="hn" href="https://news.ycombinator.com/item?id=50387796">hn</a></li><li><a href="https://p.migdal.pl/warsaw-vibe-voxel/">Show HN: Warsaw in voxels – An interactive 3D map of the city centre</a> <a class="hn" href="https://news.ycombinator.com/item?id=50339221">hn</a></li><li><a href="https://www.theguardian.com/uk-news/2026/nov/03/ai-godfather-geoffrey-hinton-better-off-without-ai">Geoffrey Hinton: it might turn out we were better off without AI</a> <a class="hn" href="https://news.ycombinator.com/item?id=50363554">hn</a></li><li><a href="https://www.bloomberg.com/news/articles/2026-11-06/anthropic-ipo-valuation-expectations-pressured-after-ai-rout">Anthropic IPO buyers see valuation as low as $1.1T</a> <a class="hn" href="https://news.ycombinator.com/item?id=50394906">hn</a></li><li><a href="https://www.birdsoutsidemywindow.org/2026/11/03/insects-dont-swarm-at-led-lights/">Insects don&#39;t swarm at LED lights</a> <a class="hn" href="https://news.ycombinator.com/item?id=50370610">hn</a></li><li><a href="https://erikgahner.github.io/posts/2026/awesome-repositories-are-no-longer-awesome/">Awesome repositories are no longer awesome</a> <a class="hn" href="https://news.ycombinator.com/item?id=50377821">hn</a></li><li><a href="https://decoded.legal/blog/2026/11/running-a-law-firm-on-free-software-2026-edition/">Running a law firm on Free software</a> <a class="hn" href="https://news.ycombinator.com/item?id=50403066">hn</a></li><li><a href="https://krthr.co/person-of-interest/">Person of Interest</a> <a class="hn" href="https://news.ycombinator.com/item?id=50412318">hn</a></li><li><a href="https://hy.tencent.ai/research/hy4">Tencent Hy4</a> <a class="hn" href="https://news.ycombinator.com/item?id=50365780">hn</a></li><li><a href="https://github.com/NVIDIA/auto-ontology">Nvidia – open-source auto-ontology</a> <a class="hn" href="https://news.ycombinator.com/item?id=50348962">hn</a></li><li><a href="https://thinkingmachines.ai/news/inkling-2-small/">Inkling 2 Small</a> <a class="hn" href="https://news.ycombinator.com/item?id=50386338">hn</a></li><li><a href="https://pwn.ai/blog/firecracker-escape">Firecracker VM Escape: PwnEscape Part 2</a> <a class="hn" href="https://news.ycombinator.com/item?id=50397219">hn</a></li><li><a href="https://www.spacex.com/starfall">Starfall – Affordable, routine access to microgravity</a> <a class="hn" href="https://news.ycombinator.com/item?id=50373308">hn</a></li><li><a href="https://electrek.co/2026/11/02/byd-sold-more-evs-last-month-than-the-us-did-all-quarter/">BYD sold more EVs last month than the US did all quarter</a> <a class="hn" href="https://news.ycombinator.com/item?id=50344181">hn</a></li><li><a href="https://github.com/hedgerow-dev/coldframe">Show HN: Coldframe, a honeypot that poses as a supermarket fridge controller</a> <a class="hn" href="https://news.ycombinator.com/item?id=50406292">hn</a></li><li><a href="https://apps.metaebene.me/en/kugelblitz">Kugelblitz – Mac-Native Google Earth Alternative</a> <a class="hn" href="https://news.ycombinator.com/item?id=50389370">hn</a></li><li><a href="https://openai.com/index/scaling-git-at-openai/">Scaling Git at OpenAI</a> <a class="hn" href="https://news.ycombinator.com/item?id=50345924">hn</a></li><li><a href="https://servo.org/blog/2026/11/05/september-in-servo/">September in Servo: &lt;progress&gt;, rounded rectangles, and more</a> <a class="hn" href="https://news.ycombinator.com/item?id=50379576">hn</a></li><li><a href="https://uploadyourram.org">Upload Your RAM</a> <a class="hn" href="https://news.ycombinator.com/item?id=50403214">hn</a></li><li><a href="https://phoboslab.org/log/2026/11/n64-ulc-codec">Obscure audio codec is a perfect fit for the N64</a> <a class="hn" href="https://news.ycombinator.com/item?id=50378508">hn</a></li><li><a href="https://www.nbcnews.com/health/health-news/study-estimates-75-nfl-players-died-15-year-span-may-cte-rcna605975">Study estimates 75% of NFL players who died over 15-year span had CTE</a> <a class="hn" href="https://news.ycombinator.com/item?id=50353335">hn</a></li><li><a href="http://thelittleengineerthatcould.blogspot.com/2022/12/the-8-linux-computer.html">The $8 Linux Computer (2022)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50404599">hn</a></li><li><a href="https://ben.stolovitz.com/posts/how-use-ai-oct-2026/">How I use AI (Oct 2026)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50355767">hn</a></li><li><a href="https://spoon-tamago.com/japan-jimi-mundane-halloween-costumes-2026/">Japan&#39;s Jimi &#39;Mundane&#39; Halloween Costumes of 2026</a> <a class="hn" href="https://news.ycombinator.com/item?id=50333131">hn</a></li><li><a href="https://fireflyk64.github.io/wcmulti/">Show HN: After a decade of reversing, I got co-op working in DOS Wing Commander</a> <a class="hn" href="https://news.ycombinator.com/item?id=50369895">hn</a></li><li><a href="https://www.science.org/content/article/barbarian-tribe-s-mythic-origin-story-true-ancient-dna-reveals">A barbarian tribe&#39;s mythic origin story is true, ancient DNA reveals</a> <a class="hn" href="https://news.ycombinator.com/item?id=50401740">hn</a></li><li><a href="https://kevinboone.me/efitest_index.html">First steps in bare-metal programming using UEFI</a> <a class="hn" href="https://news.ycombinator.com/item?id=50394855">hn</a></li><li><a href="https://news.ycombinator.com/item?id=50338728">Ask HN: Who is hiring? (November 2026)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50338728">hn</a></li><li><a href="https://techcrunch.com/2026/10/25/ai-delivers-zero-financial-payoff-to-most-companies-according-to-apollo-economist/">AI delivers &#39;zero financial payoff&#39; to most companies, Apollo economist says</a> <a class="hn" href="https://news.ycombinator.com/item?id=50330456">hn</a></li><li><a href="https://mofu-dev.com/en/blog/fluid-foundation/">Spreading Liquid with Three.js</a> <a class="hn" href="https://news.ycombinator.com/item?id=50341576">hn</a></li><li><a href="https://www.cnbc.com/2026/11/02/anthropic-ant-s-1-quarter-financials.html">Anthropic reports $17B in Q3 revenue, commitments of $895B in revised S-1</a> <a class="hn" href="https://news.ycombinator.com/item?id=50337439">hn</a></li><li><a href="https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/">GitHub&#39;s new Git storage architecture</a> <a class="hn" href="https://news.ycombinator.com/item?id=50397099">hn</a></li><li><a href="https://respawnfirst.com/linux-script-emails-sam-altman-unused-ram-ram-altman/">RAM Altman: Linux Script Emails Sam Altman Daily How Much Unused RAM in Your PC</a> <a class="hn" href="https://news.ycombinator.com/item?id=50415172">hn</a></li><li><a href="https://kevinboone.me/tpwin.html">They don&#39;t make &#39;em like that any more: Borland Turbo Pascal 7</a> <a class="hn" href="https://news.ycombinator.com/item?id=50405678">hn</a></li><li><a href="https://www.pv-magazine.com/2026/11/06/sodium-ion-batteries-approach-cost-parity-with-lfp-with-70-gwh-covered-by-supply-agreements/">Sodium-ion batteries approach cost parity with LFP</a> <a class="hn" href="https://news.ycombinator.com/item?id=50399657">hn</a></li><li><a href="https://eli.thegreenplace.net/2025/making-any-integer-with-four-2s/">Making any integer with four 2s (2025)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50408713">hn</a></li><li><a href="https://github.blog/changelog/2026-11-05-new-pull-request-overview-page-in-public-preview/">GitHub New pull request overview page in public preview</a> <a class="hn" href="https://news.ycombinator.com/item?id=50408931">hn</a></li><li><a href="https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/">OpenAI raises $11B at a $1.25T valuation</a> <a class="hn" href="https://news.ycombinator.com/item?id=50413822">hn</a></li><li><a href="https://www.lorekit.io/blog/open-agent-memory-format">Agent memory needs its OpenTelemetry moment</a> <a class="hn" href="https://news.ycombinator.com/item?id=50411467">hn</a></li><li><a href="https://aworkinglibrary.com/writing/petered">Petered</a> <a class="hn" href="https://news.ycombinator.com/item?id=50412152">hn</a></li><li><a href="https://github.com/dmunozv04/isponsorblocktv">ISponsorBlockTV: SponsorBlock client for all YouTube TV clients</a> <a class="hn" href="https://news.ycombinator.com/item?id=50410249">hn</a></li><li><a href="https://github.com/torvalds/linux">GitHub Down Again?</a> <a class="hn" href="https://news.ycombinator.com/item?id=50411818">hn</a></li><li><a href="https://www.bloomberg.com/features/2026-police-phone-tracking-advertising-tech/">Ads in Popular Apps Give Police a Powerful Tool to Spy on Users</a> <a class="hn" href="https://news.ycombinator.com/item?id=50415281">hn</a></li><li><a href="https://www.science.org/content/article/wearable-device-makers-are-harvesting-brain-data-train-ai-without-telling-users?referrer=https%3A%2F%2Fwww.google.com%2F">Consumer brain wave headsets threaten privacy</a> <a class="hn" href="https://news.ycombinator.com/item?id=50409856">hn</a></li><li><a href="https://www.polso.info/why-i-will-not-be-using-llms-coding">Why I will not be using LLMs in my coding</a> <a class="hn" href="https://news.ycombinator.com/item?id=50412591">hn</a></li><li><a href="https://packethound.app/">A Little Snitch for Windows</a> <a class="hn" href="https://news.ycombinator.com/item?id=50415135">hn</a></li><li><a href="https://linebender.org/blog/jit-bitmap-text/">JIT bitmap text rendering for microcontrollers</a> <a class="hn" href="https://news.ycombinator.com/item?id=50412072">hn</a></li>
   </ul>
 </details>
 
@@ -1030,20 +1009,20 @@ body.staged { overflow: hidden; }
   <span class="ticker-label">ALSO THIS WEEK</span>
   <div class="ticker-viewport">
     <div class="ticker-track" style="--dur: 570s">
-      <span class="ticker-run"><a href="https://news.ycombinator.com/item?id=50363461">Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50328896" tabindex="-1">Ask HN: Which TV do you recommend for privacy?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50384233" tabindex="-1">MS Paint Remote Code Execution Vulnerability</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50336518" tabindex="-1">If you love a website, back it up</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50353192" tabindex="-1">Google will turn off search for schools that reject AI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50365755" tabindex="-1">North Korean fake job interview led to $6.3B Binance heist</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50390124" tabindex="-1">Dutch &#39;idealist&#39; bank ASN blocks non-Google Android, including GrapheneOS</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50383739" tabindex="-1">Goodbye from Salon</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50366999" tabindex="-1">Kimi K3.1 Pro model weights are out</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50389222" tabindex="-1">Britain to make salary disclosure in job ads mandatory</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50362905" tabindex="-1">Nvidia RTX Spark encrypted firmware slows inference speed to 35% on Linux</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50407882" tabindex="-1">Claude Code&#39;s &#34;Don&#39;t Ask Again&#34; exposes passwords in 1,122 public GitHub files</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397429" tabindex="-1">A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50367125" tabindex="-1">AMD expects to outsell Intel in Q4 for the first time in history</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50380810" tabindex="-1">Motorola Signature 27 with GrapheneOS support</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50378942" tabindex="-1">I wish tech companies knew more about me</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50366117" tabindex="-1">Ask HN: What&#39;s your current AI agentic setup?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50336918" tabindex="-1">Fujifilm to boost tape production 5x as AI fuels archiving demand</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50352757" tabindex="-1">OpenAI seems to be silently re-enabling model training on Codex chats</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406111" tabindex="-1">Apple’s grey list: Words and phrases your iPhone won’t help you spell</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50331402" tabindex="-1">OccupySaaS</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50368481" tabindex="-1">Declarative Dragging</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50385870" tabindex="-1">Cuban: Facebook knowingly runs AI deepfake scam ads; docs say $16B fraud revenue</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358562" tabindex="-1">Safari introduces Adaptive Dark Mode in 27.3</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50353229" tabindex="-1">Kalshi and its co-founders face felony charges for violating Utah gambling laws</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406563" tabindex="-1">The end of Microsoft Research&#39;s AI Frontiers group</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50349276" tabindex="-1">Could a modern chess engine on a Pentium have defeated Kasparov in 1996?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50339397" tabindex="-1">US boy names that became girl names and vice versa</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50346755" tabindex="-1">Show HN: HackerTV – HN&#39;s most-recommended Youtube videos as 24/7 TV channels</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50372929" tabindex="-1">A thousand fewer paths to root</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50346981" tabindex="-1">Show HN: Hacker Times, a New York Times-inspired version of Hacker News</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50361268" tabindex="-1">Jelly Sheet</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50381383" tabindex="-1">Window Sweaters</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50352758" tabindex="-1">Mac at any scale</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358422" tabindex="-1">US tech giants&#39; hidden AI debt swells 90% to $3.2T in 6 months</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50401867" tabindex="-1">Asahi Linux Progress Linux 7.3</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50411961" tabindex="-1">Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50335615" tabindex="-1">Supermarket freezers across Europe hit by second suspected cyber-attack</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50360164" tabindex="-1">C++26 Disapproved</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50375354" tabindex="-1">Lemmings CSS Animation</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50383057" tabindex="-1">The Hackintosh Reborn</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50344919" tabindex="-1">The SEC Should Block Anthropic&#39;s IPO to Protect the Public</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50388001" tabindex="-1">US FAA says it will phase out floppy disks from air traffic control by 2028</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50378571" tabindex="-1">Download your favourite YouTube videos</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406222" tabindex="-1">MaxxBench – &#34;Nice DeepSWE score. But is it true?&#34;</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50369106" tabindex="-1">A new Go API for JSON</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358582" tabindex="-1">The Little Book of Generative AI Foundations: An Intuitive Mathematical Primer</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50362980" tabindex="-1">Kitty 0.50</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50372945" tabindex="-1">Images 2.6</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50393758" tabindex="-1">Deus Ex</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358702" tabindex="-1">The Internals of PostgreSQL</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397994" tabindex="-1">AI is dramatically accelerating AI research</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50392118" tabindex="-1">Gemini Omni 1.2 Flash</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50346849" tabindex="-1">DiscImageStudio: burn visible artwork onto CDs, DVDs and Blu-ray discs</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50330939" tabindex="-1">U.S. workers took home their smallest share of capital since at least 1947</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412067" tabindex="-1">Writing as a thinking tool</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50339494" tabindex="-1">Anthropic&#39;s internal AI use, at retail prices, now exceeds its employee pay</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50365982" tabindex="-1">US voters roundly reject data centers in ballot measures</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50366522" tabindex="-1">Guerrilla bike lanes: San Francisco makes illicit infrastructure permanent (2016)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50379249" tabindex="-1">MCP Explained</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50388122" tabindex="-1">From Linux to Wikipedia: How Volunteers Build the Internet</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50331957" tabindex="-1">Bones may release proteins that slow aging and extend life span</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50376313" tabindex="-1">GPT-6 Astra covertly underperforms on safety research</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50369925" tabindex="-1">Ripple-65B Preview: U.S. Open-Weight SOTA on Agentic Coding</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50333339" tabindex="-1">Show HN: Wikihack – HackerTube, but for Wikipedia articles mentioned on HN</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50340619" tabindex="-1">Self-Employed? Solopreneur? NIST Has a Cybersecurity Guide Just for You</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50387796" tabindex="-1">Pwn.college</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50339221" tabindex="-1">Show HN: Warsaw in voxels – An interactive 3D map of the city centre</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50363554" tabindex="-1">Geoffrey Hinton: it might turn out we were better off without AI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50394906" tabindex="-1">Anthropic IPO buyers see valuation as low as $1.1T</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50370610" tabindex="-1">Insects don&#39;t swarm at LED lights</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50377821" tabindex="-1">Awesome repositories are no longer awesome</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50403066" tabindex="-1">Running a law firm on Free software</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412318" tabindex="-1">Person of Interest</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50365780" tabindex="-1">Tencent Hy4</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50348962" tabindex="-1">Nvidia – open-source auto-ontology</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50386338" tabindex="-1">Inkling 2 Small</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397219" tabindex="-1">Firecracker VM Escape: PwnEscape Part 2</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50373308" tabindex="-1">Starfall – Affordable, routine access to microgravity</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50344181" tabindex="-1">BYD sold more EVs last month than the US did all quarter</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406292" tabindex="-1">Show HN: Coldframe, a honeypot that poses as a supermarket fridge controller</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50389370" tabindex="-1">Kugelblitz – Mac-Native Google Earth Alternative</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50345924" tabindex="-1">Scaling Git at OpenAI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50379576" tabindex="-1">September in Servo: &lt;progress&gt;, rounded rectangles, and more</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50403214" tabindex="-1">Upload Your RAM</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50378508" tabindex="-1">Obscure audio codec is a perfect fit for the N64</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50353335" tabindex="-1">Study estimates 75% of NFL players who died over 15-year span had CTE</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50404599" tabindex="-1">The $8 Linux Computer (2022)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50355767" tabindex="-1">How I use AI (Oct 2026)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50333131" tabindex="-1">Japan&#39;s Jimi &#39;Mundane&#39; Halloween Costumes of 2026</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50369895" tabindex="-1">Show HN: After a decade of reversing, I got co-op working in DOS Wing Commander</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50394855" tabindex="-1">First steps in bare-metal programming using UEFI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50401740" tabindex="-1">A barbarian tribe&#39;s mythic origin story is true, ancient DNA reveals</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50338728" tabindex="-1">Ask HN: Who is hiring? (November 2026)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50330456" tabindex="-1">AI delivers &#39;zero financial payoff&#39; to most companies, Apollo economist says</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50341576" tabindex="-1">Spreading Liquid with Three.js</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50337439" tabindex="-1">Anthropic reports $17B in Q3 revenue, commitments of $895B in revised S-1</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397099" tabindex="-1">GitHub&#39;s new Git storage architecture</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50415172" tabindex="-1">RAM Altman: Linux Script Emails Sam Altman Daily How Much Unused RAM in Your PC</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50405678" tabindex="-1">They don&#39;t make &#39;em like that any more: Borland Turbo Pascal 7</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50399657" tabindex="-1">Sodium-ion batteries approach cost parity with LFP</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50408713" tabindex="-1">Making any integer with four 2s (2025)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50414427" tabindex="-1">Tesla Hasn&#39;t Had a Successful New Product Launch Since JB Straubel Stepped Down</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50408931" tabindex="-1">GitHub New pull request overview page in public preview</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50413822" tabindex="-1">OpenAI raises $11B at a $1.25T valuation</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50411467" tabindex="-1">Agent memory needs its OpenTelemetry moment</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412152" tabindex="-1">Petered</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50410249" tabindex="-1">ISponsorBlockTV: SponsorBlock client for all YouTube TV clients</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50411818" tabindex="-1">GitHub Down Again?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50415281" tabindex="-1">Ads in Popular Apps Give Police a Powerful Tool to Spy on Users</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50409856" tabindex="-1">Consumer brain wave headsets threaten privacy</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412591" tabindex="-1">Why I will not be using LLMs in my coding</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50415135" tabindex="-1">A Little Snitch for Windows</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412072" tabindex="-1">JIT bitmap text rendering for microcontrollers</a><span class="sep">◆</span></span><span class="ticker-run" aria-hidden="true"><a href="https://news.ycombinator.com/item?id=50363461">Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50328896" tabindex="-1">Ask HN: Which TV do you recommend for privacy?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50384233" tabindex="-1">MS Paint Remote Code Execution Vulnerability</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50336518" tabindex="-1">If you love a website, back it up</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50353192" tabindex="-1">Google will turn off search for schools that reject AI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50365755" tabindex="-1">North Korean fake job interview led to $6.3B Binance heist</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50390124" tabindex="-1">Dutch &#39;idealist&#39; bank ASN blocks non-Google Android, including GrapheneOS</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50383739" tabindex="-1">Goodbye from Salon</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50366999" tabindex="-1">Kimi K3.1 Pro model weights are out</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50389222" tabindex="-1">Britain to make salary disclosure in job ads mandatory</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50362905" tabindex="-1">Nvidia RTX Spark encrypted firmware slows inference speed to 35% on Linux</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50407882" tabindex="-1">Claude Code&#39;s &#34;Don&#39;t Ask Again&#34; exposes passwords in 1,122 public GitHub files</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397429" tabindex="-1">A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50367125" tabindex="-1">AMD expects to outsell Intel in Q4 for the first time in history</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50380810" tabindex="-1">Motorola Signature 27 with GrapheneOS support</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50378942" tabindex="-1">I wish tech companies knew more about me</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50366117" tabindex="-1">Ask HN: What&#39;s your current AI agentic setup?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50336918" tabindex="-1">Fujifilm to boost tape production 5x as AI fuels archiving demand</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50352757" tabindex="-1">OpenAI seems to be silently re-enabling model training on Codex chats</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406111" tabindex="-1">Apple’s grey list: Words and phrases your iPhone won’t help you spell</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50331402" tabindex="-1">OccupySaaS</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50368481" tabindex="-1">Declarative Dragging</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50385870" tabindex="-1">Cuban: Facebook knowingly runs AI deepfake scam ads; docs say $16B fraud revenue</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358562" tabindex="-1">Safari introduces Adaptive Dark Mode in 27.3</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50353229" tabindex="-1">Kalshi and its co-founders face felony charges for violating Utah gambling laws</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406563" tabindex="-1">The end of Microsoft Research&#39;s AI Frontiers group</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50349276" tabindex="-1">Could a modern chess engine on a Pentium have defeated Kasparov in 1996?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50339397" tabindex="-1">US boy names that became girl names and vice versa</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50346755" tabindex="-1">Show HN: HackerTV – HN&#39;s most-recommended Youtube videos as 24/7 TV channels</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50372929" tabindex="-1">A thousand fewer paths to root</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50346981" tabindex="-1">Show HN: Hacker Times, a New York Times-inspired version of Hacker News</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50361268" tabindex="-1">Jelly Sheet</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50381383" tabindex="-1">Window Sweaters</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50352758" tabindex="-1">Mac at any scale</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358422" tabindex="-1">US tech giants&#39; hidden AI debt swells 90% to $3.2T in 6 months</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50401867" tabindex="-1">Asahi Linux Progress Linux 7.3</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50411961" tabindex="-1">Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50335615" tabindex="-1">Supermarket freezers across Europe hit by second suspected cyber-attack</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50360164" tabindex="-1">C++26 Disapproved</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50375354" tabindex="-1">Lemmings CSS Animation</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50383057" tabindex="-1">The Hackintosh Reborn</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50344919" tabindex="-1">The SEC Should Block Anthropic&#39;s IPO to Protect the Public</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50388001" tabindex="-1">US FAA says it will phase out floppy disks from air traffic control by 2028</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50378571" tabindex="-1">Download your favourite YouTube videos</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406222" tabindex="-1">MaxxBench – &#34;Nice DeepSWE score. But is it true?&#34;</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50369106" tabindex="-1">A new Go API for JSON</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358582" tabindex="-1">The Little Book of Generative AI Foundations: An Intuitive Mathematical Primer</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50362980" tabindex="-1">Kitty 0.50</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50372945" tabindex="-1">Images 2.6</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50393758" tabindex="-1">Deus Ex</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358702" tabindex="-1">The Internals of PostgreSQL</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397994" tabindex="-1">AI is dramatically accelerating AI research</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50392118" tabindex="-1">Gemini Omni 1.2 Flash</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50346849" tabindex="-1">DiscImageStudio: burn visible artwork onto CDs, DVDs and Blu-ray discs</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50330939" tabindex="-1">U.S. workers took home their smallest share of capital since at least 1947</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412067" tabindex="-1">Writing as a thinking tool</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50339494" tabindex="-1">Anthropic&#39;s internal AI use, at retail prices, now exceeds its employee pay</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50365982" tabindex="-1">US voters roundly reject data centers in ballot measures</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50366522" tabindex="-1">Guerrilla bike lanes: San Francisco makes illicit infrastructure permanent (2016)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50379249" tabindex="-1">MCP Explained</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50388122" tabindex="-1">From Linux to Wikipedia: How Volunteers Build the Internet</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50331957" tabindex="-1">Bones may release proteins that slow aging and extend life span</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50376313" tabindex="-1">GPT-6 Astra covertly underperforms on safety research</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50369925" tabindex="-1">Ripple-65B Preview: U.S. Open-Weight SOTA on Agentic Coding</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50333339" tabindex="-1">Show HN: Wikihack – HackerTube, but for Wikipedia articles mentioned on HN</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50340619" tabindex="-1">Self-Employed? Solopreneur? NIST Has a Cybersecurity Guide Just for You</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50387796" tabindex="-1">Pwn.college</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50339221" tabindex="-1">Show HN: Warsaw in voxels – An interactive 3D map of the city centre</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50363554" tabindex="-1">Geoffrey Hinton: it might turn out we were better off without AI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50394906" tabindex="-1">Anthropic IPO buyers see valuation as low as $1.1T</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50370610" tabindex="-1">Insects don&#39;t swarm at LED lights</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50377821" tabindex="-1">Awesome repositories are no longer awesome</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50403066" tabindex="-1">Running a law firm on Free software</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412318" tabindex="-1">Person of Interest</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50365780" tabindex="-1">Tencent Hy4</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50348962" tabindex="-1">Nvidia – open-source auto-ontology</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50386338" tabindex="-1">Inkling 2 Small</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397219" tabindex="-1">Firecracker VM Escape: PwnEscape Part 2</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50373308" tabindex="-1">Starfall – Affordable, routine access to microgravity</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50344181" tabindex="-1">BYD sold more EVs last month than the US did all quarter</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406292" tabindex="-1">Show HN: Coldframe, a honeypot that poses as a supermarket fridge controller</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50389370" tabindex="-1">Kugelblitz – Mac-Native Google Earth Alternative</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50345924" tabindex="-1">Scaling Git at OpenAI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50379576" tabindex="-1">September in Servo: &lt;progress&gt;, rounded rectangles, and more</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50403214" tabindex="-1">Upload Your RAM</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50378508" tabindex="-1">Obscure audio codec is a perfect fit for the N64</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50353335" tabindex="-1">Study estimates 75% of NFL players who died over 15-year span had CTE</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50404599" tabindex="-1">The $8 Linux Computer (2022)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50355767" tabindex="-1">How I use AI (Oct 2026)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50333131" tabindex="-1">Japan&#39;s Jimi &#39;Mundane&#39; Halloween Costumes of 2026</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50369895" tabindex="-1">Show HN: After a decade of reversing, I got co-op working in DOS Wing Commander</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50394855" tabindex="-1">First steps in bare-metal programming using UEFI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50401740" tabindex="-1">A barbarian tribe&#39;s mythic origin story is true, ancient DNA reveals</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50338728" tabindex="-1">Ask HN: Who is hiring? (November 2026)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50330456" tabindex="-1">AI delivers &#39;zero financial payoff&#39; to most companies, Apollo economist says</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50341576" tabindex="-1">Spreading Liquid with Three.js</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50337439" tabindex="-1">Anthropic reports $17B in Q3 revenue, commitments of $895B in revised S-1</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397099" tabindex="-1">GitHub&#39;s new Git storage architecture</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50415172" tabindex="-1">RAM Altman: Linux Script Emails Sam Altman Daily How Much Unused RAM in Your PC</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50405678" tabindex="-1">They don&#39;t make &#39;em like that any more: Borland Turbo Pascal 7</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50399657" tabindex="-1">Sodium-ion batteries approach cost parity with LFP</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50408713" tabindex="-1">Making any integer with four 2s (2025)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50414427" tabindex="-1">Tesla Hasn&#39;t Had a Successful New Product Launch Since JB Straubel Stepped Down</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50408931" tabindex="-1">GitHub New pull request overview page in public preview</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50413822" tabindex="-1">OpenAI raises $11B at a $1.25T valuation</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50411467" tabindex="-1">Agent memory needs its OpenTelemetry moment</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412152" tabindex="-1">Petered</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50410249" tabindex="-1">ISponsorBlockTV: SponsorBlock client for all YouTube TV clients</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50411818" tabindex="-1">GitHub Down Again?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50415281" tabindex="-1">Ads in Popular Apps Give Police a Powerful Tool to Spy on Users</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50409856" tabindex="-1">Consumer brain wave headsets threaten privacy</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412591" tabindex="-1">Why I will not be using LLMs in my coding</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50415135" tabindex="-1">A Little Snitch for Windows</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412072" tabindex="-1">JIT bitmap text rendering for microcontrollers</a><span class="sep">◆</span></span>
+      <span class="ticker-run"><a href="https://news.ycombinator.com/item?id=50363461">Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50328896" tabindex="-1">Ask HN: Which TV do you recommend for privacy?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50384233" tabindex="-1">MS Paint Remote Code Execution Vulnerability</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50336518" tabindex="-1">If you love a website, back it up</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50353192" tabindex="-1">Google will turn off search for schools that reject AI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50365755" tabindex="-1">North Korean fake job interview led to $6.3B Binance heist</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50390124" tabindex="-1">Dutch &#39;idealist&#39; bank ASN blocks non-Google Android, including GrapheneOS</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50383739" tabindex="-1">Goodbye from Salon</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50366999" tabindex="-1">Kimi K3.1 Pro model weights are out</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50379704" tabindex="-1">Alpine Linux Security Advisory: OpenSSH-server password authentication bypass</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50389222" tabindex="-1">Britain to make salary disclosure in job ads mandatory</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50362905" tabindex="-1">Nvidia RTX Spark encrypted firmware slows inference speed to 35% on Linux</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50407882" tabindex="-1">Claude Code&#39;s &#34;Don&#39;t Ask Again&#34; exposes passwords in 1,122 public GitHub files</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397429" tabindex="-1">A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50367125" tabindex="-1">AMD expects to outsell Intel in Q4 for the first time in history</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50380810" tabindex="-1">Motorola Signature 27 with GrapheneOS support</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50378942" tabindex="-1">I wish tech companies knew more about me</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50366117" tabindex="-1">Ask HN: What&#39;s your current AI agentic setup?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50336918" tabindex="-1">Fujifilm to boost tape production 5x as AI fuels archiving demand</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50368481" tabindex="-1">Declarative Dragging</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406111" tabindex="-1">Apple’s grey list: Words and phrases your iPhone won’t help you spell</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50352757" tabindex="-1">OpenAI seems to be silently re-enabling model training on Codex chats</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50331402" tabindex="-1">OccupySaaS</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50385870" tabindex="-1">Cuban: Facebook knowingly runs AI deepfake scam ads; docs say $16B fraud revenue</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358562" tabindex="-1">Safari introduces Adaptive Dark Mode in 27.3</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50353229" tabindex="-1">Kalshi and its co-founders face felony charges for violating Utah gambling laws</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406563" tabindex="-1">The end of Microsoft Research&#39;s AI Frontiers group</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50349276" tabindex="-1">Could a modern chess engine on a Pentium have defeated Kasparov in 1996?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50339397" tabindex="-1">US boy names that became girl names and vice versa</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50346755" tabindex="-1">Show HN: HackerTV – HN&#39;s most-recommended Youtube videos as 24/7 TV channels</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50372929" tabindex="-1">A thousand fewer paths to root</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50346981" tabindex="-1">Show HN: Hacker Times, a New York Times-inspired version of Hacker News</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50361268" tabindex="-1">Jelly Sheet</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50381383" tabindex="-1">Window Sweaters</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50352758" tabindex="-1">Mac at any scale</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358422" tabindex="-1">US tech giants&#39; hidden AI debt swells 90% to $3.2T in 6 months</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50411961" tabindex="-1">Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50401867" tabindex="-1">Asahi Linux Progress Linux 7.3</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50335615" tabindex="-1">Supermarket freezers across Europe hit by second suspected cyber-attack</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50360164" tabindex="-1">C++26 Disapproved</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50375354" tabindex="-1">Lemmings CSS Animation</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50383057" tabindex="-1">The Hackintosh Reborn</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50388001" tabindex="-1">US FAA says it will phase out floppy disks from air traffic control by 2028</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50344919" tabindex="-1">The SEC Should Block Anthropic&#39;s IPO to Protect the Public</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50378571" tabindex="-1">Download your favourite YouTube videos</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406222" tabindex="-1">MaxxBench – &#34;Nice DeepSWE score. But is it true?&#34;</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50369106" tabindex="-1">A new Go API for JSON</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358582" tabindex="-1">The Little Book of Generative AI Foundations: An Intuitive Mathematical Primer</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50362980" tabindex="-1">Kitty 0.50</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50372945" tabindex="-1">Images 2.6</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50393758" tabindex="-1">Deus Ex</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358702" tabindex="-1">The Internals of PostgreSQL</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397994" tabindex="-1">AI is dramatically accelerating AI research</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50392118" tabindex="-1">Gemini Omni 1.2 Flash</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50346849" tabindex="-1">DiscImageStudio: burn visible artwork onto CDs, DVDs and Blu-ray discs</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50330939" tabindex="-1">U.S. workers took home their smallest share of capital since at least 1947</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412067" tabindex="-1">Writing as a thinking tool</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50339494" tabindex="-1">Anthropic&#39;s internal AI use, at retail prices, now exceeds its employee pay</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50365982" tabindex="-1">US voters roundly reject data centers in ballot measures</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50366522" tabindex="-1">Guerrilla bike lanes: San Francisco makes illicit infrastructure permanent (2016)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50379249" tabindex="-1">MCP Explained</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50388122" tabindex="-1">From Linux to Wikipedia: How Volunteers Build the Internet</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50331957" tabindex="-1">Bones may release proteins that slow aging and extend life span</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50376313" tabindex="-1">GPT-6 Astra covertly underperforms on safety research</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50369925" tabindex="-1">Ripple-65B Preview: U.S. Open-Weight SOTA on Agentic Coding</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50333339" tabindex="-1">Show HN: Wikihack – HackerTube, but for Wikipedia articles mentioned on HN</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50340619" tabindex="-1">Self-Employed? Solopreneur? NIST Has a Cybersecurity Guide Just for You</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50387796" tabindex="-1">Pwn.college</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50339221" tabindex="-1">Show HN: Warsaw in voxels – An interactive 3D map of the city centre</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50363554" tabindex="-1">Geoffrey Hinton: it might turn out we were better off without AI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50394906" tabindex="-1">Anthropic IPO buyers see valuation as low as $1.1T</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50370610" tabindex="-1">Insects don&#39;t swarm at LED lights</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50377821" tabindex="-1">Awesome repositories are no longer awesome</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50403066" tabindex="-1">Running a law firm on Free software</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412318" tabindex="-1">Person of Interest</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50365780" tabindex="-1">Tencent Hy4</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50348962" tabindex="-1">Nvidia – open-source auto-ontology</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50386338" tabindex="-1">Inkling 2 Small</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397219" tabindex="-1">Firecracker VM Escape: PwnEscape Part 2</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50373308" tabindex="-1">Starfall – Affordable, routine access to microgravity</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50344181" tabindex="-1">BYD sold more EVs last month than the US did all quarter</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406292" tabindex="-1">Show HN: Coldframe, a honeypot that poses as a supermarket fridge controller</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50389370" tabindex="-1">Kugelblitz – Mac-Native Google Earth Alternative</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50345924" tabindex="-1">Scaling Git at OpenAI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50379576" tabindex="-1">September in Servo: &lt;progress&gt;, rounded rectangles, and more</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50403214" tabindex="-1">Upload Your RAM</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50378508" tabindex="-1">Obscure audio codec is a perfect fit for the N64</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50353335" tabindex="-1">Study estimates 75% of NFL players who died over 15-year span had CTE</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50404599" tabindex="-1">The $8 Linux Computer (2022)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50355767" tabindex="-1">How I use AI (Oct 2026)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50333131" tabindex="-1">Japan&#39;s Jimi &#39;Mundane&#39; Halloween Costumes of 2026</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50369895" tabindex="-1">Show HN: After a decade of reversing, I got co-op working in DOS Wing Commander</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50401740" tabindex="-1">A barbarian tribe&#39;s mythic origin story is true, ancient DNA reveals</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50394855" tabindex="-1">First steps in bare-metal programming using UEFI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50338728" tabindex="-1">Ask HN: Who is hiring? (November 2026)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50330456" tabindex="-1">AI delivers &#39;zero financial payoff&#39; to most companies, Apollo economist says</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50341576" tabindex="-1">Spreading Liquid with Three.js</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50337439" tabindex="-1">Anthropic reports $17B in Q3 revenue, commitments of $895B in revised S-1</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397099" tabindex="-1">GitHub&#39;s new Git storage architecture</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50415172" tabindex="-1">RAM Altman: Linux Script Emails Sam Altman Daily How Much Unused RAM in Your PC</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50405678" tabindex="-1">They don&#39;t make &#39;em like that any more: Borland Turbo Pascal 7</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50399657" tabindex="-1">Sodium-ion batteries approach cost parity with LFP</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50408713" tabindex="-1">Making any integer with four 2s (2025)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50408931" tabindex="-1">GitHub New pull request overview page in public preview</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50413822" tabindex="-1">OpenAI raises $11B at a $1.25T valuation</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50411467" tabindex="-1">Agent memory needs its OpenTelemetry moment</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412152" tabindex="-1">Petered</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50410249" tabindex="-1">ISponsorBlockTV: SponsorBlock client for all YouTube TV clients</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50411818" tabindex="-1">GitHub Down Again?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50415281" tabindex="-1">Ads in Popular Apps Give Police a Powerful Tool to Spy on Users</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50409856" tabindex="-1">Consumer brain wave headsets threaten privacy</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412591" tabindex="-1">Why I will not be using LLMs in my coding</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50415135" tabindex="-1">A Little Snitch for Windows</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412072" tabindex="-1">JIT bitmap text rendering for microcontrollers</a><span class="sep">◆</span></span><span class="ticker-run" aria-hidden="true"><a href="https://news.ycombinator.com/item?id=50363461">Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50328896" tabindex="-1">Ask HN: Which TV do you recommend for privacy?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50384233" tabindex="-1">MS Paint Remote Code Execution Vulnerability</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50336518" tabindex="-1">If you love a website, back it up</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50353192" tabindex="-1">Google will turn off search for schools that reject AI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50365755" tabindex="-1">North Korean fake job interview led to $6.3B Binance heist</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50390124" tabindex="-1">Dutch &#39;idealist&#39; bank ASN blocks non-Google Android, including GrapheneOS</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50383739" tabindex="-1">Goodbye from Salon</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50366999" tabindex="-1">Kimi K3.1 Pro model weights are out</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50379704" tabindex="-1">Alpine Linux Security Advisory: OpenSSH-server password authentication bypass</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50389222" tabindex="-1">Britain to make salary disclosure in job ads mandatory</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50362905" tabindex="-1">Nvidia RTX Spark encrypted firmware slows inference speed to 35% on Linux</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50407882" tabindex="-1">Claude Code&#39;s &#34;Don&#39;t Ask Again&#34; exposes passwords in 1,122 public GitHub files</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397429" tabindex="-1">A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50367125" tabindex="-1">AMD expects to outsell Intel in Q4 for the first time in history</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50380810" tabindex="-1">Motorola Signature 27 with GrapheneOS support</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50378942" tabindex="-1">I wish tech companies knew more about me</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50366117" tabindex="-1">Ask HN: What&#39;s your current AI agentic setup?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50336918" tabindex="-1">Fujifilm to boost tape production 5x as AI fuels archiving demand</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50368481" tabindex="-1">Declarative Dragging</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406111" tabindex="-1">Apple’s grey list: Words and phrases your iPhone won’t help you spell</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50352757" tabindex="-1">OpenAI seems to be silently re-enabling model training on Codex chats</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50331402" tabindex="-1">OccupySaaS</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50385870" tabindex="-1">Cuban: Facebook knowingly runs AI deepfake scam ads; docs say $16B fraud revenue</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358562" tabindex="-1">Safari introduces Adaptive Dark Mode in 27.3</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50353229" tabindex="-1">Kalshi and its co-founders face felony charges for violating Utah gambling laws</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406563" tabindex="-1">The end of Microsoft Research&#39;s AI Frontiers group</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50349276" tabindex="-1">Could a modern chess engine on a Pentium have defeated Kasparov in 1996?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50339397" tabindex="-1">US boy names that became girl names and vice versa</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50346755" tabindex="-1">Show HN: HackerTV – HN&#39;s most-recommended Youtube videos as 24/7 TV channels</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50372929" tabindex="-1">A thousand fewer paths to root</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50346981" tabindex="-1">Show HN: Hacker Times, a New York Times-inspired version of Hacker News</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50361268" tabindex="-1">Jelly Sheet</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50381383" tabindex="-1">Window Sweaters</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50352758" tabindex="-1">Mac at any scale</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358422" tabindex="-1">US tech giants&#39; hidden AI debt swells 90% to $3.2T in 6 months</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50411961" tabindex="-1">Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50401867" tabindex="-1">Asahi Linux Progress Linux 7.3</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50335615" tabindex="-1">Supermarket freezers across Europe hit by second suspected cyber-attack</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50360164" tabindex="-1">C++26 Disapproved</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50375354" tabindex="-1">Lemmings CSS Animation</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50383057" tabindex="-1">The Hackintosh Reborn</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50388001" tabindex="-1">US FAA says it will phase out floppy disks from air traffic control by 2028</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50344919" tabindex="-1">The SEC Should Block Anthropic&#39;s IPO to Protect the Public</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50378571" tabindex="-1">Download your favourite YouTube videos</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406222" tabindex="-1">MaxxBench – &#34;Nice DeepSWE score. But is it true?&#34;</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50369106" tabindex="-1">A new Go API for JSON</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358582" tabindex="-1">The Little Book of Generative AI Foundations: An Intuitive Mathematical Primer</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50362980" tabindex="-1">Kitty 0.50</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50372945" tabindex="-1">Images 2.6</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50393758" tabindex="-1">Deus Ex</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50358702" tabindex="-1">The Internals of PostgreSQL</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397994" tabindex="-1">AI is dramatically accelerating AI research</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50392118" tabindex="-1">Gemini Omni 1.2 Flash</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50346849" tabindex="-1">DiscImageStudio: burn visible artwork onto CDs, DVDs and Blu-ray discs</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50330939" tabindex="-1">U.S. workers took home their smallest share of capital since at least 1947</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412067" tabindex="-1">Writing as a thinking tool</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50339494" tabindex="-1">Anthropic&#39;s internal AI use, at retail prices, now exceeds its employee pay</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50365982" tabindex="-1">US voters roundly reject data centers in ballot measures</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50366522" tabindex="-1">Guerrilla bike lanes: San Francisco makes illicit infrastructure permanent (2016)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50379249" tabindex="-1">MCP Explained</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50388122" tabindex="-1">From Linux to Wikipedia: How Volunteers Build the Internet</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50331957" tabindex="-1">Bones may release proteins that slow aging and extend life span</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50376313" tabindex="-1">GPT-6 Astra covertly underperforms on safety research</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50369925" tabindex="-1">Ripple-65B Preview: U.S. Open-Weight SOTA on Agentic Coding</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50333339" tabindex="-1">Show HN: Wikihack – HackerTube, but for Wikipedia articles mentioned on HN</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50340619" tabindex="-1">Self-Employed? Solopreneur? NIST Has a Cybersecurity Guide Just for You</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50387796" tabindex="-1">Pwn.college</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50339221" tabindex="-1">Show HN: Warsaw in voxels – An interactive 3D map of the city centre</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50363554" tabindex="-1">Geoffrey Hinton: it might turn out we were better off without AI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50394906" tabindex="-1">Anthropic IPO buyers see valuation as low as $1.1T</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50370610" tabindex="-1">Insects don&#39;t swarm at LED lights</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50377821" tabindex="-1">Awesome repositories are no longer awesome</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50403066" tabindex="-1">Running a law firm on Free software</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412318" tabindex="-1">Person of Interest</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50365780" tabindex="-1">Tencent Hy4</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50348962" tabindex="-1">Nvidia – open-source auto-ontology</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50386338" tabindex="-1">Inkling 2 Small</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397219" tabindex="-1">Firecracker VM Escape: PwnEscape Part 2</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50373308" tabindex="-1">Starfall – Affordable, routine access to microgravity</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50344181" tabindex="-1">BYD sold more EVs last month than the US did all quarter</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50406292" tabindex="-1">Show HN: Coldframe, a honeypot that poses as a supermarket fridge controller</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50389370" tabindex="-1">Kugelblitz – Mac-Native Google Earth Alternative</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50345924" tabindex="-1">Scaling Git at OpenAI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50379576" tabindex="-1">September in Servo: &lt;progress&gt;, rounded rectangles, and more</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50403214" tabindex="-1">Upload Your RAM</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50378508" tabindex="-1">Obscure audio codec is a perfect fit for the N64</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50353335" tabindex="-1">Study estimates 75% of NFL players who died over 15-year span had CTE</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50404599" tabindex="-1">The $8 Linux Computer (2022)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50355767" tabindex="-1">How I use AI (Oct 2026)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50333131" tabindex="-1">Japan&#39;s Jimi &#39;Mundane&#39; Halloween Costumes of 2026</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50369895" tabindex="-1">Show HN: After a decade of reversing, I got co-op working in DOS Wing Commander</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50401740" tabindex="-1">A barbarian tribe&#39;s mythic origin story is true, ancient DNA reveals</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50394855" tabindex="-1">First steps in bare-metal programming using UEFI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50338728" tabindex="-1">Ask HN: Who is hiring? (November 2026)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50330456" tabindex="-1">AI delivers &#39;zero financial payoff&#39; to most companies, Apollo economist says</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50341576" tabindex="-1">Spreading Liquid with Three.js</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50337439" tabindex="-1">Anthropic reports $17B in Q3 revenue, commitments of $895B in revised S-1</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50397099" tabindex="-1">GitHub&#39;s new Git storage architecture</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50415172" tabindex="-1">RAM Altman: Linux Script Emails Sam Altman Daily How Much Unused RAM in Your PC</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50405678" tabindex="-1">They don&#39;t make &#39;em like that any more: Borland Turbo Pascal 7</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50399657" tabindex="-1">Sodium-ion batteries approach cost parity with LFP</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50408713" tabindex="-1">Making any integer with four 2s (2025)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50408931" tabindex="-1">GitHub New pull request overview page in public preview</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50413822" tabindex="-1">OpenAI raises $11B at a $1.25T valuation</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50411467" tabindex="-1">Agent memory needs its OpenTelemetry moment</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412152" tabindex="-1">Petered</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50410249" tabindex="-1">ISponsorBlockTV: SponsorBlock client for all YouTube TV clients</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50411818" tabindex="-1">GitHub Down Again?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50415281" tabindex="-1">Ads in Popular Apps Give Police a Powerful Tool to Spy on Users</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50409856" tabindex="-1">Consumer brain wave headsets threaten privacy</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412591" tabindex="-1">Why I will not be using LLMs in my coding</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50415135" tabindex="-1">A Little Snitch for Windows</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50412072" tabindex="-1">JIT bitmap text rendering for microcontrollers</a><span class="sep">◆</span></span>
     </div>
   </div>
 </div>
 
 
-<footer>Generated 2026-11-09 14:52 with gpt-4.1-mini · voice: coral · top 20 stories/day from the HN Algolia API.</footer>
+<footer>Generated 2026-11-09 15:03 with gpt-4.1-mini · voice: coral · top 20 stories/day from the HN Algolia API.</footer>
 </div>
 
 
 <script>
 (() => {
   const segs = JSON.parse(document.getElementById('bc-seg').textContent);
-  const kinds = {"launches": "Launches", "open": "Headlines", "quote": "Comment of the week", "rapid": "Quick hits", "signoff": "Sign-off", "story": "Top story"};
+  const kinds = {"launches": "Launches", "open": "Headlines", "rapid": "Quick hits", "signoff": "Sign-off", "story": "Top story", "wrap": "The week in one line"};
   const $ = id => document.getElementById(id);
   const audio = $('audio'), player = $('player'), fill = $('fill'), track = $('track'), stage = $('stage');
   const slides = [...stage.querySelectorAll('.slide')], chs = [...stage.querySelectorAll('.ch b')];

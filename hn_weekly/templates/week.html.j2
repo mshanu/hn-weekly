@@ -13,7 +13,7 @@
 {% set moods = {"enthusiastic": ("🎉", "excited"), "skeptical": ("🤨", "skeptical"),
                 "divided": ("😐", "divided"), "informative": ("💡", "informative")} %}
 {% set kinds = {"open": "Headlines", "story": "Top story", "rapid": "Quick hits", "launches": "Launches",
-                "quote": "Comment of the week", "signoff": "Sign-off"} %}
+                "wrap": "The week in one line", "signoff": "Sign-off"} %}
 {% set bc = d.broadcast %}
 {% set box_start = {} %}
 {% if bc %}{% for s in bc.segments %}{% if s.box_id >= 0 and s.box_id not in box_start %}{% set _ = box_start.update({s.box_id: s.start}) %}{% endif %}{% endfor %}{% endif %}
@@ -45,7 +45,7 @@
     <div class="now"><span class="now-kind" id="now-kind">Press play</span><span class="now-title" id="now-title">{{ d.range }} in under {{ (bc.duration / 60)|round(0, 'ceil')|int }} minutes</span></div>
     <div class="track" id="track" role="slider" aria-label="Seek" tabindex="0">
       <div class="fill" id="fill"></div>
-      {% for s in bc.segments %}{% if s.kind in ("story", "quote", "launches") and loop.index0 > 0 %}<span class="tick" style="left: {{ (100 * s.start / bc.duration)|round(2) }}%"></span>{% endif %}{% endfor %}
+      {% for s in bc.segments %}{% if s.kind in ("story", "wrap", "launches") and loop.index0 > 0 %}<span class="tick" style="left: {{ (100 * s.start / bc.duration)|round(2) }}%"></span>{% endif %}{% endfor %}
     </div>
     <div class="ptime"><span id="t-cur">0:00</span><span id="t-dur">{{ bc.duration|mmss }}</span></div>
   </div>
@@ -126,10 +126,10 @@
       <div class="s-coming"><span>Coming up</span>
         <ol>{% for x in bc.segments if x.kind == "story" %}{% set xb = by_id.get(x.box_id) %}<li>{{ xb.title if xb else x.title }}</li>{% endfor %}</ol>
       </div>
-    {% elif s.kind == "quote" %}
-      <div class="s-kicker">Comment of the week</div>
-      <blockquote class="s-quote">{{ s.quote or s.text }}</blockquote>
-      <div class="s-by">{% if s.author %}<b>{{ s.author }}</b> on {% endif %}{{ b.title if b else "Hacker News" }}{% if b %} · <a href="{{ b.hn_url }}" target="_blank" rel="noopener">read the thread →</a>{% endif %}</div>
+    {% elif s.kind == "wrap" %}
+      <div class="s-kicker">The week in one line</div>
+      <p class="s-wrap">{{ s.text }}</p>
+      <div class="s-by">Drawn from all {{ by_id|length }} highlights · {{ d.range }}</div>
     {% elif s.kind == "signoff" %}
       <div class="s-kicker">HN Weekly</div>
       <h2 class="s-title">That's the week.</h2>

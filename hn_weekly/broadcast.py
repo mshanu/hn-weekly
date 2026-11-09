@@ -18,10 +18,10 @@ from .summarize import Summarizer, _schema, STR
 
 SAMPLE_RATE = 24_000          # OpenAI TTS PCM: 24kHz, 16-bit, mono
 BYTES_PER_SEC = SAMPLE_RATE * 2
-PAUSE = {"open": 0.4, "story": 0.5, "rapid": 0.25, "launches": 0.25, "quote": 0.4, "signoff": 0.0}
-KINDS = ["open", "story", "rapid", "launches", "quote", "signoff"]
+PAUSE = {"open": 0.4, "story": 0.5, "rapid": 0.25, "launches": 0.25, "wrap": 0.5, "signoff": 0.0}
+KINDS = ["open", "story", "rapid", "launches", "wrap", "signoff"]
 WORD_TARGET, WORD_MAX = 235, 260   # measured ~120 wpm → ≈ 2:00 of audio
-QUOTE_MAX = 22
+WRAP_MAX = 30
 N_TOP, N_QUICK = 3, 5
 
 SCRIPT_FORMAT = _schema("bulletin", {
@@ -32,9 +32,8 @@ SCRIPT_FORMAT = _schema("bulletin", {
             "box_id": {"type": "integer"},
             "title": STR,
             "text": STR,
-            "quote": STR,
         },
-        "required": ["kind", "box_id", "title", "text", "quote"],
+        "required": ["kind", "box_id", "title", "text"],
         "additionalProperties": False,
     }},
 })
@@ -48,9 +47,11 @@ Write the script as segments, in this order:
 3. rapid: exactly one per QUICK box, in order (launches included). ONE short sentence of fact plus the HN verdict,
    e.g. "Mistral released Large 4 weights, and HN cheered the open license." ~12 words each.
 Never move a box to a different kind of segment, and never cover boxes that are not listed.
-4. quote (box_id = the box the comment is from): ONE striking comment from CANDIDATE COMMENTS.
-   Put the exact quoted words in "quote": copied VERBATIM, a complete sentence, max 20 words, from one candidate.
-   In "text" say only "User <name> wrote:" followed by the same words. ~22 words.
+4. wrap (box_id -1): the whole week in ONE sentence, drawn from ALL HIGHLIGHTS (not just the stories above).
+   Write it like a columnist's verdict: name the two or three concrete themes that ran through many highlights
+   (e.g. "software quietly overstepping user consent", "decade-old bugs coming back to bite") and the mood.
+   Do not list individual stories, do not repeat the HEADLINE, and avoid vague words like "shifts", "issues",
+   "amid", "landscape". Max 25 words. No lead-in: the anchor already says "In one line" before it.
 5. signoff (box_id -1): e.g. "That's the week. See you next Monday." ~7 words.
 Rules:
 - Total about {WORD_TARGET} words. NEVER exceed {WORD_MAX}. Cut adjectives, filler and transitions.
@@ -59,7 +60,7 @@ Rules:
   ("five point six billion dollars", "C-V-E", "M6 chip").
 - Neutral, crisp radio tone. No hype, and do not invent facts beyond what is given.
 - "title" is a 2-5 word on-screen label for the segment (e.g. "Binance loses $5.6B").
-- box_id must be one of the ids given, or -1 for open/signoff. Set "quote" to "" for every segment except quote."""
+- box_id must be one of the ids given, or -1 for open/wrap/signoff."""
 
 
 def _norm(s: str) -> str:
@@ -74,8 +75,8 @@ def _story_id(hn_url: str) -> int:
     return int(hn_url.rsplit("=", 1)[1])
 
 
-def build_inputs(digest: dict, wdir: Path) -> tuple[str, dict[int, list[tuple[str, str]]], dict[str, list[int]]]:
-    """Prompt input (top / rapid / launch boxes plus candidate comments) and candidate quotes per box."""
+def build_inputs(digest: dict, wdir: Path) -> tuple[str, dict[str, list[int]]]:
+    """Prompt input: top and quick boxes to read, plus every highlight for the one-line wrap."""
     topics = json.loads((wdir / "4_topics.json").read_text())
     topic_of = {i: t for t in topics for i in t["story_ids"]}
     boxes = sorted((b for s in digest["sections"] for b in s["boxes"]), key=lambda b: b["id"])
@@ -86,28 +87,18 @@ def build_inputs(digest: dict, wdir: Path) -> tuple[str, dict[int, list[tuple[st
                 f"  what: {t['gist']}\n  hn: {t['pulse']}")
 
     top, rapid = boxes[:N_TOP], boxes[N_TOP:N_TOP + N_QUICK]
-
-    candidates: dict[int, list[tuple[str, str]]] = {}
-    lines = []
-    for b in boxes[:10]:
-        raw_p = wdir / "2_raw" / f"{_story_id(b['hn_url'])}.json"
-        if not raw_p.exists():
-            continue
-        for c in json.loads(raw_p.read_text())["comments"][:2]:
-            text = c["text"][:400]
-            candidates.setdefault(b["id"], []).append((c["author"], text))
-            lines.append(f"[box {b['id']}] user {c['author']}: {text}")
+    highlights = [f"- {b['title']} ({b['section']}, {b['mood']}): {b['gist']}" for b in boxes]
 
     prompt = (f"WEEK: {digest['range']}\nHEADLINE: {digest['headline']}\n\n"
               "TOP:\n" + "\n".join(map(describe, top)) +
               "\n\nQUICK:\n" + "\n".join(map(describe, rapid)) +
-              "\n\nCANDIDATE COMMENTS:\n" + "\n".join(lines))
+              "\n\nALL HIGHLIGHTS:\n" + "\n".join(highlights))
     rundown = {"story": [b["id"] for b in top], "rapid": [b["id"] for b in rapid],
-               "launches": []}
-    return prompt, candidates, rundown
+               "launches": [], "wrap": [-1]}
+    return prompt, rundown
 
 
-def problems(segments: list[dict], rundown: dict[str, list[int]], candidates: dict[int, list[tuple[str, str]]]) -> list[str]:
+def problems(segments: list[dict], rundown: dict[str, list[int]]) -> list[str]:
     """Human-readable issues to feed back to the model for one retry."""
     out = []
     if (w := _words(segments)) > WORD_MAX:
@@ -116,63 +107,36 @@ def problems(segments: list[dict], rundown: dict[str, list[int]], candidates: di
         got = [s["box_id"] for s in segments if s["kind"] == kind]
         if got != ids:
             out.append(f"'{kind}' segments must cover exactly boxes {ids} in that order; you gave {got}.")
-    pool = [_norm(t) for cs in candidates.values() for _, t in cs]
     for s in segments:
-        if s["kind"] == "quote":
-            if len(s["quote"].split()) > QUOTE_MAX:
-                out.append(f"The quote is {len(s['quote'].split())} words; max {QUOTE_MAX}. Pick a shorter "
-                           "verbatim excerpt (a complete sentence or two).")
-            elif not any(_norm(s["quote"]) in c for c in pool):
-                out.append("The quote is not a verbatim excerpt of a candidate comment.")
+        if s["kind"] == "wrap" and len(s["text"].split()) > WRAP_MAX:
+            out.append(f"The wrap is {len(s['text'].split())} words; keep it to one sentence of at most 25.")
     return out
 
 
-def validate_script(segments: list[dict], digest: dict, candidates: dict[int, list[tuple[str, str]]]) -> list[dict]:
+def validate_script(segments: list[dict], digest: dict) -> list[dict]:
     valid_ids = {b["id"] for s in digest["sections"] for b in s["boxes"]}
     out = []
     for s in segments:
         if not s["text"].strip():
             continue
-        if s["box_id"] not in valid_ids:
+        if s["box_id"] not in valid_ids or s["kind"] == "wrap":
             s["box_id"] = -1
-        if s["kind"] == "quote":
-            q = _norm(s["quote"])
-            pool = [_norm(t) for cs in candidates.values() for _, t in cs]
-            if len(q) < 12 or len(s["quote"].split()) > QUOTE_MAX + 5 or not any(q in c for c in pool):
-                continue  # never broadcast a quote we can't verify verbatim
+        if s["kind"] == "wrap":
+            s["text"] = re.sub(r"^\s*in one line\W*", "", s["text"], flags=re.I)
         out.append(s)
-    if not any(s["kind"] == "quote" for s in out) and (fb := fallback_quote(digest, candidates)):
-        at = next((i for i, s in enumerate(out) if s["kind"] == "signoff"), len(out))
-        out.insert(at, fb)
     return out
 
 
-def fallback_quote(digest: dict, candidates) -> dict | None:
-    """Deterministic verbatim quote: the leading sentences (<= QUOTE_MAX words) of a top comment on the hottest topics."""
-    titles = {b["id"]: b["title"] for s in digest["sections"] for b in s["boxes"]}
-    for box_id in sorted(candidates):
-        for author, text in candidates[box_id]:
-            excerpt = ""
-            for sent in re.split(r"(?<=[.!?])\s+", " ".join(text.split())):
-                if len((excerpt + " " + sent).split()) > QUOTE_MAX:
-                    break
-                excerpt = (excerpt + " " + sent).strip()
-            if len(excerpt.split()) >= 6:
-                return {"kind": "quote", "box_id": box_id, "title": "Comment of the week", "quote": excerpt,
-                        "text": f"User {author} wrote: {excerpt}"}
-    return None
-
-
 async def write_script(llm: Summarizer, digest: dict, wdir: Path) -> list[dict]:
-    prompt, candidates, rundown = build_inputs(digest, wdir)
+    prompt, rundown = build_inputs(digest, wdir)
     segs = (await llm._call(SCRIPT_PROMPT, prompt, SCRIPT_FORMAT))["segments"]
-    if issues := problems(segs, rundown, candidates):
+    if issues := problems(segs, rundown):
         print("  script retry:", "; ".join(issues), flush=True)
         segs = (await llm._call(
             SCRIPT_PROMPT, prompt + "\n\nYOUR PREVIOUS DRAFT:\n" + json.dumps(segs, ensure_ascii=False) +
             "\n\nFix these problems and return the full corrected script:\n- " + "\n- ".join(issues),
             SCRIPT_FORMAT))["segments"]
-    return validate_script(segs, digest, candidates)
+    return validate_script(segs, digest)
 
 
 async def synthesize(cfg, segments: list[dict]) -> list[bytes]:
@@ -182,7 +146,8 @@ async def synthesize(cfg, segments: list[dict]) -> list[bytes]:
     async def one(seg):
         async with sem:
             r = await client.audio.speech.create(
-                model=cfg.tts_model, voice=cfg.tts_voice, input=seg["text"],
+                model=cfg.tts_model, voice=cfg.tts_voice,
+                input=("In one line: " + seg["text"]) if seg["kind"] == "wrap" else seg["text"],
                 instructions=cfg.tts_style, response_format="pcm")
             pcm = r.content
             return pcm[: len(pcm) // 2 * 2]  # whole 16-bit samples only
@@ -198,24 +163,8 @@ def encode_mp3(pcm: bytes) -> bytes:
     return bytes(enc.encode(pcm) + enc.flush())
 
 
-def slide_fields(seg: dict) -> dict:
-    """Extra fields the presentation needs: the verbatim quote and who wrote it."""
-    if seg["kind"] != "quote":
-        return {}
-    m = re.search(r"\buser\s+([\w.-]+?)[,:]?\s+(?:wrote|said|put it)", seg["text"], re.I)
-    return {"quote": seg.get("quote", ""), "author": m.group(1) if m else ""}
-
-
 def load_broadcast(bpath: Path, wdir: Path) -> dict:
-    """Read 7_broadcast.json, backfilling slide fields from 6_script.json for older builds."""
-    bc = json.loads(bpath.read_text())
-    spath = wdir / "6_script.json"
-    if spath.exists() and any(s["kind"] == "quote" and "quote" not in s for s in bc["segments"]):
-        script = json.loads(spath.read_text())
-        if len(script) == len(bc["segments"]):
-            for seg, src in zip(bc["segments"], script):
-                seg.update(slide_fields(src))
-    return bc
+    return json.loads(bpath.read_text())
 
 
 async def stage_broadcast(cfg, llm: Summarizer, digest: dict, week: str, wdir: Path, log) -> dict | None:
@@ -240,8 +189,7 @@ async def stage_broadcast(cfg, llm: Summarizer, digest: dict, week: str, wdir: P
     for seg, clip in zip(segments, clips):
         dur = len(clip) / BYTES_PER_SEC
         timeline.append({"kind": seg["kind"], "box_id": seg["box_id"], "title": seg["title"],
-                         "text": seg["text"], "start": round(t, 2), "end": round(t + dur, 2),
-                         **slide_fields(seg)})
+                         "text": seg["text"], "start": round(t, 2), "end": round(t + dur, 2)})
         pause = PAUSE.get(seg["kind"], 0.4)
         pcm += clip + bytes(int(pause * SAMPLE_RATE) * 2)
         t += dur + pause
