@@ -1,0 +1,1245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HN Weekly 2026-W47</title>
+<meta name="hn-week" content="2026-W47">
+<meta name="hn-range" content="Nov 16 – Nov 22, 2026">
+<meta name="hn-headline" content="Lean theorem prover achieved a 17M-line formal Riemann Hypothesis proof; Anthropic IPO and pollution concerns; Google, Microsoft, OpenAI release efficient AI models; critical NGINX and OpenJDK RCE bugs patched.">
+<style>
+:root {
+  --bg: #f7f6f2; --surface: #ffffff; --text: #1d1c1a; --muted: #6b6860; --line: #e4e1d8;
+  --accent: #d2561c;
+  --v-enthusiastic: #2f7d4f; --v-skeptical: #b4432f; --v-divided: #8a5fbf; --v-informative: #3769a8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161513; --surface: #1f1e1b; --text: #ecebe6; --muted: #9c998f; --line: #34322d;
+    --accent: #f07a3e;
+    --v-enthusiastic: #6cc48f; --v-skeptical: #ee8a76; --v-divided: #bb9be6; --v-informative: #86afe6;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 32px 16px 64px; }
+a { color: inherit; }
+.kicker { color: var(--accent); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: 12px; }
+h1 { font-size: 28px; line-height: 1.15; margin: 6px 0 6px; letter-spacing: -.01em; }
+.headline { margin: 0 0 8px; color: var(--muted); font-size: 16px; max-width: 70ch; }
+.sec { margin-top: 32px; }
+.sec h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted);
+  margin: 0 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.sec h2 { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sheat { display: flex; align-items: center; gap: 8px; flex: 0 1 220px; }
+.sheat .bar { flex: 1; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; min-width: 60px; }
+.sheat .bar span { display: block; height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, #f2b33d, var(--accent)); }
+.hottest { color: var(--accent); font-weight: 700; }
+.box .top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.flames { font-size: 13px; white-space: nowrap; letter-spacing: -2px; line-height: 1.4; }
+.flames.f1 { opacity: .55; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.box:hover { border-color: var(--accent); }
+.box h3 { font-size: 16px; line-height: 1.25; margin: 0; overflow-wrap: anywhere; }
+.box h3 a { text-decoration: none; }
+.box h3 a:hover { text-decoration: underline; }
+.gist { margin: 0; }
+.mood { align-self: flex-start; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+  border: 1px solid currentColor; }
+.v-enthusiastic { color: var(--v-enthusiastic); } .v-skeptical { color: var(--v-skeptical); }
+.v-divided { color: var(--v-divided); } .v-informative { color: var(--v-informative); }
+.take { margin: 0; color: var(--muted); font-style: italic; }
+.foot { margin-top: auto; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-size: 13px; }
+.discuss { margin-left: auto; color: var(--accent); text-decoration: none; }
+.discuss:hover { text-decoration: underline; }
+.threads summary { cursor: pointer; color: var(--muted); list-style: none; }
+.threads summary::-webkit-details-marker { display: none; }
+.threads summary::before { content: "▸ "; }
+.threads[open] summary::before { content: "▾ "; }
+.threads[open] { flex-basis: 100%; order: 2; }
+.threads ul { margin: 6px 0 0; padding-left: 16px; }
+.threads li { margin: 3px 0; }
+.threads li a { color: var(--accent); text-decoration: none; }
+.threads li a:hover { text-decoration: underline; }
+.more { margin-top: 36px; }
+.more summary { cursor: pointer; color: var(--muted); }
+.more ul { columns: 2 280px; padding-left: 18px; margin: 10px 0; }
+.more li { margin: 3px 0; break-inside: avoid; }
+.more .hn { color: var(--accent); font-size: 12px; margin-left: 4px; }
+.week-row { display: block; text-decoration: none; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 10px; padding: 14px 16px; margin: 12px 0; }
+.week-row:hover { border-color: var(--accent); }
+.week-row p { margin: 6px 0 0; color: var(--muted); }
+.meta { color: var(--muted); font-size: 13px; }
+footer { margin-top: 48px; color: var(--muted); font-size: 12px; }
+
+/* ---------- Newscast ---------- */
+:root { --ink: #121212; --ink-text: #f4f2ec; --live: #e5322d; --glow: rgba(210, 86, 28, .18); }
+@media (prefers-color-scheme: dark) { :root { --ink: #0b0b0a; --glow: rgba(240, 122, 62, .22); } }
+.masthead { background: var(--ink); color: var(--ink-text); border-bottom: 3px solid var(--accent); }
+.mast-inner { max-width: 1080px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 8px; font-weight: 800; letter-spacing: .12em; font-size: 15px; text-decoration: none; }
+.logo { display: inline-grid; place-items: center; width: 22px; height: 22px; background: var(--accent); color: #fff;
+  letter-spacing: 0; border-radius: 3px; }
+.logo svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+.onair { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800; letter-spacing: .1em;
+  padding: 3px 8px; border-radius: 3px; background: #3a3a38; color: #cfccc4; }
+.onair .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.playing .onair { background: var(--live); color: #fff; }
+.playing .onair .dot { animation: blink 1.2s infinite; }
+@keyframes blink { 50% { opacity: .25; } }
+.mast-date { margin-left: auto; font-size: 13px; color: #b9b6ad; }
+.mast-archive { font-size: 13px; color: #b9b6ad; }
+.wrap { padding-top: 24px; }
+.lead h1 { font-size: clamp(22px, 3.4vw, 32px); line-height: 1.2; max-width: 32ch; margin: 8px 0 18px; }
+
+.player { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 14px; margin: 0 0 8px;
+  padding: 12px 14px; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .06); }
+.play { flex: none; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--accent); color: #fff;
+  display: grid; place-items: center; cursor: pointer; }
+.play svg { width: 22px; height: 22px; fill: currentColor; }
+.play svg[hidden] { display: none; }
+.play:hover { filter: brightness(1.08); }
+.pmain { flex: 1; min-width: 0; }
+.now { display: flex; align-items: baseline; gap: 8px; min-width: 0; margin-bottom: 6px; }
+.now-kind { flex: none; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.now-title { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.track { position: relative; height: 8px; border-radius: 4px; background: var(--line); cursor: pointer; }
+.fill { position: absolute; inset: 0 auto 0 0; width: 0; border-radius: 4px; background: var(--accent); }
+.tick { position: absolute; top: -2px; width: 2px; height: 12px; background: var(--muted); opacity: .5; border-radius: 1px; }
+.ptime { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-top: 4px;
+  font-variant-numeric: tabular-nums; }
+.speed { flex: none; font: 600 13px/1 inherit; font-family: inherit; padding: 8px 10px; border-radius: 8px;
+  border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; min-width: 52px; }
+
+.box { position: relative; transition: border-color .2s, box-shadow .2s, transform .2s; }
+.box.seekable { cursor: pointer; }
+.at { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.box.seekable:hover .at { color: var(--accent); }
+.live-badge { position: absolute; top: -10px; left: 12px; display: none; font-size: 11px; font-weight: 800;
+  letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; background: var(--live); color: #fff; }
+.box.on-air { border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
+.box.on-air .live-badge { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .playing .box.on-air { animation: onair 2.4s ease-in-out infinite; }
+  @keyframes onair { 50% { box-shadow: 0 0 0 6px var(--glow); } }
+}
+
+.transcript { margin-top: 36px; }
+.transcript summary { cursor: pointer; color: var(--muted); }
+.transcript ol { list-style: none; padding: 0; margin: 12px 0 0; max-width: 72ch; }
+.transcript li { padding: 8px 10px; border-radius: 8px; margin: 2px 0; }
+.transcript li.cur { background: var(--surface); outline: 1px solid var(--line); }
+.ts { font: 12px/1 inherit; font-family: inherit; font-variant-numeric: tabular-nums; color: var(--accent);
+  background: none; border: 0; padding: 0 6px 0 0; cursor: pointer; }
+.tk { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-right: 4px; }
+
+body.has-ticker { padding-bottom: 40px; }
+.ticker { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex; align-items: stretch; height: 34px;
+  background: var(--ink); color: var(--ink-text); font-size: 13px; border-top: 2px solid var(--accent); }
+.ticker-label { flex: none; display: flex; align-items: center; padding: 0 12px; background: var(--accent); color: #fff;
+  font-weight: 800; font-size: 11px; letter-spacing: .1em; }
+.ticker-viewport { flex: 1; overflow: hidden; display: flex; align-items: center; }
+.ticker-track { display: flex; width: max-content; animation: ticker var(--dur) linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker-run { display: flex; align-items: center; white-space: nowrap; }
+.ticker a { text-decoration: none; padding: 0 4px; }
+.ticker a:hover { color: var(--accent); }
+.ticker .sep { color: var(--accent); padding: 0 10px; font-size: 9px; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+  .ticker-viewport { overflow-x: auto; }
+}
+@media (max-width: 560px) {
+  .mast-date { margin-left: 0; width: 100%; order: 3; }
+  .player { gap: 10px; padding: 10px; }
+  .play { width: 42px; height: 42px; }
+  .ticker-label { padding: 0 8px; font-size: 10px; }
+}
+
+/* ---------- Presentation (stage) ---------- */
+.watch { display: inline-flex; align-items: center; gap: 10px; margin: -6px 0 18px; padding: 10px 18px 10px 14px;
+  border: 0; border-radius: 999px; background: var(--ink); color: var(--ink-text); font: 600 15px/1 inherit;
+  font-family: inherit; cursor: pointer; box-shadow: 0 4px 14px rgba(0, 0, 0, .12); }
+.watch svg { width: 18px; height: 18px; fill: var(--accent); }
+.watch span { font-weight: 500; color: #b9b6ad; font-variant-numeric: tabular-nums; }
+.watch:hover { outline: 2px solid var(--accent); }
+@media (prefers-color-scheme: dark) { .watch { background: var(--accent); color: #fff; } .watch svg { fill: #fff; } .watch span { color: #ffe3d4; } }
+body.staged { overflow: hidden; }
+.stage { position: fixed; inset: 0; z-index: 100; display: grid; grid-template-rows: auto 1fr auto auto;
+  color: #f4f2ec; background: radial-gradient(1200px 600px at 80% -10%, rgba(240, 122, 62, .22), transparent 60%),
+  radial-gradient(900px 500px at -10% 110%, rgba(55, 105, 168, .25), transparent 60%), #0d0d0c;
+  --accent: #f07a3e; --muted: #a8a59b; --line: #34322d;
+  --v-enthusiastic: #6cc48f; --v-skeptical: #ee8a76; --v-divided: #bb9be6; --v-informative: #86afe6; }
+.stage[hidden] { display: none; }
+.st-bar { display: flex; align-items: center; gap: 14px; padding: 12px 20px; }
+.st-bar .brand { color: #f4f2ec; }
+.st-date { margin-left: auto; font-size: 13px; color: var(--muted); }
+.st-btn { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; border: 1px solid transparent;
+  background: rgba(255, 255, 255, .07); color: #f4f2ec; cursor: pointer; font: 700 12px/1 inherit; font-family: inherit; }
+.st-btn:hover { background: rgba(255, 255, 255, .14); }
+.st-btn[hidden] { display: none; }
+.st-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#st-prev svg, #st-next svg { fill: currentColor; }
+.st-cc[aria-pressed="true"] { background: #f4f2ec; color: #0d0d0c; }
+
+.slides { position: relative; min-height: 0; cursor: pointer; }
+.slide { position: absolute; inset: 0; display: flex; align-items: center; overflow-y: auto;
+  opacity: 0; visibility: hidden; transform: translateY(18px); }
+.slide.past { transform: translateY(-18px); }
+.slide.cur { opacity: 1; visibility: visible; transform: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .slide { transition: opacity .5s ease, transform .6s cubic-bezier(.2, .7, .2, 1), visibility 0s linear .6s; }
+  .slide.cur { transition: opacity .5s ease .1s, transform .6s cubic-bezier(.2, .7, .2, 1) .1s, visibility 0s; }
+  .slide.cur .s-inner > * { animation: rise .6s cubic-bezier(.2, .7, .2, 1) both; }
+  .slide.cur .s-inner > :nth-child(2) { animation-delay: .12s; }
+  .slide.cur .s-inner > :nth-child(3) { animation-delay: .24s; }
+  .slide.cur .s-inner > :nth-child(4) { animation-delay: .9s; }
+  .slide.cur .s-inner > :nth-child(5) { animation-delay: 1.1s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+}
+.s-inner { width: 100%; max-width: 980px; margin: auto; padding: 24px clamp(20px, 5vw, 56px); cursor: auto; }
+.s-kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; color: var(--accent); font-weight: 800;
+  font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
+.s-sec { color: var(--muted); font-weight: 600; letter-spacing: .06em; }
+.s-sec::before { content: "·"; margin-right: 12px; color: var(--muted); }
+.s-kicker .flames { letter-spacing: -2px; }
+.s-title { font-size: clamp(30px, 5.4vw, 64px); line-height: 1.05; letter-spacing: -.02em; margin: 14px 0 18px; max-width: 18ch; }
+.s-gist { font-size: clamp(19px, 2.4vw, 28px); line-height: 1.35; margin: 0 0 28px; max-width: 34ch; color: #e6e3db; }
+.s-hn { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 10px 14px; max-width: 760px;
+  padding: 16px 20px; border-left: 4px solid var(--accent); background: rgba(255, 255, 255, .05); border-radius: 0 12px 12px 0; }
+.s-hn-label { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.s-hn .mood { justify-self: start; font-size: 13px; }
+.s-take { grid-column: 1 / -1; margin: 0; font-size: clamp(17px, 2vw, 22px); font-style: italic; color: #d9d6cd; }
+.s-link { display: inline-block; margin-top: 22px; color: var(--accent); text-decoration: none; font-weight: 600; }
+.s-link:hover { text-decoration: underline; }
+.k-rapid .s-title, .k-launches .s-title { font-size: clamp(28px, 4.6vw, 54px); }
+.s-date { font-size: clamp(16px, 2vw, 20px); color: var(--muted); margin-top: 10px; }
+.s-head { font-size: clamp(26px, 3.6vw, 44px); line-height: 1.12; letter-spacing: -.015em; margin: 12px 0 0; max-width: 26ch; }
+.s-coming span { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.s-coming ol { list-style: none; counter-reset: c; padding: 0; margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.s-coming li { counter-increment: c; padding: 10px 16px; border-radius: 10px; background: rgba(255, 255, 255, .07);
+  font-size: clamp(15px, 1.7vw, 18px); font-weight: 600; }
+.s-coming li::before { content: counter(c); color: var(--accent); margin-right: 10px; font-weight: 800; }
+.s-wrap { margin: 22px 0; padding-left: clamp(18px, 3vw, 32px); border-left: 4px solid var(--accent);
+  font-size: clamp(24px, 3.6vw, 42px); line-height: 1.25; font-weight: 600; letter-spacing: -.01em; max-width: 30ch; }
+.s-by { color: var(--muted); font-size: clamp(15px, 1.7vw, 18px); }
+.s-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.s-replay, .s-plain { font: 600 16px/1 inherit; font-family: inherit; padding: 12px 18px; border-radius: 999px; cursor: pointer; }
+.s-replay { border: 0; background: var(--accent); color: #fff; }
+.s-startrow { margin: 26px 0 30px; }
+.playing .s-startrow { visibility: hidden; }
+.s-plain { border: 1px solid rgba(255, 255, 255, .25); background: transparent; color: #f4f2ec; }
+
+.st-low { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 20px 10px; }
+.caption { max-width: min(900px, 100%); min-height: 1.4em; padding: 6px 14px; border-radius: 6px; text-align: center;
+  background: rgba(0, 0, 0, .65); font-size: clamp(16px, 1.9vw, 21px); line-height: 1.4; }
+.caption.empty, .no-cc .caption { visibility: hidden; }
+.lower3 { align-self: stretch; display: flex; max-width: 980px; width: 100%; margin: 0 auto; font-weight: 700; overflow: hidden; border-radius: 4px; }
+.l3-kind { flex: none; padding: 8px 14px; background: var(--live); color: #fff; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; display: flex; align-items: center; }
+.l3-title { flex: 1; min-width: 0; padding: 8px 14px; background: #f4f2ec; color: #121212; font-size: 15px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.st-ctrl { display: flex; align-items: center; gap: 12px; padding: 10px 20px 16px; max-width: 1020px; width: 100%; margin: 0 auto; }
+.st-ctrl .play { width: 52px; height: 52px; }
+.chapters { flex: 1; display: flex; gap: 3px; min-width: 0; }
+.ch { flex: 1 1 0; min-width: 4px; height: 26px; padding: 10px 0; border: 0; background: none; cursor: pointer; }
+.ch i { display: block; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, .2); overflow: hidden; }
+.ch:hover i { background: rgba(255, 255, 255, .35); }
+.ch b { display: block; height: 100%; width: 0; background: var(--accent); }
+.st-time { flex: none; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+@media (max-width: 560px) {
+  .st-bar { padding: 10px 12px; gap: 10px; }
+  .st-bar .onair { display: none; }
+  .st-ctrl { flex-wrap: wrap; gap: 8px; padding: 6px 12px 14px; }
+  .chapters { order: -1; flex-basis: 100%; }
+  .st-time { margin-left: auto; }
+  .s-hn { grid-template-columns: 1fr; }
+  .st-low { padding: 0 12px 6px; }
+}
+@media (max-height: 560px) { .lower3 { display: none; } }
+</style>
+</head>
+<body class="has-ticker staged">
+
+
+
+
+
+
+<header class="masthead">
+  <div class="mast-inner">
+    <a class="brand" href="index.html"><span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4M16.2 7.8a6 6 0 0 1 0 8.4M4.9 4.9a10 10 0 0 0 0 14.2M19.1 4.9a10 10 0 0 1 0 14.2"/></svg></span>HN WEEKLY</a>
+    <span class="onair" id="onair"><span class="dot"></span><span id="onair-label">ON AIR</span></span>
+    <span class="mast-date">Nov 16 – Nov 22, 2026</span>
+    <a class="mast-archive" href="index.html">Archive</a>
+  </div>
+</header>
+
+<div class="wrap">
+<section class="lead">
+  <div class="kicker">This week on Hacker News · 3-minute bulletin</div>
+  <h1>Lean theorem prover achieved a 17M-line formal Riemann Hypothesis proof; Anthropic IPO and pollution concerns; Google, Microsoft, OpenAI release efficient AI models; critical NGINX and OpenJDK RCE bugs patched.</h1>
+  <button class="watch" id="watch-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch the bulletin<span>2:02</span></button>
+</section>
+
+
+<div class="player" id="player">
+  <audio id="audio" preload="metadata" src="audio/2026-W47.mp3"></audio>
+  <button class="play" id="play" aria-label="Play bulletin">
+    <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+  </button>
+  <div class="pmain">
+    <div class="now"><span class="now-kind" id="now-kind">Press play</span><span class="now-title" id="now-title">Nov 16 – Nov 22, 2026 in under 3 minutes</span></div>
+    <div class="track" id="track" role="slider" aria-label="Seek" tabindex="0">
+      <div class="fill" id="fill"></div>
+      <span class="tick" style="left: 4.19%"></span><span class="tick" style="left: 19.83%"></span><span class="tick" style="left: 36.64%"></span><span class="tick" style="left: 87.95%"></span>
+    </div>
+    <div class="ptime"><span id="t-cur">0:00</span><span id="t-dur">2:02</span></div>
+  </div>
+  <button class="speed" id="speed" aria-label="Playback speed">1×</button>
+</div>
+<script type="application/json" id="bc-seg">[{"box_id": -1, "end": 4.75, "kind": "open", "start": 0.0, "text": "This is HN Weekly, your week on Hacker News in two minutes.", "title": "HN Weekly Open"}, {"box_id": 0, "end": 23.85, "kind": "story", "start": 5.15, "text": "Levent Alp\u00f6ge released a fifteen million line AI-assisted formal proof of the Generalized Riemann Hypothesis using Lean. Hacker News is divided, impressed by the scale and rigor but cautious about verifying such massive proofs and the ongoing need for human insight.", "title": "Massive AI-Assisted GRH Proof"}, {"box_id": 1, "end": 44.5, "kind": "story", "start": 24.35, "text": "Anthropic debuted on Nasdaq with a two trillion dollar valuation that quickly dropped amid tech sell-off, sparking doubts about AI sector growth. The community is skeptical of the high valuations and worries over the sustainability and long-term profitability of AI companies.", "title": "Anthropic\u0027s Volatile IPO"}, {"box_id": 2, "end": 60.55, "kind": "story", "start": 45.0, "text": "Alessandro Masullo released a draft proof of the Generalized Riemann Hypothesis that has known flaws and is under expert scrutiny. Hacker News respects the effort but remains skeptical of correctness and debates AI\u0027s role in pressuring proof releases.", "title": "Draft GRH Proof Reviewed"}, {"box_id": 3, "end": 71.45, "kind": "rapid", "start": 61.05, "text": "Nvidia faces CEO departure, SEC probes, and rising competition; HN is skeptical about its innovation and governance.", "title": "Nvidia CEO and Challenges"}, {"box_id": 4, "end": 80.5, "kind": "rapid", "start": 71.7, "text": "Carnegie Mellon launched free CS courses on YouTube; HN welcomes this but questions video-only learning value.", "title": "CMU CS Courses Launch"}, {"box_id": 5, "end": 87.25, "kind": "rapid", "start": 80.75, "text": "Virus therapy halted tumors in three patients; HN shows cautious hope pending larger studies.", "title": "Pancreatic Cancer Trials"}, {"box_id": 6, "end": 97.5, "kind": "rapid", "start": 87.5, "text": "Inkling 2 Mini and LookAtMyQuant tools promise efficient AI on devices; HN discussion mixed on impact and documentation.", "title": "Inkling 2 Mini Transformer"}, {"box_id": 7, "end": 107.75, "kind": "rapid", "start": 97.75, "text": "Quad9 stopped French DNS service after legal domain blocking; HN condemns censorship and doubts effectiveness.", "title": "Quad9 Exits France"}, {"box_id": -1, "end": 118.95, "kind": "wrap", "start": 108.0, "text": "Formal AI proofs, AI firm valuation concerns, and internet freedom clashes with censorship dominated lively debates on Hacker News this week.", "title": "Week Summary"}, {"box_id": -1, "end": 122.75, "kind": "signoff", "start": 119.45, "text": "That\u0027s the week. See you next Monday.", "title": "HN Weekly Close"}]</script>
+
+
+
+<section class="sec">
+  <h2><span>Security &amp; Privacy</span>
+    <span class="sheat" title="Section activity: 29,067 points + comments">
+      <span class="bar"><span style="width: 100%"></span></span><span class="hottest">hottest</span>
+    </span>
+  </h2>
+  <div class="grid">
+  
+    
+    <article class="box seekable" data-box-id="7">
+      <div class="top">
+        <h3><a href="https://blog.cloudflare.com/quad9-withdrawal-from-france/">Quad9 DNS Exit from France</a></h3>
+        <span class="flames f2" title="Activity: 2,337 points + comments">🔥🔥</span>
+      </div>
+      <p class="gist">Quad9 ceased French service after court ruled to block piracy-related domains.</p>
+      <span class="mood v-skeptical">🤨 skeptical</span>
+      <p class="take">“Sympathy for Quad9; widespread criticism of DNS blocking as censorship and ineffective”</p>
+      <div class="foot">
+        <span class="at" title="Play this story">▶ 1:37</span>
+        
+        <details class="threads">
+          <summary>+1 thread</summary>
+          <ul>
+          <li><a href="https://news.ycombinator.com/item?id=50545958">DNS resolvers are the wrong place to fight piracy</a></li>
+          </ul>
+        </details>
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50538994">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="10">
+      <div class="top">
+        <h3><a href="https://www.wiz.io/blog/nginx-http2-rce-vulnerabilities">NGINX HTTP/2 RCE Bugs</a></h3>
+        <span class="flames f2" title="Activity: 2,161 points + comments">🔥🔥</span>
+      </div>
+      <p class="gist">Two critical unauthenticated RCEs found in NGINX HTTP/2; patches released promptly.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Serious threat but disabling HTTP/2 not always viable; AI&#39;s role in discovery debated”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50547374">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="11">
+      <div class="top">
+        <h3><a href="https://calif.io/java4shell/">OpenJDK Java4Shell RCE Bug</a></h3>
+        <span class="flames f2" title="Activity: 2,124 points + comments">🔥🔥</span>
+      </div>
+      <p class="gist">OpenJDK Base64 AVX-512 bug caused critical RCE vulnerability fixed by Oracle.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Recognized severity but exploit limits debated; calls for less legacy code remain”</p>
+      <div class="foot">
+        
+        
+        <details class="threads">
+          <summary>+1 thread</summary>
+          <ul>
+          <li><a href="https://news.ycombinator.com/item?id=50558906">Someone reported java4shell bug in September 2026</a></li>
+          </ul>
+        </details>
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50538240">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="16">
+      <div class="top">
+        <h3><a href="https://www.cnn.com/2026/11/17/politics/highly-classified-national-security-communications-network-goes-down">NSA NSANet Outage After PHP Patch</a></h3>
+        <span class="flames f1" title="Activity: 1,776 points + comments">🔥</span>
+      </div>
+      <p class="gist">NSA&#39;s classified network outage linked to PHP patch; no cyberattack involved.</p>
+      <span class="mood v-skeptical">🤨 skeptical</span>
+      <p class="take">“Seen as routine issue; skepticism about official statements and AI exploit fears”</p>
+      <div class="foot">
+        
+        
+        <details class="threads">
+          <summary>+1 thread</summary>
+          <ul>
+          <li><a href="https://news.ycombinator.com/item?id=50533089">NSA Internal Network Down</a></li>
+          </ul>
+        </details>
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50532849">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="17">
+      <div class="top">
+        <h3><a href="https://www1.wdr.de/nrw/rheinland/rhein-erft-kreis/technischer-defekt-chlor-phantasialand-100.html">Microsoft 365 Outage Causes Poisoning</a></h3>
+        <span class="flames f1" title="Activity: 1,738 points + comments">🔥</span>
+      </div>
+      <p class="gist">Microsoft bug delayed alerts, causing chlorine poisoning due to failed pool notifications.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Fault lies in safety design; highlights challenges in large system management”</p>
+      <div class="foot">
+        
+        
+        <details class="threads">
+          <summary>+1 thread</summary>
+          <ul>
+          <li><a href="https://news.ycombinator.com/item?id=50517321">Microsoft blames monster email outage on software defect introduced in July fix</a></li>
+          </ul>
+        </details>
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50509411">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+  </div>
+</section>
+
+<section class="sec">
+  <h2><span>Business &amp; Startups</span>
+    <span class="sheat" title="Section activity: 20,230 points + comments">
+      <span class="bar"><span style="width: 70%"></span></span>
+    </span>
+  </h2>
+  <div class="grid">
+  
+    
+    <article class="box seekable" data-box-id="1">
+      <div class="top">
+        <h3><a href="https://www.reuters.com/business/finance/anthropics-historic-debut-put-ais-promise-peril-wall-st-test-2026-11-19/">Anthropic Nasdaq IPO Volatility</a></h3>
+        <span class="flames f3" title="Activity: 6,149 points + comments">🔥🔥🔥</span>
+      </div>
+      <p class="gist">Anthropic IPO valued around $2T dropped quickly amid AI and tech market sell-off.</p>
+      <span class="mood v-skeptical">🤨 skeptical</span>
+      <p class="take">“Skeptical of valuation and hype; concerns about overvaluation and sustainable growth”</p>
+      <div class="foot">
+        <span class="at" title="Play this story">▶ 0:24</span>
+        
+        <details class="threads">
+          <summary>+2 threads</summary>
+          <ul>
+          <li><a href="https://news.ycombinator.com/item?id=50574383">Nasdaq erases all 2026 gains as AI sell-off dampens Anthropic’s second day</a></li><li><a href="https://news.ycombinator.com/item?id=50553843">Anthropic prices initial public offering</a></li>
+          </ul>
+        </details>
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50562754">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box seekable" data-box-id="3">
+      <div class="top">
+        <h3><a href="https://www.ft.com/content/dbde7a30-548c-4f9d-a4be-7898a0c24dcf">Nvidia CEO Exit and Challenges</a></h3>
+        <span class="flames f3" title="Activity: 3,072 points + comments">🔥🔥🔥</span>
+      </div>
+      <p class="gist">Nvidia faces CEO departure, SEC probe on finances, and rising AI chip competition.</p>
+      <span class="mood v-skeptical">🤨 skeptical</span>
+      <p class="take">“Community doubts future without Huang, wary of financial scrutiny and market pressures”</p>
+      <div class="foot">
+        <span class="at" title="Play this story">▶ 1:01</span>
+        
+        <details class="threads">
+          <summary>+3 threads</summary>
+          <ul>
+          <li><a href="https://news.ycombinator.com/item?id=50512235">What&#39;s Next for Nvidia?</a></li><li><a href="https://news.ycombinator.com/item?id=50581438">US SEC&#39;s Nvidia probe is examining potential accounting issues – sources</a></li><li><a href="https://news.ycombinator.com/item?id=50518567">Nvidia was in trouble before the Jensen Huang mess</a></li>
+          </ul>
+        </details>
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50534631">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="13">
+      <div class="top">
+        <h3><a href="https://www.caranddriver.com/news/a74490092/toyota-nissan-honda-standardize-parts-lower-costs/">Japanese Automakers Parts Standardization</a></h3>
+        <span class="flames f1" title="Activity: 1,925 points + comments">🔥</span>
+      </div>
+      <p class="gist">Toyota, Nissan, Honda unify parts to reduce costs and compete with Chinese rivals.</p>
+      <span class="mood v-informative">💡 informative</span>
+      <p class="take">“Seen as practical but late; concerns about innovation and EV market lag persist”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50596133">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="14">
+      <div class="top">
+        <h3><a href="https://betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power/">Anthropic&#39;s Fossil Fuel Energy Use</a></h3>
+        <span class="flames f1" title="Activity: 1,864 points + comments">🔥</span>
+      </div>
+      <p class="gist">By 2028, 87% gas and 11% coal power Anthropic&#39;s data centers causing pollution.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Community condemns fossil dependency; calls for regulation amid systemic green challenges”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50597612">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="19">
+      <div class="top">
+        <h3><a href="http://groundworkcollaborative.org/news/amazons-decoy-deals-groundwork-investigation-reveals-nearly-1-in-3-black-friday-and-cyber-monday-deals-advertised-by-amazon-offered-no-savings-to-shoppers-nearly-1-in-10-w/">Amazon Black Friday Pricing Probe</a></h3>
+        <span class="flames f1" title="Activity: 1,533 points + comments">🔥</span>
+      </div>
+      <p class="gist">Investigation found many Amazon deals not discounted or even overpriced.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Common practice; recommends price tracking tools and clearer discount disclosures”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50517488">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+  </div>
+</section>
+
+<section class="sec">
+  <h2><span>Society, Policy &amp; Culture</span>
+    <span class="sheat" title="Section activity: 19,172 points + comments">
+      <span class="bar"><span style="width: 66%"></span></span>
+    </span>
+  </h2>
+  <div class="grid">
+  
+    
+    <article class="box" data-box-id="12">
+      <div class="top">
+        <h3><a href="https://www.nytimes.com/2026/11/17/upshot/school-phone-bans-study-scores.html">School Phone Bans Improve Scores</a></h3>
+        <span class="flames f1" title="Activity: 1,956 points + comments">🔥</span>
+      </div>
+      <p class="gist">Study shows phone bans modestly improve test scores and social engagement.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Appreciated for social gains but skepticism on test score impact and study methods”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50530163">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+  </div>
+</section>
+
+<section class="sec">
+  <h2><span>AI &amp; ML</span>
+    <span class="sheat" title="Section activity: 18,405 points + comments">
+      <span class="bar"><span style="width: 63%"></span></span>
+    </span>
+  </h2>
+  <div class="grid">
+  
+    
+    <article class="box seekable" data-box-id="6">
+      <div class="top">
+        <h3><a href="https://thinkingmachines.ai/news/inkling-2-mini/">Inkling 2 Mini Transformer Model</a></h3>
+        <span class="flames f2" title="Activity: 2,475 points + comments">🔥🔥</span>
+      </div>
+      <p class="gist">Inkling 2 Mini MoE transformer and LookAtMyQuant compression tool released for efficient AI.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Excitement over design and compression; some skepticism over real-world reliability”</p>
+      <div class="foot">
+        <span class="at" title="Play this story">▶ 1:27</span>
+        
+        <details class="threads">
+          <summary>+1 thread</summary>
+          <ul>
+          <li><a href="https://news.ycombinator.com/item?id=50591853">Inkling-2-Mini in 5.4 GB Memory</a></li>
+          </ul>
+        </details>
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50581260">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="8">
+      <div class="top">
+        <h3><a href="https://leanprover-community.github.io/blog/posts/riemann-hypothesis/">Lean Formal Riemann Hypothesis Proof</a></h3>
+        <span class="flames f2" title="Activity: 2,240 points + comments">🔥🔥</span>
+      </div>
+      <p class="gist">Alpöge&#39;s 17M-line Lean-verified Riemann Hypothesis proof endorsed by formal communities.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Historic milestone but doubts about massive code size and lack of insight remain”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50589618">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="9">
+      <div class="top">
+        <h3><a href="https://openai.com/index/introducing-gpt-6-2-astra-sol/">OpenAI GPT-6.2 Astra and Sol</a></h3>
+        <span class="flames f2" title="Activity: 2,211 points + comments">🔥🔥</span>
+      </div>
+      <p class="gist">OpenAI launched GPT-6.2 Astra and Sol models focusing on efficiency and performance.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Mixed reviews: praised speed but criticized office output quality and prompt adherence”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50535230">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="15">
+      <div class="top">
+        <h3><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/">Google Gemini 4 Neon AI Model</a></h3>
+        <span class="flames f1" title="Activity: 1,841 points + comments">🔥</span>
+      </div>
+      <p class="gist">Google released Gemini 4 Neon for efficient complex tasks with safety features.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Acknowledged progress; debated practical edge and privacy concerns remain”</p>
+      <div class="foot">
+        
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50552424">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box" data-box-id="18">
+      <div class="top">
+        <h3><a href="https://microsoft.ai/news/microsoft-ignite-2026/">Microsoft MAI Code 2 Models</a></h3>
+        <span class="flames f1" title="Activity: 1,574 points + comments">🔥</span>
+      </div>
+      <p class="gist">Microsoft launched multiple AI models emphasizing cost efficiency and coding performance.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Cautious optimism tempered by benchmark skepticism and calls for openness”</p>
+      <div class="foot">
+        
+        
+        <details class="threads">
+          <summary>+1 thread</summary>
+          <ul>
+          <li><a href="https://news.ycombinator.com/item?id=50535885">MAI Code 2 and Code 2 Flash</a></li>
+          </ul>
+        </details>
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50548021">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+  </div>
+</section>
+
+<section class="sec">
+  <h2><span>Science &amp; Hardware</span>
+    <span class="sheat" title="Section activity: 17,134 points + comments">
+      <span class="bar"><span style="width: 59%"></span></span>
+    </span>
+  </h2>
+  <div class="grid">
+  
+    
+    <article class="box seekable" data-box-id="0">
+      <div class="top">
+        <h3><a href="https://alpo.ge/remark.pdf">GRH Proofs with AI and Lean</a></h3>
+        <span class="flames f3" title="Activity: 6,710 points + comments">🔥🔥🔥</span>
+      </div>
+      <p class="gist">Levent Alpöge released 15M-line AI-assisted GRH proof using Lean theorem prover.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Impressive scale and rigor but skepticism about verifiability and human insight needed”</p>
+      <div class="foot">
+        <span class="at" title="Play this story">▶ 0:05</span>
+        
+        <details class="threads">
+          <summary>+3 threads</summary>
+          <ul>
+          <li><a href="https://news.ycombinator.com/item?id=50578358">Unforced Navier-Stokes Singularity and the Generalized Riemann Hypothesis</a></li><li><a href="https://news.ycombinator.com/item?id=50581084">The stochastic parrots have apparently proved the Riemann Hypothesis</a></li><li><a href="https://news.ycombinator.com/item?id=50598441">Masullo on the Riemann Hypothesis</a></li>
+          </ul>
+        </details>
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50574968">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box seekable" data-box-id="2">
+      <div class="top">
+        <h3><a href="https://math216.wordpress.com/2026/11/20/hurried-announcement-alessandro-masullo-grh/">Masullo&#39;s Draft GRH Proof</a></h3>
+        <span class="flames f3" title="Activity: 3,649 points + comments">🔥🔥🔥</span>
+      </div>
+      <p class="gist">Alessandro Masullo released draft GRH proof with known issues, under expert review.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Acknowledged effort but experts skeptical; rushed release raises credit concerns from AI race”</p>
+      <div class="foot">
+        <span class="at" title="Play this story">▶ 0:45</span>
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50579568">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+    
+    <article class="box seekable" data-box-id="5">
+      <div class="top">
+        <h3><a href="https://www.theguardian.com/society/2026/nov/20/pill-pancreatic-cancer-breakthrough-daraxonrasib">Pancreatic Cancer Virus Trial</a></h3>
+        <span class="flames f2" title="Activity: 2,694 points + comments">🔥🔥</span>
+      </div>
+      <p class="gist">Virus injection halted tumors in 3 patients; new drug shrinks tumors in trials.</p>
+      <span class="mood v-divided">😐 divided</span>
+      <p class="take">“Cautious hope for breakthroughs amid need for larger studies and slow progress”</p>
+      <div class="foot">
+        <span class="at" title="Play this story">▶ 1:20</span>
+        
+        <details class="threads">
+          <summary>+1 thread</summary>
+          <ul>
+          <li><a href="https://news.ycombinator.com/item?id=50563066">Pancreatic cancer halted by virus injection in three patients</a></li>
+          </ul>
+        </details>
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50582069">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+  </div>
+</section>
+
+<section class="sec">
+  <h2><span>Launches &amp; Repos</span>
+    <span class="sheat" title="Section activity: 9,933 points + comments">
+      <span class="bar"><span style="width: 34%"></span></span>
+    </span>
+  </h2>
+  <div class="grid">
+  
+    
+    <article class="box seekable" data-box-id="4">
+      <div class="top">
+        <h3><a href="https://www.cs.cmu.edu/learn/">CMU Free CS Courses on YouTube</a></h3>
+        <span class="flames f3" title="Activity: 2,721 points + comments">🔥🔥🔥</span>
+      </div>
+      <p class="gist">CMU launched free full-semester CS lectures on YouTube, plans AI tools and courseware.</p>
+      <span class="mood v-informative">💡 informative</span>
+      <p class="take">“Appreciated for quality but critiques on audio and lack of interactive learning”</p>
+      <div class="foot">
+        <span class="at" title="Play this story">▶ 1:11</span>
+        
+        <a class="discuss" href="https://news.ycombinator.com/item?id=50522980">discuss →</a>
+      </div>
+      <span class="live-badge" aria-hidden="true">🔊 On air</span>
+    </article>
+  
+  </div>
+</section>
+
+
+
+<details class="transcript">
+  <summary>Read the transcript</summary>
+  <ol>
+  
+    <li data-seg="0"><button class="ts" data-t="0.0">0:00</button>
+      <span class="tk">Headlines</span> This is HN Weekly, your week on Hacker News in two minutes.</li>
+  
+    <li data-seg="1"><button class="ts" data-t="5.15">0:05</button>
+      <span class="tk">Top story</span> Levent Alpöge released a fifteen million line AI-assisted formal proof of the Generalized Riemann Hypothesis using Lean. Hacker News is divided, impressed by the scale and rigor but cautious about verifying such massive proofs and the ongoing need for human insight.</li>
+  
+    <li data-seg="2"><button class="ts" data-t="24.35">0:24</button>
+      <span class="tk">Top story</span> Anthropic debuted on Nasdaq with a two trillion dollar valuation that quickly dropped amid tech sell-off, sparking doubts about AI sector growth. The community is skeptical of the high valuations and worries over the sustainability and long-term profitability of AI companies.</li>
+  
+    <li data-seg="3"><button class="ts" data-t="45.0">0:45</button>
+      <span class="tk">Top story</span> Alessandro Masullo released a draft proof of the Generalized Riemann Hypothesis that has known flaws and is under expert scrutiny. Hacker News respects the effort but remains skeptical of correctness and debates AI&#39;s role in pressuring proof releases.</li>
+  
+    <li data-seg="4"><button class="ts" data-t="61.05">1:01</button>
+      <span class="tk">Quick hits</span> Nvidia faces CEO departure, SEC probes, and rising competition; HN is skeptical about its innovation and governance.</li>
+  
+    <li data-seg="5"><button class="ts" data-t="71.7">1:11</button>
+      <span class="tk">Quick hits</span> Carnegie Mellon launched free CS courses on YouTube; HN welcomes this but questions video-only learning value.</li>
+  
+    <li data-seg="6"><button class="ts" data-t="80.75">1:20</button>
+      <span class="tk">Quick hits</span> Virus therapy halted tumors in three patients; HN shows cautious hope pending larger studies.</li>
+  
+    <li data-seg="7"><button class="ts" data-t="87.5">1:27</button>
+      <span class="tk">Quick hits</span> Inkling 2 Mini and LookAtMyQuant tools promise efficient AI on devices; HN discussion mixed on impact and documentation.</li>
+  
+    <li data-seg="8"><button class="ts" data-t="97.75">1:37</button>
+      <span class="tk">Quick hits</span> Quad9 stopped French DNS service after legal domain blocking; HN condemns censorship and doubts effectiveness.</li>
+  
+    <li data-seg="9"><button class="ts" data-t="108.0">1:48</button>
+      <span class="tk">The week in one line</span> Formal AI proofs, AI firm valuation concerns, and internet freedom clashes with censorship dominated lively debates on Hacker News this week.</li>
+  
+    <li data-seg="10"><button class="ts" data-t="119.45">1:59</button>
+      <span class="tk">Sign-off</span> That&#39;s the week. See you next Monday.</li>
+  
+  </ol>
+</details>
+
+
+
+
+<div class="stage" id="stage" role="dialog" aria-modal="true" aria-label="HN Weekly bulletin">
+  <div class="st-bar">
+    <span class="brand"><span class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4M16.2 7.8a6 6 0 0 1 0 8.4M4.9 4.9a10 10 0 0 0 0 14.2M19.1 4.9a10 10 0 0 1 0 14.2"/></svg></span>HN WEEKLY</span>
+    <span class="onair"><span class="dot"></span>ON AIR</span>
+    <span class="st-date">Nov 16 – Nov 22, 2026</span>
+    <button class="st-btn" id="st-full" aria-label="Full screen" title="Full screen (F)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    <button class="st-btn" id="st-close" aria-label="Close presentation" title="Close (Esc)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="slides">
+  
+    
+    <section class="slide k-open" data-i="0" aria-hidden="true">
+      <div class="s-inner">
+    
+      <div class="s-kicker">This week on Hacker News</div>
+      <div class="s-date">Nov 16 – Nov 22, 2026</div>
+      <h2 class="s-head">Lean theorem prover achieved a 17M-line formal Riemann Hypothesis proof; Anthropic IPO and pollution concerns; Google, Microsoft, OpenAI release efficient AI models; critical NGINX and OpenJDK RCE bugs patched.</h2>
+      <div class="s-actions s-startrow"><button class="s-replay" id="st-start">▶ Play the bulletin · 2:02</button><button class="s-plain" id="st-skip">Skip to the stories</button></div>
+      <div class="s-coming"><span>Coming up</span>
+        <ol><li>GRH Proofs with AI and Lean</li><li>Anthropic Nasdaq IPO Volatility</li><li>Masullo&#39;s Draft GRH Proof</li></ol>
+      </div>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-story" data-i="1" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Top story 1 of 3<span class="s-sec">Science &amp; Hardware</span><span class="flames f3">🔥🔥🔥</span></div>
+      <h2 class="s-title">GRH Proofs with AI and Lean</h2>
+      <p class="s-gist">Levent Alpöge released 15M-line AI-assisted GRH proof using Lean theorem prover.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Impressive scale and rigor but skepticism about verifiability and human insight needed”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50574968" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-story" data-i="2" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Top story 2 of 3<span class="s-sec">Business &amp; Startups</span><span class="flames f3">🔥🔥🔥</span></div>
+      <h2 class="s-title">Anthropic Nasdaq IPO Volatility</h2>
+      <p class="s-gist">Anthropic IPO valued around $2T dropped quickly amid AI and tech market sell-off.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-skeptical">🤨 skeptical</span>
+        <p class="s-take">“Skeptical of valuation and hype; concerns about overvaluation and sustainable growth”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50562754" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-story" data-i="3" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Top story 3 of 3<span class="s-sec">Science &amp; Hardware</span><span class="flames f3">🔥🔥🔥</span></div>
+      <h2 class="s-title">Masullo&#39;s Draft GRH Proof</h2>
+      <p class="s-gist">Alessandro Masullo released draft GRH proof with known issues, under expert review.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Acknowledged effort but experts skeptical; rushed release raises credit concerns from AI race”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50579568" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-rapid" data-i="4" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Quick hits<span class="s-sec">Business &amp; Startups</span><span class="flames f3">🔥🔥🔥</span></div>
+      <h2 class="s-title">Nvidia CEO Exit and Challenges</h2>
+      <p class="s-gist">Nvidia faces CEO departure, SEC probe on finances, and rising AI chip competition.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-skeptical">🤨 skeptical</span>
+        <p class="s-take">“Community doubts future without Huang, wary of financial scrutiny and market pressures”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50534631" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-rapid" data-i="5" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Quick hits<span class="s-sec">Launches &amp; Repos</span><span class="flames f3">🔥🔥🔥</span></div>
+      <h2 class="s-title">CMU Free CS Courses on YouTube</h2>
+      <p class="s-gist">CMU launched free full-semester CS lectures on YouTube, plans AI tools and courseware.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-informative">💡 informative</span>
+        <p class="s-take">“Appreciated for quality but critiques on audio and lack of interactive learning”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50522980" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-rapid" data-i="6" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Quick hits<span class="s-sec">Science &amp; Hardware</span><span class="flames f2">🔥🔥</span></div>
+      <h2 class="s-title">Pancreatic Cancer Virus Trial</h2>
+      <p class="s-gist">Virus injection halted tumors in 3 patients; new drug shrinks tumors in trials.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Cautious hope for breakthroughs amid need for larger studies and slow progress”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50582069" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-rapid" data-i="7" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Quick hits<span class="s-sec">AI &amp; ML</span><span class="flames f2">🔥🔥</span></div>
+      <h2 class="s-title">Inkling 2 Mini Transformer Model</h2>
+      <p class="s-gist">Inkling 2 Mini MoE transformer and LookAtMyQuant compression tool released for efficient AI.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-divided">😐 divided</span>
+        <p class="s-take">“Excitement over design and compression; some skepticism over real-world reliability”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50581260" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-rapid" data-i="8" aria-hidden="true">
+      <div class="s-inner">
+    
+      
+      
+      <div class="s-kicker">Quick hits<span class="s-sec">Security &amp; Privacy</span><span class="flames f2">🔥🔥</span></div>
+      <h2 class="s-title">Quad9 DNS Exit from France</h2>
+      <p class="s-gist">Quad9 ceased French service after court ruled to block piracy-related domains.</p>
+      <div class="s-hn">
+        <span class="s-hn-label">On Hacker News</span>
+        <span class="mood v-skeptical">🤨 skeptical</span>
+        <p class="s-take">“Sympathy for Quad9; widespread criticism of DNS blocking as censorship and ineffective”</p>
+      </div>
+      <a class="s-link" href="https://news.ycombinator.com/item?id=50538994" target="_blank" rel="noopener">Join the discussion →</a>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-wrap" data-i="9" aria-hidden="true">
+      <div class="s-inner">
+    
+      <div class="s-kicker">The week in one line</div>
+      <p class="s-wrap">Formal AI proofs, AI firm valuation concerns, and internet freedom clashes with censorship dominated lively debates on Hacker News this week.</p>
+      <div class="s-by">Drawn from all 20 highlights · Nov 16 – Nov 22, 2026</div>
+    
+      </div>
+    </section>
+  
+    
+    <section class="slide k-signoff" data-i="10" aria-hidden="true">
+      <div class="s-inner">
+    
+      <div class="s-kicker">HN Weekly</div>
+      <h2 class="s-title">That's the week.</h2>
+      <p class="s-gist">That&#39;s the week. See you next Monday.</p>
+      <div class="s-actions"><button class="s-replay" id="st-replay">↺ Watch again</button><button class="s-plain" id="st-browse">Browse all 20 stories</button></div>
+    
+      </div>
+    </section>
+  
+  </div>
+  <div class="st-low">
+    <div class="caption empty" id="caption"></div>
+    <div class="lower3"><span class="l3-kind" id="l3-kind">HN Weekly</span><span class="l3-title" id="l3-title">Nov 16 – Nov 22, 2026</span></div>
+  </div>
+  <div class="st-ctrl">
+    <button class="st-btn" id="st-prev" aria-label="Previous segment" title="Previous (←)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M19 5l-10 7 10 7z"/></svg></button>
+    <button class="play" id="st-play" aria-label="Play bulletin">
+      <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </button>
+    <button class="st-btn" id="st-next" aria-label="Next segment" title="Next (→)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M5 5l10 7-10 7z"/></svg></button>
+    <div class="chapters"><button class="ch" style="flex-grow: 4.8" data-i="0" aria-label="HN Weekly Open" title="HN Weekly Open"><i><b></b></i></button><button class="ch" style="flex-grow: 18.7" data-i="1" aria-label="Massive AI-Assisted GRH Proof" title="Massive AI-Assisted GRH Proof"><i><b></b></i></button><button class="ch" style="flex-grow: 20.1" data-i="2" aria-label="Anthropic&#39;s Volatile IPO" title="Anthropic&#39;s Volatile IPO"><i><b></b></i></button><button class="ch" style="flex-grow: 15.5" data-i="3" aria-label="Draft GRH Proof Reviewed" title="Draft GRH Proof Reviewed"><i><b></b></i></button><button class="ch" style="flex-grow: 10.4" data-i="4" aria-label="Nvidia CEO and Challenges" title="Nvidia CEO and Challenges"><i><b></b></i></button><button class="ch" style="flex-grow: 8.8" data-i="5" aria-label="CMU CS Courses Launch" title="CMU CS Courses Launch"><i><b></b></i></button><button class="ch" style="flex-grow: 6.5" data-i="6" aria-label="Pancreatic Cancer Trials" title="Pancreatic Cancer Trials"><i><b></b></i></button><button class="ch" style="flex-grow: 10.0" data-i="7" aria-label="Inkling 2 Mini Transformer" title="Inkling 2 Mini Transformer"><i><b></b></i></button><button class="ch" style="flex-grow: 10.0" data-i="8" aria-label="Quad9 Exits France" title="Quad9 Exits France"><i><b></b></i></button><button class="ch" style="flex-grow: 11.0" data-i="9" aria-label="Week Summary" title="Week Summary"><i><b></b></i></button><button class="ch" style="flex-grow: 3.3" data-i="10" aria-label="HN Weekly Close" title="HN Weekly Close"><i><b></b></i></button></div>
+    <span class="st-time" id="st-time">0:00 / 2:02</span>
+    <button class="st-btn st-cc" id="st-cc" aria-pressed="true" title="Subtitles (C)">CC</button>
+  </div>
+</div>
+
+
+
+<details class="more">
+  <summary>103 more stories this week</summary>
+  <ul>
+  <li><a href="https://pub.cba.mit.edu/863.26/site/">How to make almost anything</a> <a class="hn" href="https://news.ycombinator.com/item?id=50514470">hn</a></li><li><a href="https://blog.harrison.page/garage-door-spam/">Garage Door Spam</a> <a class="hn" href="https://news.ycombinator.com/item?id=50519231">hn</a></li><li><a href="https://qwen.ai/blog?id=qwen4-max">Qwen4-Max</a> <a class="hn" href="https://news.ycombinator.com/item?id=50513215">hn</a></li><li><a href="https://apnews.com/article/bank-outage-chase-wells-fargo-truist-50fee2693c22f597fa6ca51a97ef2cda">Technical issue at JPMorgan Chase triggers online banking delays for US banks</a> <a class="hn" href="https://news.ycombinator.com/item?id=50521045">hn</a></li><li><a href="https://violetpixel.com/blog/2026-11-17-we-need-smart-people-who-give-a-shit/">We need smart people who give a shit</a> <a class="hn" href="https://news.ycombinator.com/item?id=50554045">hn</a></li><li><a href="https://poolp.org/posts/2026-11-20/ill-never-buy-framework-hardware-again/">I&#39;ll never buy Framework hardware again</a> <a class="hn" href="https://news.ycombinator.com/item?id=50576855">hn</a></li><li><a href="https://nicolasbouliane.com/blog/death-by-ai">AI is killing All About Berlin</a> <a class="hn" href="https://news.ycombinator.com/item?id=50542705">hn</a></li><li><a href="https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-publica-primeiro-codigo-fonte-aberto-no-github-e-amplia-transparencia-da-reforma-tributaria">Brazil&#39;s tax authority open-sources its tax calculator on GitHub under MIT</a> <a class="hn" href="https://news.ycombinator.com/item?id=50532613">hn</a></li><li><a href="https://www.inside-db.com/">Inside Deutsche Bank</a> <a class="hn" href="https://news.ycombinator.com/item?id=50547620">hn</a></li><li><a href="https://slopstrap.mikelacher.com/">Slopstrap – Make your site look hastily vibecoded</a> <a class="hn" href="https://news.ycombinator.com/item?id=50576012">hn</a></li><li><a href="https://verialabs.com/ruby2shell/">Ruby2ßhell: Pre-authentication RCE on stock Rails</a> <a class="hn" href="https://news.ycombinator.com/item?id=50556287">hn</a></li><li><a href="https://xusheng.dev/posts/windows-coding-agent-telemetry/">Windows 11 is collecting data on which coding agents and developer tools you use</a> <a class="hn" href="https://news.ycombinator.com/item?id=50524736">hn</a></li><li><a href="https://developer.apple.com/system-status/">Apple Services Down</a> <a class="hn" href="https://news.ycombinator.com/item?id=50535238">hn</a></li><li><a href="https://www.bugmenot.com/">BugMeNot has closed</a> <a class="hn" href="https://news.ycombinator.com/item?id=50523601">hn</a></li><li><a href="https://news.ycombinator.com/item?id=50583761">Ask HN: I have been unemployed for 2y. 15 years of experience, US. What to do?</a> <a class="hn" href="https://news.ycombinator.com/item?id=50583761">hn</a></li><li><a href="https://element.io/blog/how-the-european-commission-rolled-out-matrix-to-more-than-40-000-staff/">How the European Commission rolled out Matrix to more than 40k staff</a> <a class="hn" href="https://news.ycombinator.com/item?id=50558533">hn</a></li><li><a href="https://kottke.org/17/06/if-you-cant-explain-something-in-simple-terms-you-dont-understand-it">If you can&#39;t explain something in simple terms, you don&#39;t understand it (2017)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50572355">hn</a></li><li><a href="https://revscope.co/blog/search-seo-geo-2026/">Google&#39;s AI answers reducing search traffic by 40%</a> <a class="hn" href="https://news.ycombinator.com/item?id=50540178">hn</a></li><li><a href="https://blog.report-uri.com/worlds-largest-brands-infected-with-malware-via-optimizely/">Optimizely compromised, served malware on Zoom, GitLab</a> <a class="hn" href="https://news.ycombinator.com/item?id=50524767">hn</a></li><li><a href="https://www.science.org/content/blog-post/detonating-huge-pile-lead-azide-really">Detonating a pile of lead azide</a> <a class="hn" href="https://news.ycombinator.com/item?id=50588982">hn</a></li><li><a href="https://macanorak.com/uk-government-forced-to-admit-it-issued-apple-a-secret-encryption-order/">UK government forced to admit it issued Apple a secret encryption order</a> <a class="hn" href="https://news.ycombinator.com/item?id=50562113">hn</a></li><li><a href="https://blog.tymscar.com/posts/studiodisplayethernet/">My monitor was cutting my download speed by 75%</a> <a class="hn" href="https://news.ycombinator.com/item?id=50587875">hn</a></li><li><a href="https://architectlabs.com/blog/frostbite">Frostbite: A new CPU architecture discovered, designed and verified by AI</a> <a class="hn" href="https://news.ycombinator.com/item?id=50572503">hn</a></li><li><a href="https://iter.ca/post/ubo-uxss/">Universal XSS in uBlock Origin from website-driven element picker</a> <a class="hn" href="https://news.ycombinator.com/item?id=50513160">hn</a></li><li><a href="https://ounapuu.ee/posts/2026/11/19/unsafeguards/">Fuck Your AI Safeguards</a> <a class="hn" href="https://news.ycombinator.com/item?id=50562262">hn</a></li><li><a href="https://manidoraisamy.com/developer-to-architect.html">We promoted developers into architects without informing them</a> <a class="hn" href="https://news.ycombinator.com/item?id=50579331">hn</a></li><li><a href="https://blog.mozilla.org/en/mozilla/internet-policy/apple-ios-browser-engine-rules/">Why there are still no non-WebKit browsers on iOS</a> <a class="hn" href="https://news.ycombinator.com/item?id=50575644">hn</a></li><li><a href="https://stulle.app/">Sandwich Simulator</a> <a class="hn" href="https://news.ycombinator.com/item?id=50594911">hn</a></li><li><a href="https://signal.org/blog/protecting-your-privacy/">Restricting AI agents in mobile operating systems platforms from capturing data</a> <a class="hn" href="https://news.ycombinator.com/item?id=50572348">hn</a></li><li><a href="https://www.anthropic.com/research/claude-black-hole-physics">Claude solves two open problems in the physics of black holes</a> <a class="hn" href="https://news.ycombinator.com/item?id=50563148">hn</a></li><li><a href="https://ecohustler.com/article/one-corporation-to-pollute-them-all/">Carnival Cruises emits ten times more sulphur oxide than all of Europe&#39;s cars (2019)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50572116">hn</a></li><li><a href="https://trmnl.com/blog/introducing-frame">Frame – 31.5&#34; color ePaper display</a> <a class="hn" href="https://news.ycombinator.com/item?id=50519354">hn</a></li><li><a href="https://openai.com/index/perplexity-and-intelligence/">Perplexity and Intelligence</a> <a class="hn" href="https://news.ycombinator.com/item?id=50601525">hn</a></li><li><a href="https://reddit.com/r/recruitinghell/comments/1xyr6ml/interviewed_at_a_yc_startup_spent_30_hours/">Interviewed at a YC startup, found out they used my LinkedIn without permission</a> <a class="hn" href="https://news.ycombinator.com/item?id=50542135">hn</a></li><li><a href="https://consumerrights.wiki/w/ID.me_terms_required_for_IRS_sign-in">ID.me terms required for IRS sign-in</a> <a class="hn" href="https://news.ycombinator.com/item?id=50540437">hn</a></li><li><a href="https://grapheneos.social/@GrapheneOS/117645038299496084">Google is pushing OEMs against GrapheneOS and bootloader unlocking</a> <a class="hn" href="https://news.ycombinator.com/item?id=50570479">hn</a></li><li><a href="https://europeanbusinessmagazine.com/ai-agents-better-questions-kpmg/">AI agents ask better questions than KPMG accountants in audit trial</a> <a class="hn" href="https://news.ycombinator.com/item?id=50547777">hn</a></li><li><a href="https://arxiv.org/abs/2611.21885">Language Models Can Rewrite Their Own Weights</a> <a class="hn" href="https://news.ycombinator.com/item?id=50577265">hn</a></li><li><a href="https://ductus.sorenblank.com">Handwriting, as a Font</a> <a class="hn" href="https://news.ycombinator.com/item?id=50509972">hn</a></li><li><a href="https://phrack.org/issues/73/introduction_md">Phrack 73</a> <a class="hn" href="https://news.ycombinator.com/item?id=50535992">hn</a></li><li><a href="https://bruceroettgers.eu/blog/protomaps/">Protomaps: Self-hosting map tiles has gotten cheap and easy</a> <a class="hn" href="https://news.ycombinator.com/item?id=50509837">hn</a></li><li><a href="https://github.com/microsoft/onnxruntime">Microsoft&#39;s ONNX Runtime has disappeared from GitHub</a> <a class="hn" href="https://news.ycombinator.com/item?id=50539610">hn</a></li><li><a href="https://burntsushi.net/jiff/">Jiff 1.0: A datetime library for Rust</a> <a class="hn" href="https://news.ycombinator.com/item?id=50519744">hn</a></li><li><a href="https://em-online.bearblog.dev/i-can-tell-you-wrote-this-yourself/">&#34;I can tell you wrote this yourself&#34;</a> <a class="hn" href="https://news.ycombinator.com/item?id=50571189">hn</a></li><li><a href="https://lastbook.org/">Everything you need to survive and rebuild society</a> <a class="hn" href="https://news.ycombinator.com/item?id=50560822">hn</a></li><li><a href="https://www.sciencenorway.no/culture-history-history-of-science/350-years-ago-this-man-discovered-that-light-has-a-finite-speed/2737969">350 years ago, Ole Rømer discovered that light has a finite speed</a> <a class="hn" href="https://news.ycombinator.com/item?id=50536813">hn</a></li><li><a href="https://runta.com/blog/introducing-frontierharness-eval-v1-1/">What is the best harness for each model?</a> <a class="hn" href="https://news.ycombinator.com/item?id=50532191">hn</a></li><li><a href="https://jack.cab/blog/siterate">What is w2rt6byl5nf1opmc-a.com?</a> <a class="hn" href="https://news.ycombinator.com/item?id=50517602">hn</a></li><li><a href="https://www.backblaze.com/company/policy/privacy">Backblaze Notice at Collection and Privacy Policy</a> <a class="hn" href="https://news.ycombinator.com/item?id=50585593">hn</a></li><li><a href="https://kapteko.com/15-million-webservers/">15M web servers on one VM – smoltcp, DPDK, AF_XDP</a> <a class="hn" href="https://news.ycombinator.com/item?id=50556533">hn</a></li><li><a href="https://notnottalmud.substack.com/p/getting-the-mind-to-steer-the-body">Getting the mind to steer the body to steer you</a> <a class="hn" href="https://news.ycombinator.com/item?id=50583028">hn</a></li><li><a href="https://www.breck-mckye.com/blog/2026/11/software-is-breaking-down-at-a-systemic-level/">Software is breaking down at a systemic level</a> <a class="hn" href="https://news.ycombinator.com/item?id=50520866">hn</a></li><li><a href="https://www.postgresql.org/docs/release/19.0/">PostgreSQL 19</a> <a class="hn" href="https://news.ycombinator.com/item?id=50569890">hn</a></li><li><a href="https://cekrem.github.io/posts/if-you-stop-writing-code-you-also-get-worse-at-reviewing-it/">If you stop writing code, you also get worse at reviewing it</a> <a class="hn" href="https://news.ycombinator.com/item?id=50573886">hn</a></li><li><a href="https://ocw.mit.edu/courses/res-16-002-how-to-cad-almost-anything-january-iap-2024/">How to CAD Almost Anything</a> <a class="hn" href="https://news.ycombinator.com/item?id=50528119">hn</a></li><li><a href="https://www.yahoo.com/news/world/articles/russia-reportedly-planned-mass-casualty-090500574.html">Russia reportedly planned mass-casualty attack in Poland to be blamed on Ukraine</a> <a class="hn" href="https://news.ycombinator.com/item?id=50547344">hn</a></li><li><a href="https://github.com/jquery/jquery/releases/tag/4.1.0">jQuery 4.1.0</a> <a class="hn" href="https://news.ycombinator.com/item?id=50537156">hn</a></li><li><a href="https://www.solidjs.com/blog/solid-2-0-the-long-hold/">Solid 2.0</a> <a class="hn" href="https://news.ycombinator.com/item?id=50536387">hn</a></li><li><a href="https://ransomnews.com/burger-king-tweet-bitly-link-hijack-2026/">Old Bitly links are being hijacked</a> <a class="hn" href="https://news.ycombinator.com/item?id=50511395">hn</a></li><li><a href="https://ninlive.com/">NINLIVE: The Nine Inch Nails live archive</a> <a class="hn" href="https://news.ycombinator.com/item?id=50583274">hn</a></li><li><a href="https://git-aarvin.github.io/mei/">Gemini 4 Neon is the new #1 on the Models Engineering Index</a> <a class="hn" href="https://news.ycombinator.com/item?id=50568130">hn</a></li><li><a href="https://github.com/openssl/openssl/pull/33652">OpenSSL: Buffer overflow in EVP_EncodeBlock() (CVE-2026-121481, CVSS 9.8)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50569226">hn</a></li><li><a href="https://jordankrueger.com/blog/better-open-source-not-more-apps/">We don&#39;t need more apps, we need better open source</a> <a class="hn" href="https://news.ycombinator.com/item?id=50532086">hn</a></li><li><a href="https://chillphysicsenjoyer.substack.com/p/chemistry-is-actually-geometry">Chemistry is Actually Geometry</a> <a class="hn" href="https://news.ycombinator.com/item?id=50522643">hn</a></li><li><a href="https://globalcommercegraph.com/writing/the-ninety-eight-percent-slot-machine">The 98% Slot Machine: How Paid Advertising Became an Extraction Tax</a> <a class="hn" href="https://news.ycombinator.com/item?id=50564159">hn</a></li><li><a href="https://curiousbits.nl/blog/do-not-buy-ram-compress/">Do not buy RAM, compress</a> <a class="hn" href="https://news.ycombinator.com/item?id=50557661">hn</a></li><li><a href="https://opencode.ai/product/browse">OpenCode Browse</a> <a class="hn" href="https://news.ycombinator.com/item?id=50523459">hn</a></li><li><a href="https://xenaproject.wordpress.com/2026/11/12/and-the-proof-is-checked-in-lean/">Interpreting claims that a theorem is correct because it was checked in Lean</a> <a class="hn" href="https://news.ycombinator.com/item?id=50515058">hn</a></li><li><a href="https://complexdiscovery.com/harvard-researchers-find-ai-coding-agents-shifted-the-bottleneck-to-code-review/">Harvard researchers find AI coding agents shifted the bottleneck to code review</a> <a class="hn" href="https://news.ycombinator.com/item?id=50538303">hn</a></li><li><a href="https://social.anoxinon.de/@codebergstatus/117636437840688845">Codeberg.org Not Reachable</a> <a class="hn" href="https://news.ycombinator.com/item?id=50544261">hn</a></li><li><a href="https://news.cornell.edu/stories/2026/10/sheep-grazing-solar-fields-offers-farmers-economic-ecological-gains">Grazing sheep in fields with solar arrays</a> <a class="hn" href="https://news.ycombinator.com/item?id=50520182">hn</a></li><li><a href="https://www.drivevault.io/blog/when-will-hard-drive-prices-come-down.html">SSD prices may begin to decline in the latter half of 2027</a> <a class="hn" href="https://news.ycombinator.com/item?id=50557716">hn</a></li><li><a href="https://masnick.com/posts/the-secret-thinkpad-powerbutton-code-to-bring-dead-laptops-back-to-life/">The Secret ThinkPad Powerbutton Code to Bring Dead Laptops Back to Life (2007)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50516473">hn</a></li><li><a href="https://github.com/tristanbuckmaster/navier-stokes/">Finite-time blow-up for the Navier–Stokes equations</a> <a class="hn" href="https://news.ycombinator.com/item?id=50576232">hn</a></li><li><a href="https://krthr.co/paper-folds-and-whats-new-in-fanzines-app/">Making 8-page foldable zines from a single A4 sheet in the browser</a> <a class="hn" href="https://news.ycombinator.com/item?id=50559719">hn</a></li><li><a href="https://energy-based-reasoners.github.io/">Energy-Based Reasoners: 385x more efficient inference</a> <a class="hn" href="https://news.ycombinator.com/item?id=50543989">hn</a></li><li><a href="https://www.slowchronicle.com/posts/llm-assisted-reverse-engineering">LLM assisted reverse engineering</a> <a class="hn" href="https://news.ycombinator.com/item?id=50553225">hn</a></li><li><a href="https://kobi.music/research/dettato">Show HN: I made an audio-to-MIDI model 60x more efficient</a> <a class="hn" href="https://news.ycombinator.com/item?id=50526023">hn</a></li><li><a href="https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/">How the Claude Code team thinks about verification</a> <a class="hn" href="https://news.ycombinator.com/item?id=50529612">hn</a></li><li><a href="https://github.com/gulivan/worker755">Show HN: I built a game where you are an LLM&#39;s subagent</a> <a class="hn" href="https://news.ycombinator.com/item?id=50599762">hn</a></li><li><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/">Genie 4 is now available</a> <a class="hn" href="https://news.ycombinator.com/item?id=50550415">hn</a></li><li><a href="https://www.php.net/releases/8.6/en.php">What&#39;s New in PHP 8.6</a> <a class="hn" href="https://news.ycombinator.com/item?id=50557870">hn</a></li><li><a href="https://www.masteringemacs.org/article/announcing-dreamcoder">DreamCoder: Coding harness and IDE from the author of Mastering Emacs</a> <a class="hn" href="https://news.ycombinator.com/item?id=50581110">hn</a></li><li><a href="https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/">Data Processing Incidents on Inference Providers</a> <a class="hn" href="https://news.ycombinator.com/item?id=50595554">hn</a></li><li><a href="https://lists.gnupg.org/pipermail/gnupg-announce/2026q4/000517.html">GnuPG Security Advisory for GPGME</a> <a class="hn" href="https://news.ycombinator.com/item?id=50587208">hn</a></li><li><a href="https://forum.torproject.org/t/security-release-0-4-9-17/22454">Tor Project Issues Rapid-Response DoS-Defense Fix Amid Sustained DDoS Attack</a> <a class="hn" href="https://news.ycombinator.com/item?id=50512441">hn</a></li><li><a href="https://linebender.org/blog/next-100-guis/">Advice for the next 100 Rust GUIs</a> <a class="hn" href="https://news.ycombinator.com/item?id=50593737">hn</a></li><li><a href="https://osw-alliance.net/en/">Open Social Web Alliance</a> <a class="hn" href="https://news.ycombinator.com/item?id=50600511">hn</a></li><li><a href="https://borretti.me/article/re-riemann">Re: Riemann</a> <a class="hn" href="https://news.ycombinator.com/item?id=50583982">hn</a></li><li><a href="https://github.com/ItsNotRexed/Leonida">Leonida – PC Recompilation of the Xbox Version of GTA 6</a> <a class="hn" href="https://news.ycombinator.com/item?id=50595168">hn</a></li><li><a href="https://eli.thegreenplace.net/2017/clojure-the-perfect-language-to-expand-your-brain/">Clojure will affect the way you think about programming (2017)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50585376">hn</a></li><li><a href="https://github.com/EL4CTEO/fast-anything">Fast-Anything: Don&#39;t rewrite it in Rust. Rewrite the 5% that&#39;s slow</a> <a class="hn" href="https://news.ycombinator.com/item?id=50596155">hn</a></li><li><a href="https://winedroid.soham.sh/demo/">Winedroid – run Android apps without Android (WASM demo)</a> <a class="hn" href="https://news.ycombinator.com/item?id=50580536">hn</a></li><li><a href="https://www.bbc.com/news/articles/cvze7de86pk3o">FBI reportedly investigating apparent hack of its criminal database</a> <a class="hn" href="https://news.ycombinator.com/item?id=50587859">hn</a></li><li><a href="https://simple-bench.com/">Astra 6.2 and Sol 6.2 flop at Simple Bench</a> <a class="hn" href="https://news.ycombinator.com/item?id=50588916">hn</a></li><li><a href="https://www.noemamag.com/the-mythology-of-conscious-ai/">The Mythology of Conscious AI</a> <a class="hn" href="https://news.ycombinator.com/item?id=50595537">hn</a></li><li><a href="https://www.lemonde.fr/en/opinion/article/2026/11/22/as-science-increasingly-shows-the-role-chemical-substances-play-in-lifestyle-diseases-europe-weakens-its-regulations_6786595_23.html">Europe weakens chemical rules as science links them to &#39;lifestyle diseases&#39;</a> <a class="hn" href="https://news.ycombinator.com/item?id=50600677">hn</a></li><li><a href="https://github.com/sebaandrada-cell/PcapAnalyzer">PcapAnalyzer – self-hosted pcap analyzer with 27 problem detectors</a> <a class="hn" href="https://news.ycombinator.com/item?id=50594132">hn</a></li><li><a href="https://www.jeffgeerling.com/blog/2026/i-joined-the-ntp-pool/">I joined the NTP Pool, but not with my Stratum 1 Pi</a> <a class="hn" href="https://news.ycombinator.com/item?id=50600622">hn</a></li><li><a href="https://www.pandex.io">Pandex – Official European Law for AI Agents, over MCP</a> <a class="hn" href="https://news.ycombinator.com/item?id=50593481">hn</a></li><li><a href="https://alperenkeles.com/posts/vocab-for-testing/">A Better Vocabulary for Testing</a> <a class="hn" href="https://news.ycombinator.com/item?id=50594182">hn</a></li><li><a href="https://www.bloodinthemachine.com/p/ai-is-becoming-a-disaster-for-the">AI is becoming a disaster for the climate</a> <a class="hn" href="https://news.ycombinator.com/item?id=50598961">hn</a></li><li><a href="https://www.nytimes.com/2026/11/22/climate/cop31-climate-summit-ends-climate.html">U.N. Climate Talks Collapse in a Bitter Clash over Fossil Fuels</a> <a class="hn" href="https://news.ycombinator.com/item?id=50599583">hn</a></li>
+  </ul>
+</details>
+
+<div class="ticker" aria-label="More headlines">
+  <span class="ticker-label">ALSO THIS WEEK</span>
+  <div class="ticker-viewport">
+    <div class="ticker-track" style="--dur: 515s">
+      <span class="ticker-run"><a href="https://news.ycombinator.com/item?id=50514470">How to make almost anything</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50519231" tabindex="-1">Garage Door Spam</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50513215" tabindex="-1">Qwen4-Max</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50521045" tabindex="-1">Technical issue at JPMorgan Chase triggers online banking delays for US banks</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50554045" tabindex="-1">We need smart people who give a shit</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50576855" tabindex="-1">I&#39;ll never buy Framework hardware again</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50542705" tabindex="-1">AI is killing All About Berlin</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50532613" tabindex="-1">Brazil&#39;s tax authority open-sources its tax calculator on GitHub under MIT</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50547620" tabindex="-1">Inside Deutsche Bank</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50576012" tabindex="-1">Slopstrap – Make your site look hastily vibecoded</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50556287" tabindex="-1">Ruby2ßhell: Pre-authentication RCE on stock Rails</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50524736" tabindex="-1">Windows 11 is collecting data on which coding agents and developer tools you use</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50535238" tabindex="-1">Apple Services Down</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50523601" tabindex="-1">BugMeNot has closed</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50583761" tabindex="-1">Ask HN: I have been unemployed for 2y. 15 years of experience, US. What to do?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50558533" tabindex="-1">How the European Commission rolled out Matrix to more than 40k staff</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50572355" tabindex="-1">If you can&#39;t explain something in simple terms, you don&#39;t understand it (2017)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50540178" tabindex="-1">Google&#39;s AI answers reducing search traffic by 40%</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50524767" tabindex="-1">Optimizely compromised, served malware on Zoom, GitLab</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50588982" tabindex="-1">Detonating a pile of lead azide</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50562113" tabindex="-1">UK government forced to admit it issued Apple a secret encryption order</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50587875" tabindex="-1">My monitor was cutting my download speed by 75%</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50572503" tabindex="-1">Frostbite: A new CPU architecture discovered, designed and verified by AI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50513160" tabindex="-1">Universal XSS in uBlock Origin from website-driven element picker</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50562262" tabindex="-1">Fuck Your AI Safeguards</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50579331" tabindex="-1">We promoted developers into architects without informing them</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50575644" tabindex="-1">Why there are still no non-WebKit browsers on iOS</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50594911" tabindex="-1">Sandwich Simulator</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50572348" tabindex="-1">Restricting AI agents in mobile operating systems platforms from capturing data</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50563148" tabindex="-1">Claude solves two open problems in the physics of black holes</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50572116" tabindex="-1">Carnival Cruises emits ten times more sulphur oxide than all of Europe&#39;s cars (2019)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50519354" tabindex="-1">Frame – 31.5&#34; color ePaper display</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50601525" tabindex="-1">Perplexity and Intelligence</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50542135" tabindex="-1">Interviewed at a YC startup, found out they used my LinkedIn without permission</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50540437" tabindex="-1">ID.me terms required for IRS sign-in</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50570479" tabindex="-1">Google is pushing OEMs against GrapheneOS and bootloader unlocking</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50547777" tabindex="-1">AI agents ask better questions than KPMG accountants in audit trial</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50577265" tabindex="-1">Language Models Can Rewrite Their Own Weights</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50509972" tabindex="-1">Handwriting, as a Font</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50535992" tabindex="-1">Phrack 73</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50509837" tabindex="-1">Protomaps: Self-hosting map tiles has gotten cheap and easy</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50539610" tabindex="-1">Microsoft&#39;s ONNX Runtime has disappeared from GitHub</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50519744" tabindex="-1">Jiff 1.0: A datetime library for Rust</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50571189" tabindex="-1">&#34;I can tell you wrote this yourself&#34;</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50560822" tabindex="-1">Everything you need to survive and rebuild society</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50536813" tabindex="-1">350 years ago, Ole Rømer discovered that light has a finite speed</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50532191" tabindex="-1">What is the best harness for each model?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50517602" tabindex="-1">What is w2rt6byl5nf1opmc-a.com?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50585593" tabindex="-1">Backblaze Notice at Collection and Privacy Policy</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50556533" tabindex="-1">15M web servers on one VM – smoltcp, DPDK, AF_XDP</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50583028" tabindex="-1">Getting the mind to steer the body to steer you</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50520866" tabindex="-1">Software is breaking down at a systemic level</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50569890" tabindex="-1">PostgreSQL 19</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50573886" tabindex="-1">If you stop writing code, you also get worse at reviewing it</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50528119" tabindex="-1">How to CAD Almost Anything</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50547344" tabindex="-1">Russia reportedly planned mass-casualty attack in Poland to be blamed on Ukraine</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50537156" tabindex="-1">jQuery 4.1.0</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50536387" tabindex="-1">Solid 2.0</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50511395" tabindex="-1">Old Bitly links are being hijacked</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50583274" tabindex="-1">NINLIVE: The Nine Inch Nails live archive</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50568130" tabindex="-1">Gemini 4 Neon is the new #1 on the Models Engineering Index</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50569226" tabindex="-1">OpenSSL: Buffer overflow in EVP_EncodeBlock() (CVE-2026-121481, CVSS 9.8)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50532086" tabindex="-1">We don&#39;t need more apps, we need better open source</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50522643" tabindex="-1">Chemistry is Actually Geometry</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50564159" tabindex="-1">The 98% Slot Machine: How Paid Advertising Became an Extraction Tax</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50557661" tabindex="-1">Do not buy RAM, compress</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50523459" tabindex="-1">OpenCode Browse</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50515058" tabindex="-1">Interpreting claims that a theorem is correct because it was checked in Lean</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50538303" tabindex="-1">Harvard researchers find AI coding agents shifted the bottleneck to code review</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50544261" tabindex="-1">Codeberg.org Not Reachable</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50520182" tabindex="-1">Grazing sheep in fields with solar arrays</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50557716" tabindex="-1">SSD prices may begin to decline in the latter half of 2027</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50516473" tabindex="-1">The Secret ThinkPad Powerbutton Code to Bring Dead Laptops Back to Life (2007)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50576232" tabindex="-1">Finite-time blow-up for the Navier–Stokes equations</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50559719" tabindex="-1">Making 8-page foldable zines from a single A4 sheet in the browser</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50543989" tabindex="-1">Energy-Based Reasoners: 385x more efficient inference</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50553225" tabindex="-1">LLM assisted reverse engineering</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50526023" tabindex="-1">Show HN: I made an audio-to-MIDI model 60x more efficient</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50529612" tabindex="-1">How the Claude Code team thinks about verification</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50599762" tabindex="-1">Show HN: I built a game where you are an LLM&#39;s subagent</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50550415" tabindex="-1">Genie 4 is now available</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50557870" tabindex="-1">What&#39;s New in PHP 8.6</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50581110" tabindex="-1">DreamCoder: Coding harness and IDE from the author of Mastering Emacs</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50595554" tabindex="-1">Data Processing Incidents on Inference Providers</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50587208" tabindex="-1">GnuPG Security Advisory for GPGME</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50512441" tabindex="-1">Tor Project Issues Rapid-Response DoS-Defense Fix Amid Sustained DDoS Attack</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50593737" tabindex="-1">Advice for the next 100 Rust GUIs</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50600511" tabindex="-1">Open Social Web Alliance</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50583982" tabindex="-1">Re: Riemann</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50595168" tabindex="-1">Leonida – PC Recompilation of the Xbox Version of GTA 6</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50585376" tabindex="-1">Clojure will affect the way you think about programming (2017)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50596155" tabindex="-1">Fast-Anything: Don&#39;t rewrite it in Rust. Rewrite the 5% that&#39;s slow</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50580536" tabindex="-1">Winedroid – run Android apps without Android (WASM demo)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50587859" tabindex="-1">FBI reportedly investigating apparent hack of its criminal database</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50588916" tabindex="-1">Astra 6.2 and Sol 6.2 flop at Simple Bench</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50595537" tabindex="-1">The Mythology of Conscious AI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50600677" tabindex="-1">Europe weakens chemical rules as science links them to &#39;lifestyle diseases&#39;</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50594132" tabindex="-1">PcapAnalyzer – self-hosted pcap analyzer with 27 problem detectors</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50600622" tabindex="-1">I joined the NTP Pool, but not with my Stratum 1 Pi</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50593481" tabindex="-1">Pandex – Official European Law for AI Agents, over MCP</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50594182" tabindex="-1">A Better Vocabulary for Testing</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50598961" tabindex="-1">AI is becoming a disaster for the climate</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50599583" tabindex="-1">U.N. Climate Talks Collapse in a Bitter Clash over Fossil Fuels</a><span class="sep">◆</span></span><span class="ticker-run" aria-hidden="true"><a href="https://news.ycombinator.com/item?id=50514470">How to make almost anything</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50519231" tabindex="-1">Garage Door Spam</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50513215" tabindex="-1">Qwen4-Max</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50521045" tabindex="-1">Technical issue at JPMorgan Chase triggers online banking delays for US banks</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50554045" tabindex="-1">We need smart people who give a shit</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50576855" tabindex="-1">I&#39;ll never buy Framework hardware again</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50542705" tabindex="-1">AI is killing All About Berlin</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50532613" tabindex="-1">Brazil&#39;s tax authority open-sources its tax calculator on GitHub under MIT</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50547620" tabindex="-1">Inside Deutsche Bank</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50576012" tabindex="-1">Slopstrap – Make your site look hastily vibecoded</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50556287" tabindex="-1">Ruby2ßhell: Pre-authentication RCE on stock Rails</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50524736" tabindex="-1">Windows 11 is collecting data on which coding agents and developer tools you use</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50535238" tabindex="-1">Apple Services Down</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50523601" tabindex="-1">BugMeNot has closed</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50583761" tabindex="-1">Ask HN: I have been unemployed for 2y. 15 years of experience, US. What to do?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50558533" tabindex="-1">How the European Commission rolled out Matrix to more than 40k staff</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50572355" tabindex="-1">If you can&#39;t explain something in simple terms, you don&#39;t understand it (2017)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50540178" tabindex="-1">Google&#39;s AI answers reducing search traffic by 40%</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50524767" tabindex="-1">Optimizely compromised, served malware on Zoom, GitLab</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50588982" tabindex="-1">Detonating a pile of lead azide</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50562113" tabindex="-1">UK government forced to admit it issued Apple a secret encryption order</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50587875" tabindex="-1">My monitor was cutting my download speed by 75%</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50572503" tabindex="-1">Frostbite: A new CPU architecture discovered, designed and verified by AI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50513160" tabindex="-1">Universal XSS in uBlock Origin from website-driven element picker</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50562262" tabindex="-1">Fuck Your AI Safeguards</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50579331" tabindex="-1">We promoted developers into architects without informing them</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50575644" tabindex="-1">Why there are still no non-WebKit browsers on iOS</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50594911" tabindex="-1">Sandwich Simulator</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50572348" tabindex="-1">Restricting AI agents in mobile operating systems platforms from capturing data</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50563148" tabindex="-1">Claude solves two open problems in the physics of black holes</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50572116" tabindex="-1">Carnival Cruises emits ten times more sulphur oxide than all of Europe&#39;s cars (2019)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50519354" tabindex="-1">Frame – 31.5&#34; color ePaper display</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50601525" tabindex="-1">Perplexity and Intelligence</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50542135" tabindex="-1">Interviewed at a YC startup, found out they used my LinkedIn without permission</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50540437" tabindex="-1">ID.me terms required for IRS sign-in</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50570479" tabindex="-1">Google is pushing OEMs against GrapheneOS and bootloader unlocking</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50547777" tabindex="-1">AI agents ask better questions than KPMG accountants in audit trial</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50577265" tabindex="-1">Language Models Can Rewrite Their Own Weights</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50509972" tabindex="-1">Handwriting, as a Font</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50535992" tabindex="-1">Phrack 73</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50509837" tabindex="-1">Protomaps: Self-hosting map tiles has gotten cheap and easy</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50539610" tabindex="-1">Microsoft&#39;s ONNX Runtime has disappeared from GitHub</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50519744" tabindex="-1">Jiff 1.0: A datetime library for Rust</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50571189" tabindex="-1">&#34;I can tell you wrote this yourself&#34;</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50560822" tabindex="-1">Everything you need to survive and rebuild society</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50536813" tabindex="-1">350 years ago, Ole Rømer discovered that light has a finite speed</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50532191" tabindex="-1">What is the best harness for each model?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50517602" tabindex="-1">What is w2rt6byl5nf1opmc-a.com?</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50585593" tabindex="-1">Backblaze Notice at Collection and Privacy Policy</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50556533" tabindex="-1">15M web servers on one VM – smoltcp, DPDK, AF_XDP</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50583028" tabindex="-1">Getting the mind to steer the body to steer you</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50520866" tabindex="-1">Software is breaking down at a systemic level</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50569890" tabindex="-1">PostgreSQL 19</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50573886" tabindex="-1">If you stop writing code, you also get worse at reviewing it</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50528119" tabindex="-1">How to CAD Almost Anything</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50547344" tabindex="-1">Russia reportedly planned mass-casualty attack in Poland to be blamed on Ukraine</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50537156" tabindex="-1">jQuery 4.1.0</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50536387" tabindex="-1">Solid 2.0</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50511395" tabindex="-1">Old Bitly links are being hijacked</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50583274" tabindex="-1">NINLIVE: The Nine Inch Nails live archive</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50568130" tabindex="-1">Gemini 4 Neon is the new #1 on the Models Engineering Index</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50569226" tabindex="-1">OpenSSL: Buffer overflow in EVP_EncodeBlock() (CVE-2026-121481, CVSS 9.8)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50532086" tabindex="-1">We don&#39;t need more apps, we need better open source</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50522643" tabindex="-1">Chemistry is Actually Geometry</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50564159" tabindex="-1">The 98% Slot Machine: How Paid Advertising Became an Extraction Tax</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50557661" tabindex="-1">Do not buy RAM, compress</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50523459" tabindex="-1">OpenCode Browse</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50515058" tabindex="-1">Interpreting claims that a theorem is correct because it was checked in Lean</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50538303" tabindex="-1">Harvard researchers find AI coding agents shifted the bottleneck to code review</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50544261" tabindex="-1">Codeberg.org Not Reachable</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50520182" tabindex="-1">Grazing sheep in fields with solar arrays</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50557716" tabindex="-1">SSD prices may begin to decline in the latter half of 2027</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50516473" tabindex="-1">The Secret ThinkPad Powerbutton Code to Bring Dead Laptops Back to Life (2007)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50576232" tabindex="-1">Finite-time blow-up for the Navier–Stokes equations</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50559719" tabindex="-1">Making 8-page foldable zines from a single A4 sheet in the browser</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50543989" tabindex="-1">Energy-Based Reasoners: 385x more efficient inference</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50553225" tabindex="-1">LLM assisted reverse engineering</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50526023" tabindex="-1">Show HN: I made an audio-to-MIDI model 60x more efficient</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50529612" tabindex="-1">How the Claude Code team thinks about verification</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50599762" tabindex="-1">Show HN: I built a game where you are an LLM&#39;s subagent</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50550415" tabindex="-1">Genie 4 is now available</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50557870" tabindex="-1">What&#39;s New in PHP 8.6</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50581110" tabindex="-1">DreamCoder: Coding harness and IDE from the author of Mastering Emacs</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50595554" tabindex="-1">Data Processing Incidents on Inference Providers</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50587208" tabindex="-1">GnuPG Security Advisory for GPGME</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50512441" tabindex="-1">Tor Project Issues Rapid-Response DoS-Defense Fix Amid Sustained DDoS Attack</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50593737" tabindex="-1">Advice for the next 100 Rust GUIs</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50600511" tabindex="-1">Open Social Web Alliance</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50583982" tabindex="-1">Re: Riemann</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50595168" tabindex="-1">Leonida – PC Recompilation of the Xbox Version of GTA 6</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50585376" tabindex="-1">Clojure will affect the way you think about programming (2017)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50596155" tabindex="-1">Fast-Anything: Don&#39;t rewrite it in Rust. Rewrite the 5% that&#39;s slow</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50580536" tabindex="-1">Winedroid – run Android apps without Android (WASM demo)</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50587859" tabindex="-1">FBI reportedly investigating apparent hack of its criminal database</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50588916" tabindex="-1">Astra 6.2 and Sol 6.2 flop at Simple Bench</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50595537" tabindex="-1">The Mythology of Conscious AI</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50600677" tabindex="-1">Europe weakens chemical rules as science links them to &#39;lifestyle diseases&#39;</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50594132" tabindex="-1">PcapAnalyzer – self-hosted pcap analyzer with 27 problem detectors</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50600622" tabindex="-1">I joined the NTP Pool, but not with my Stratum 1 Pi</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50593481" tabindex="-1">Pandex – Official European Law for AI Agents, over MCP</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50594182" tabindex="-1">A Better Vocabulary for Testing</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50598961" tabindex="-1">AI is becoming a disaster for the climate</a><span class="sep">◆</span><a href="https://news.ycombinator.com/item?id=50599583" tabindex="-1">U.N. Climate Talks Collapse in a Bitter Clash over Fossil Fuels</a><span class="sep">◆</span></span>
+    </div>
+  </div>
+</div>
+
+
+<footer>Generated 2026-11-23 11:07 with gpt-4.1-mini · voice: coral · top 20 stories/day from the HN Algolia API.</footer>
+</div>
+
+
+<script>
+(() => {
+  const segs = JSON.parse(document.getElementById('bc-seg').textContent);
+  const kinds = {"launches": "Launches", "open": "Headlines", "rapid": "Quick hits", "signoff": "Sign-off", "story": "Top story", "wrap": "The week in one line"};
+  const $ = id => document.getElementById(id);
+  const audio = $('audio'), player = $('player'), fill = $('fill'), track = $('track'), stage = $('stage');
+  const slides = [...stage.querySelectorAll('.slide')], chs = [...stage.querySelectorAll('.ch b')];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+  const dur = () => audio.duration || segs[segs.length - 1].end;
+  const store = (k, v) => { try { return v === undefined ? localStorage.getItem(k) : localStorage.setItem(k, v); } catch { return null; } };
+  let cur = -1, cap = '';
+
+  // Subtitles: split each segment into sentences, timed by their share of the segment's characters.
+  segs.forEach(s => {
+    const parts = s.text.match(/[^.!?]+[.!?]+["'”’]*\s*|[^.!?]+$/g) || [s.text];
+    const total = parts.reduce((n, p) => n + p.length, 0);
+    let t = s.start;
+    s.lines = parts.map(p => { const l = { at: t, text: p.trim() }; t += (s.end - s.start) * p.length / total; return l; });
+  });
+
+  audio.addEventListener('error', () => {
+    player.hidden = true; $('watch-btn').hidden = true; $('onair') && ($('onair').hidden = true);
+    stage.hidden = true; document.body.classList.remove('staged');  // no audio → plain boxes page
+  });
+
+  function segAt(t) {
+    for (let i = segs.length - 1; i >= 0; i--) if (t >= segs[i].start) return i;
+    return 0;
+  }
+  function inView(el) {
+    const r = el.getBoundingClientRect(), top = player.getBoundingClientRect().bottom;
+    return r.top >= top && r.bottom <= innerHeight - 48;
+  }
+  function setSeg(i) {
+    if (i === cur) return;
+    cur = i;
+    const s = segs[i];
+    $('now-kind').textContent = $('l3-kind').textContent = kinds[s.kind] || s.kind;
+    $('now-title').textContent = $('l3-title').textContent = s.title;
+    slides.forEach((el, j) => { el.classList.toggle('cur', j === i); el.classList.toggle('past', j < i); el.setAttribute('aria-hidden', j !== i); });
+    document.querySelectorAll('.box.on-air').forEach(b => b.classList.remove('on-air'));
+    document.querySelectorAll('.transcript li.cur').forEach(li => li.classList.remove('cur'));
+    document.querySelector(`.transcript li[data-seg="${i}"]`)?.classList.add('cur');
+    const box = s.box_id >= 0 && document.querySelector(`.box[data-box-id="${s.box_id}"]`);
+    if (box) {
+      box.classList.add('on-air');
+      if (stage.hidden && !audio.paused && !inView(box)) box.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    }
+  }
+  function seek(t, play = true) {
+    audio.currentTime = t; setSeg(segAt(t + 0.01)); tick();
+    if (play) audio.play();
+  }
+  function tick() {
+    const t = audio.currentTime;
+    fill.style.width = (100 * t / dur()) + '%';
+    $('t-cur').textContent = fmt(t);
+    $('st-time').textContent = `${fmt(t)} / ${fmt(dur())}`;
+    setSeg(segAt(t));
+    chs.forEach((b, j) => {
+      const s = segs[j];
+      b.style.width = (j < cur ? 100 : j > cur ? 0 : Math.min(100, 100 * (t - s.start) / (s.end - s.start))) + '%';
+    });
+    const lines = segs[cur].lines, line = [...lines].reverse().find(l => t >= l.at) || lines[0];
+    const text = audio.paused && t === 0 ? '' : line.text;
+    if (text !== cap) { cap = text; $('caption').textContent = text; $('caption').classList.toggle('empty', !text); }
+  }
+
+  audio.addEventListener('timeupdate', tick);
+  audio.addEventListener('loadedmetadata', () => { $('t-dur').textContent = fmt(audio.duration); tick(); });
+  const sync = () => {
+    const playing = !audio.paused;
+    document.querySelectorAll('.ico-play').forEach(i => i.hidden = playing);
+    document.querySelectorAll('.ico-pause').forEach(i => i.hidden = !playing);
+    for (const b of [$('play'), $('st-play')]) b.setAttribute('aria-label', playing ? 'Pause bulletin' : 'Play bulletin');
+    document.body.classList.toggle('playing', playing);
+    $('onair-label').textContent = playing ? 'ON AIR' : (audio.currentTime > 0 ? 'PAUSED' : 'ON AIR');
+  };
+  const toggle = () => audio.paused ? audio.play() : audio.pause();
+  audio.addEventListener('play', sync); audio.addEventListener('pause', sync);
+  audio.addEventListener('ended', () => {
+    document.querySelectorAll('.box.on-air').forEach(b => b.classList.remove('on-air'));
+    setSeg(segs.length - 1);
+  });
+
+  $('play').addEventListener('click', toggle);
+  $('st-play').addEventListener('click', toggle);
+  const speeds = [1, 1.25, 1.5];
+  $('speed').addEventListener('click', e => {
+    audio.playbackRate = speeds[(speeds.indexOf(audio.playbackRate) + 1) % speeds.length];
+    e.currentTarget.textContent = audio.playbackRate + '×';
+  });
+  track.addEventListener('click', e => {
+    const r = track.getBoundingClientRect();
+    seek(Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * dur(), !audio.paused);
+  });
+  track.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') seek(Math.min(dur(), audio.currentTime + 10), !audio.paused);
+    if (e.key === 'ArrowLeft') seek(Math.max(0, audio.currentTime - 10), !audio.paused);
+  });
+  document.querySelectorAll('.box.seekable').forEach(box => box.addEventListener('click', e => {
+    if (e.target.closest('a, summary, details ul')) return;
+    const i = segs.findIndex(s => s.box_id === +box.dataset.boxId);
+    if (i >= 0) seek(segs[i].start);
+  }));
+  document.querySelectorAll('.transcript .ts').forEach(b => b.addEventListener('click', () => seek(+b.dataset.t)));
+
+  // ---- Presentation mode ----
+  const next = () => cur < segs.length - 1 && seek(segs[cur + 1].start, !audio.paused);
+  const prev = () => seek(audio.currentTime - segs[cur].start > 2 || cur === 0 ? segs[cur].start : segs[cur - 1].start, !audio.paused);
+  function openStage() {
+    stage.hidden = false; document.body.classList.add('staged');
+    if (cur < 0) setSeg(0);
+    tick(); $('st-play').focus();
+    if (audio.paused && audio.currentTime < 1) audio.play();
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+  function closeStage() {
+    if (document.fullscreenElement) document.exitFullscreen();
+    stage.hidden = true; document.body.classList.remove('staged');
+    history.replaceState(null, '', '#boxes');  // reload stays on the boxes
+    $('watch-btn').focus();
+  }
+  const setCC = on => { stage.classList.toggle('no-cc', !on); $('st-cc').setAttribute('aria-pressed', on); store('hnw-cc', on ? '1' : '0'); };
+  setCC(store('hnw-cc') !== '0');
+
+  $('watch-btn').addEventListener('click', openStage);
+  $('st-close').addEventListener('click', closeStage);
+  $('st-next').addEventListener('click', next);
+  $('st-prev').addEventListener('click', prev);
+  $('st-cc').addEventListener('click', () => setCC(stage.classList.contains('no-cc')));
+  $('st-replay').addEventListener('click', () => seek(0));
+  $('st-start').addEventListener('click', () => seek(0));
+  $('st-skip').addEventListener('click', () => $('st-browse').click());
+  $('st-browse').addEventListener('click', () => { audio.pause(); closeStage(); document.querySelector('.sec')?.scrollIntoView(); });
+  stage.querySelectorAll('.ch').forEach(c => c.addEventListener('click', () => seek(segs[+c.dataset.i].start)));
+  const canFull = !!stage.requestFullscreen;
+  $('st-full').hidden = !canFull;
+  const full = () => document.fullscreenElement ? document.exitFullscreen() : stage.requestFullscreen();
+  $('st-full').addEventListener('click', full);
+  // Tap/click on the slide itself toggles play, like a video.
+  stage.querySelector('.slides').addEventListener('click', e => { if (!e.target.closest('a, button')) toggle(); });
+
+  document.addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (!stage.hidden) {
+      const k = e.key;
+      if (k === 'Escape') { e.preventDefault(); return closeStage(); }
+      if (k === 'ArrowRight') { e.preventDefault(); return next(); }
+      if (k === 'ArrowLeft') { e.preventDefault(); return prev(); }
+      if (k === 'f' && canFull) return full();
+      if (k === 'c') return setCC(stage.classList.contains('no-cc'));
+      if (k === 'Tab') {  // keep focus inside the dialog
+        const f = [...stage.querySelectorAll('button:not([hidden]), a')].filter(x => x.offsetParent);
+        if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+      }
+    }
+    if (e.code === 'Space' && !e.target.closest('input, textarea, button, a, [contenteditable]')) {
+      e.preventDefault(); toggle();
+    }
+  });
+  // Slides are the default view; #boxes (set when you close them) opens the box page instead.
+  if (location.hash === '#boxes') { stage.hidden = true; document.body.classList.remove('staged'); }
+  else { setSeg(0); tick(); }
+})();
+</script>
+
+</body>
+</html>
